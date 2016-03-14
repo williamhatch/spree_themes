@@ -79,7 +79,7 @@ module Spree
 
     def generate_seeds
       available_themes = Dir.entries('vendor/themes/').reject { |file_name| file_name == '.' || file_name == '..' }
-      file_content = "AVAILABLE_THEMES = #{ available_themes }"
+      file_content = "AVAILABLE_THEMES = #{ available_themes.prepend('default') }"
       File.open(::SpreeThemes::Engine.root.join('config', 'available_themes.rb'), 'w+'){|f| f << file_content }
     end
   end

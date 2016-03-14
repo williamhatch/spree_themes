@@ -1,1 +1,1 @@
-AVAILABLE_THEMES = ["dark", "light"]
+AVAILABLE_THEMES = ["default", "dark", "light"]

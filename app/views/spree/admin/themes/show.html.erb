@@ -18,7 +18,7 @@
     <div class="panel-body">
       <div class="col-md-6">
         <div data-hook="name" class="form-group">
-          <%= f.select :name, available_themes, {},:class => 'form-control select' if available_themes.any? %>
+          <%= f.select :name, AVAILABLE_THEMES, {}, class: 'form-control select'%>
         </div>
 
       </div>
