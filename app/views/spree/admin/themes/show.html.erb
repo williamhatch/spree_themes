@@ -1,0 +1,34 @@
+<% content_for :page_title do %>
+  <%= Spree::Theme.model_name.human %>
+<% end %>
+
+<% if Spree::Theme.current.name? %>
+  <h4><%= "Current theme - #{ Spree::Theme.current.name }" %></h4>
+<% end %>
+
+
+<%= form_for [:admin, @theme] do |f| %>
+  <div class="panel panel-default" data-hook="tax_rates">
+    <div class="panel-heading">
+      <h1 class="panel-title">
+        <%= Spree.t(:choose_a_new_theme) %>
+      </h1>
+    </div>
+
+    <div class="panel-body">
+      <div class="col-md-6">
+        <div data-hook="name" class="form-group">
+          <%= f.select :name, available_themes, {},:class => 'form-control select' if available_themes.any? %>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="form-actions" data-hook="buttons">
+    <%= button Spree.t('actions.update'), 'refresh', 'submit', {class: 'btn-success'} %>
+  </div>
+
+<% end %>
+
+
