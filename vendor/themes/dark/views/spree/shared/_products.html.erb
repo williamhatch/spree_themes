@@ -25,14 +25,14 @@
   <div id="products" class="row" data-hook>
     <% products.each do |product| %>
       <% url = spree.product_url(product, taxon_id: @taxon.try(:id)) %>
-      <div id="product_<%= product.id %>" class="col-md-3 col-sm-6 product-list-item" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
-        <div class="panel panel-default">
+      <div id="product_<%= product.id %>" class="col-md-12 product-list-item" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
+        <div class="list-group-item row marb-15">
           <% cache(@taxon.present? ? [I18n.locale, current_currency, @taxon, product] : [I18n.locale, current_currency, product]) do %>
-            <div class="panel-body text-center product-body">
+            <div class="list-group-item-text product-body col-md-6">
               <%= link_to small_image(product, itemprop: "image"), url, itemprop: 'url' %><br/>
               <%= link_to truncate(product.name, length: 50), url, class: 'info', itemprop: "name", title: product.name %>
             </div>
-            <div class="panel-footer text-center">
+            <div class="list-group-item-text text-center">
               <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                 <span class="price selling lead" itemprop="price"><%= display_price(product) %></span>
               </span>

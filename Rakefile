@@ -22,9 +22,6 @@ task :test_app do
 end
 
 desc 'Generates a new theme'
-
 task :generate_theme do
-
-  theme = Spree::ThemeGeneratorService.new(ENV['name'])
-
+  Spree::ThemeGeneratorService.new(ENV['name']).generate
 end

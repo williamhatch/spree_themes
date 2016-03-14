@@ -6,6 +6,10 @@ module Spree
 
     def initialize(theme_name)
       @theme_name = theme_name
+    end
+
+    def generate
+      puts 'Generating files'
       generate_views
       generate_stylesheet
       generate_images
@@ -13,33 +17,32 @@ module Spree
       generate_javascript
       update_head
       generate_seeds
+      puts 'Files generated'
+    end
+
+    def generate_views
+      FileUtils.cp_r(spree_path + '/app/views/spree/', view_path)
+      puts Dir["#{ view_path }/**/*.html.erb"]
     end
 
     def generate_stylesheet
-      content = "/*\n*= require spree/frontend/all\n*= require #{ @theme_name }/stylesheets/spree/frontend/general\n*/"
-      generate_file(stylesheets_path, content)
-      generate_file(::SpreeThemes::Engine.root.join('vendor', 'themes', @theme_name, 'stylesheets', 'spree', 'frontend', 'general.css'), '')
+      generate_file(stylesheets_path, "/*\n*= require spree/frontend/all\n*= require #{ @theme_name }/stylesheets/spree/frontend/general\n*/")
+      generate_file(absolute_path(['stylesheets', 'spree', 'frontend', 'general.css']))
       puts Dir["vendor/themes/#{ @theme_name }/stylesheets/**/*.css"]
     end
 
     def generate_font
-      FileUtils.mkdir_p(::SpreeThemes::Engine.root.join('vendor', 'themes', @theme_name, 'font', 'spree', 'frontend'))
+      create_recursive_folder(['font', 'spree', 'frontend'])
     end
 
     def generate_images
-      FileUtils.mkdir_p(::SpreeThemes::Engine.root.join('vendor', 'themes', @theme_name, 'images', 'spree', 'frontend'))
+      create_recursive_folder(['images', 'spree', 'frontend'])
     end
 
     def generate_javascript
-      content = "//= require spree/frontend/all\n//= require #{ @theme_name }/javascripts/spree/frontend/general"
-      generate_file(javascripts_path, content)
-      generate_file(::SpreeThemes::Engine.root.join('vendor', 'themes', @theme_name, 'javascripts', 'spree', 'frontend', 'general.js'), '')
+      generate_file(javascripts_path, "//= require spree/frontend/all\n//= require #{ @theme_name }/javascripts/spree/frontend/general")
+      generate_file(absolute_path(['javascripts', 'spree', 'frontend', 'general.js']))
       puts Dir["vendor/themes/#{ @theme_name }/javascripts/**/*.js"]
-    end
-
-    def generate_views
-      FileUtils.cp_r(spree_path + '/app/views/spree/', view_path[0])
-      puts Dir["#{ view_path[0] }/**/*.html.erb"]
     end
 
     def spree_path
@@ -47,27 +50,31 @@ module Spree
     end
 
     def view_path
-      FileUtils.mkdir_p(::SpreeThemes::Engine.root.join('vendor', 'themes', @theme_name, 'views'))
+      create_recursive_folder(['views'])[0]
     end
 
     def stylesheets_path
-      FileUtils.mkdir_p(::SpreeThemes::Engine.root.join('vendor', 'themes', @theme_name, 'stylesheets', 'spree', 'frontend'))
-      ::SpreeThemes::Engine.root.join('vendor', 'themes', @theme_name, 'stylesheets', 'spree', 'frontend', 'all.css').to_s
+      create_recursive_folder(['stylesheets', 'spree', 'frontend'])
+      absolute_path(['stylesheets', 'spree', 'frontend', 'all.css']).to_s
     end
 
     def javascripts_path
-      FileUtils.mkdir_p(::SpreeThemes::Engine.root.join('vendor', 'themes', @theme_name, 'javascripts', 'spree', 'frontend'))
-      ::SpreeThemes::Engine.root.join('vendor', 'themes', @theme_name, 'javascripts', 'spree', 'frontend', 'all.js').to_s
+      create_recursive_folder(['javascripts', 'spree', 'frontend'])
+      absolute_path(['javascripts', 'spree', 'frontend', 'all.js']).to_s
     end
 
-    def generate_file(path, content)
+    def generate_file(path, content='')
       File.open(path, 'wb') do |f|
         f.write(content)
       end
     end
 
+    def create_recursive_folder(path)
+      FileUtils.mkdir_p(absolute_path(path))
+    end
+
     def shared_head_path
-      ::SpreeThemes::Engine.root.join('vendor', 'themes', @theme_name, 'views', 'spree', 'shared', '_head.html.erb')
+      absolute_path(['views', 'spree', 'shared', '_head.html.erb'])
     end
 
     def update_head
@@ -81,6 +88,10 @@ module Spree
       available_themes = Dir.entries('vendor/themes/').reject { |file_name| file_name == '.' || file_name == '..' }
       file_content = "AVAILABLE_THEMES = #{ available_themes.prepend('default') }"
       File.open(::SpreeThemes::Engine.root.join('config', 'available_themes.rb'), 'w+'){|f| f << file_content }
+    end
+
+    def absolute_path(path)
+      ::SpreeThemes::Engine.root.join('vendor', 'themes', @theme_name, *path)
     end
   end
 end
