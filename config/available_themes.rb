@@ -1,4 +1,1 @@
-AVAILABLE_THEMES = [
-'light',
-'new',
-]
+AVAILABLE_THEMES = ["dark", "light"]

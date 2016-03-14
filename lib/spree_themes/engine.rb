@@ -10,10 +10,16 @@ module SpreeThemes
       g.test_framework :rspec
     end
 
+    initializer "asset_paths" do |app|
+      Rails.application.config.assets.paths.insert(8,
+        root.join('vendor', 'themes').to_s
+        )
+    end
+
     initializer "spree_themes.assets.precompile" do |app|
       AVAILABLE_THEMES.each do |theme_name|
-        app.config.assets.precompile += "#{theme_name}/spree/frontend/all.css"
-        app.config.assets.precompile += "#{theme_name}/spree/frontend/all.js"
+        app.config.assets.precompile += ["#{theme_name}/stylesheets/spree/frontend/all.css"]
+        app.config.assets.precompile += ["#{theme_name}/javascripts/spree/frontend/all.js"]
       end
     end
 
