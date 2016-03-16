@@ -2,7 +2,6 @@ module Spree
   class ThemeGeneratorService
 
     require 'spree_themes'
-    require 'byebug'
 
     def initialize(theme_name)
       @theme_name = theme_name

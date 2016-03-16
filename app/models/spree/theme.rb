@@ -1,5 +1,5 @@
 module Spree
   class Theme < Spree::Base
-    scope :current, -> { first }
+    singleton_class.send(:alias_method, :current, :first)
   end
 end
