@@ -13,7 +13,7 @@ Installation
 Add spree_themes to your Gemfile:
 
 ```ruby
-gem 'spree_themes'
+gem 'spree_themes', git: 'https://github.com/vinsol/spree-themes.git'
 ```
 
 Bundle your dependencies and run the installation generator:
@@ -49,7 +49,7 @@ Creating a new theme
 
   ```
   1. Change Directory to `spree-themes` gem.
-  2. Run the command `bundle exec generate_theme name=theme_name`
+  2. Run the command `bundle exec rake generate_theme name=theme_name`
   3. Customize the CS and JS files generated inside `spree-themes/vendor/themes/theme_name` according to your requirement.
   ```
 
