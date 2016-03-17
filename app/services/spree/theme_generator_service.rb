@@ -15,7 +15,6 @@ module Spree
       generate_font
       generate_javascript
       update_head
-      generate_seeds
       puts 'Files generated'
     end
 
@@ -83,14 +82,8 @@ module Spree
       File.open(shared_head_path, 'w') { |file| file.puts text }
     end
 
-    def generate_seeds
-      available_themes = Dir.entries('vendor/themes/').reject { |file_name| file_name == '.' || file_name == '..' }
-      file_content = "AVAILABLE_THEMES = #{ available_themes.prepend('default') }"
-      File.open(::SpreeThemes::Engine.root.join('config', 'available_themes.rb'), 'w+'){|f| f << file_content }
-    end
-
     def absolute_path(path)
-      ::SpreeThemes::Engine.root.join('vendor', 'themes', @theme_name, *path)
+      Rails.root.join('vendor', 'themes', @theme_name, *path)
     end
   end
 end

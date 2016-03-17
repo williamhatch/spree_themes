@@ -48,9 +48,8 @@ Creating a new theme
 1. To create a new theme , follow the below steps:
 
   ```
-  1. Change Directory to `spree-themes` gem.
-  2. Run the command `bundle exec rake generate_theme name=theme_name`
-  3. Customize the CS and JS files generated inside `spree-themes/vendor/themes/theme_name` according to your requirement.
+  1. Run the command `bundle exec rake generate_theme name=theme_name`
+  2. Customize the CS and JS files generated inside `vendor/themes/theme_name` according to your requirement.
   ```
 
   ```

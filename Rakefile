@@ -20,8 +20,3 @@ task :test_app do
   ENV['LIB_NAME'] = 'spree_themes'
   Rake::Task['extension:test_app'].invoke
 end
-
-desc 'Generates a new theme'
-task :generate_theme do
-  Spree::ThemeGeneratorService.new(ENV['name']).generate
-end

@@ -3,7 +3,7 @@ module Spree
     before_action :prepend_view
 
     def prepend_view
-      prepend_view_path ::SpreeThemes::Engine.root.join('vendor', 'themes', Theme.current.name, 'views')
+      prepend_view_path Rails.root.join('vendor', 'themes', Spree::Config[:theme_name], 'views')
     end
   end
 end

@@ -1,13 +1,11 @@
 <% content_for :page_title do %>
-  <%= Spree::Theme.model_name.human %>
+  <%= Spree.t(:theme) %>
 <% end %>
 
-<% if Spree::Theme.current.name? %>
-  <h4><%= "Current theme - #{ Spree::Theme.current.name }" %></h4>
-<% end %>
+<h4><%= "Current theme - #{ Spree::Config[:theme_name] }" %></h4>
 
 
-<%= form_for [:admin, @theme] do |f| %>
+<%= form_tag admin_theme_path, method: :patch do %>
   <div class="panel panel-default" data-hook="tax_rates">
     <div class="panel-heading">
       <h1 class="panel-title">
@@ -18,9 +16,8 @@
     <div class="panel-body">
       <div class="col-md-6">
         <div data-hook="name" class="form-group">
-          <%= f.select :name, AVAILABLE_THEMES, {}, class: 'form-control select'%>
+          <%= select :theme, :name, available_themes, { selected: Spree::Config[:theme_name] }, class: 'form-control select' %>
         </div>
-
       </div>
     </div>
 
