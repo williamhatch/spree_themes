@@ -1,0 +1,31 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:theme) %>
+<% end %>
+
+<h4><%= "Current theme - #{ Spree::Config[:theme_name] }" %></h4>
+
+
+<%= form_tag admin_theme_path, method: :patch do %>
+  <div class="panel panel-default" data-hook="tax_rates">
+    <div class="panel-heading">
+      <h1 class="panel-title">
+        <%= Spree.t(:select_new_theme) %>
+      </h1>
+    </div>
+
+    <div class="panel-body">
+      <div class="col-md-6">
+        <div data-hook="name" class="form-group">
+          <%= select :theme, :name, available_themes, { selected: Spree::Config[:theme_name] }, class: 'form-control select' %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="form-actions" data-hook="buttons">
+    <%= button Spree.t('actions.update'), 'refresh', 'submit', {class: 'btn-success'} %>
+  </div>
+
+<% end %>
+
+

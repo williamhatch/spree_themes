@@ -3,3 +3,5 @@
 
 en:
   hello: "Hello world"
+  select_new_theme: 'Choose a new theme'
+  theme: 'Theme'

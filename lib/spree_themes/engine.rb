@@ -1,12 +1,27 @@
 module SpreeThemes
   class Engine < Rails::Engine
     require 'spree/core'
+    require_relative '../extensions/dir'
     isolate_namespace Spree
     engine_name 'spree_themes'
 
     # use rspec for tests
     config.generators do |g|
       g.test_framework :rspec
+    end
+
+    initializer "asset_paths" do |app|
+      Rails.application.config.assets.paths.insert(8,
+        Rails.root.join('vendor', 'themes').to_s
+        )
+    end
+
+    initializer "spree_themes.assets.precompile" do |app|
+      FileUtils.mkdir_p(Rails.root.join('vendor', 'themes'))
+      Dir.human_entries(Rails.root.join('vendor', 'themes')).each do |theme_name|
+        app.config.assets.precompile += ["#{theme_name}/stylesheets/spree/frontend/all.css"]
+        app.config.assets.precompile += ["#{theme_name}/javascripts/spree/frontend/all.js"]
+      end
     end
 
     def self.activate
