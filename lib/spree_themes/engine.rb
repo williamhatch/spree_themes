@@ -19,8 +19,9 @@ module SpreeThemes
     initializer "spree_themes.assets.precompile" do |app|
       FileUtils.mkdir_p(Rails.root.join('vendor', 'themes'))
       Dir.human_entries(Rails.root.join('vendor', 'themes')).each do |theme_name|
-        app.config.assets.precompile += ["#{theme_name}/stylesheets/spree/frontend/all.css"]
-        app.config.assets.precompile += ["#{theme_name}/javascripts/spree/frontend/all.js"]
+        app.config.assets.precompile += Dir.glob(Rails.root.join('vendor', 'themes', theme_name, 'stylesheets', 'spree', '**', '*.css'))
+        app.config.assets.precompile += Dir.glob(Rails.root.join('vendor', 'themes', theme_name, 'stylesheets', 'spree', '**', '*.scss'))
+        app.config.assets.precompile += Dir.glob(Rails.root.join('vendor', 'themes', theme_name, 'javascripts', 'spree', '**', '*.js'))
       end
     end
 
