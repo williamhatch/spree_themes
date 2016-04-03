@@ -13,12 +13,8 @@ module Spree
       variant.option_values.joins(:option_type).find_by(spree_option_types: { presentation: 'Color' })
     end
 
-    def size_variant_options(variant)
-      variant.size_options_text
-    end
-
-    def color_variant_options(variant)
-      variant.color_options_text
+    def non_color_option_types(product)
+      product.option_types.where.not(presentation: 'Color')
     end
   end
 end
