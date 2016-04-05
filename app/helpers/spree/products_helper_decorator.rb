@@ -24,7 +24,7 @@ module Spree
     end
 
     def short_product_descritpion(product)
-      truncate(product.description, length: 100)
+      truncate(product.description, length: 100, omission: '')
     end
   end
 end

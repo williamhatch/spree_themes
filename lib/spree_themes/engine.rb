@@ -14,7 +14,9 @@ module SpreeThemes
       Dir.human_entries(Rails.root.join('vendor', 'themes')).each do |theme_name|
         Rails.application.config.assets.paths.insert(8,
           Rails.root.join('vendor', 'themes', theme_name, 'javascripts').to_s,
-          Rails.root.join('vendor', 'themes', theme_name, 'stylesheets').to_s
+          Rails.root.join('vendor', 'themes', theme_name, 'stylesheets').to_s,
+          Rails.root.join('vendor', 'themes', theme_name, 'images').to_s,
+          Rails.root.join('vendor', 'themes', theme_name, 'fonts').to_s
         )
       end
     end
@@ -31,8 +33,8 @@ module SpreeThemes
         app.config.assets.precompile += Dir.glob(Rails.root.join('vendor', 'themes', theme_name, 'stylesheets', 'spree', '**', '*.scss'))
         app.config.assets.precompile += Dir.glob(Rails.root.join('vendor', 'themes', theme_name, 'javascripts', 'spree', '**', '*.js'))
         app.config.assets.precompile += Dir.glob(Rails.root.join('vendor', 'themes', theme_name, 'javascripts', 'spree', '**', '*.js.coffee'))
-        app.config.assets.precompile += Dir.glob(Rails.root.join('vendor', 'themes', 'yoda', 'fonts', 'spree', '*'))
       end
+      config.assets.precompile << /\.(?:svg|eot|woff|ttf|woff2|gif|png)\z/
     end
 
     def self.activate
