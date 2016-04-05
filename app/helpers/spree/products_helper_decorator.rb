@@ -22,5 +22,9 @@ module Spree
       max_updated_at = (@products.maximum(:updated_at) || Date.today).to_s(:number)
       "#{I18n.locale}/#{current_currency}/spree/products/all-#{params[:page]}-#{max_updated_at}-#{count}-#{Spree::Config[:theme_name]}"
     end
+
+    def short_product_descritpion(product)
+      truncate(product.description, length: 100)
+    end
   end
 end

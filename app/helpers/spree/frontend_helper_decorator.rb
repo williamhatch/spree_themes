@@ -1,6 +1,6 @@
 module Spree
   FrontendHelper.class_eval do
-    def link_to_cart(text = nil)
+    def cart_info(text = nil)
       css_class = nil
 
       if simple_current_order.nil? or simple_current_order.item_count.zero?
