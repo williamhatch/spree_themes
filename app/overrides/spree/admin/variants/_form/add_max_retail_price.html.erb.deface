@@ -1,6 +1,0 @@
-<!-- insert_after "[data-hook='cost_price']" -->
-
-<div class="form-group" data-hook="maximum_retail_price">
-  <%= f.label :maximum_retail_price, Spree.t(:maximum_retail_price) %>
-  <%= f.text_field :maximum_retail_price, :value => number_to_currency(@variant.maximum_retail_price, :unit => ''), :class => 'form-control' %>
-</div>
