@@ -34,7 +34,7 @@ module SpreeThemes
         app.config.assets.precompile += Dir.glob(Rails.root.join('vendor', 'themes', theme_name, 'javascripts', 'spree', '**', '*.js'))
         app.config.assets.precompile += Dir.glob(Rails.root.join('vendor', 'themes', theme_name, 'javascripts', 'spree', '**', '*.js.coffee'))
       end
-      config.assets.precompile << /\.(?:svg|eot|woff|ttf|woff2|gif|png)\z/
+      config.assets.precompile << /\.(?:svg|eot|woff|ttf|woff2|gif|png|jpg)\z/
     end
 
     def self.activate
