@@ -16,7 +16,8 @@ module SpreeThemes
           Rails.root.join('vendor', 'themes', theme_name, 'javascripts').to_s,
           Rails.root.join('vendor', 'themes', theme_name, 'stylesheets').to_s,
           Rails.root.join('vendor', 'themes', theme_name, 'images').to_s,
-          Rails.root.join('vendor', 'themes', theme_name, 'fonts').to_s
+          Rails.root.join('vendor', 'themes', theme_name, 'fonts').to_s,
+          Rails.root.join('vendor', 'themes', theme_name, 'logo').to_s
         )
       end
     end
@@ -33,6 +34,7 @@ module SpreeThemes
         app.config.assets.precompile += Dir.glob(Rails.root.join('vendor', 'themes', theme_name, 'stylesheets', 'spree', '**', '*.scss'))
         app.config.assets.precompile += Dir.glob(Rails.root.join('vendor', 'themes', theme_name, 'javascripts', 'spree', '**', '*.js'))
         app.config.assets.precompile += Dir.glob(Rails.root.join('vendor', 'themes', theme_name, 'javascripts', 'spree', '**', '*.js.coffee'))
+        app.config.assets.precompile += Dir.glob(Rails.root.join('vendor', 'themes', theme_name, 'logo', '*.png'))
       end
       config.assets.precompile << /\.(?:svg|eot|woff|ttf|woff2|gif|png|jpg)\z/
     end
