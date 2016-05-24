@@ -45,6 +45,10 @@ module SpreeThemes
       end
     end
 
+    config.to_prepare do
+      Spree::StoreController.helper Spree::GlobalHelper
+    end
+
     config.to_prepare &method(:activate).to_proc
     Devise.parent_controller = 'Spree::StoreController'
   end
