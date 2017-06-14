@@ -1,0 +1,44 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'spree/backend/codemirror' %>
+  <%= javascript_include_tag 'spree/backend/ruby' %>
+  <%= stylesheet_link_tag 'spree/backend/codemirror' %>
+<% end %>
+
+<% content_for :page_title do %>
+  <%= Spree.t(:templates) %>
+<% end %>
+
+<div data-hook="admin_theme_upload_form_header">
+  <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @theme } %>
+</div>
+
+<%= form_for @template, url: admin_theme_template_path(@theme, @template), method: :put, html: { multipart: true } do |f| %>
+  <fieldset>
+    <div data-hook="admin_template_form_fields">
+      <div class="row">
+        <div class="col-md-8" data-hook="admin_template_form">
+          <div data-hook="admin_template_form_body">
+            <%= f.label :body, Spree.t(:body) %>
+            <%= f.text_area :body, class: 'form-control body', rows: '20' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions" data-hook="buttons">
+      <%= button Spree.t('actions.update'), 'refresh', 'submit', {class: 'btn-success', data: { disable_with: "#{ Spree.t(:saving) }..." }} %>
+      <span class="or"><%= Spree.t(:or) %></span>
+      <%= button_link_to Spree.t('actions.cancel'), admin_theme_templates_path(@theme), icon: 'delete' %>
+    </div>
+  </fieldset>
+<% end %>
+
+<!-- script to initialize code mirror editor on textarea -->
+<script type="text/javascript">
+  $(document).ready(function() {
+    var myTextArea = $('#themes_template_body')[0];
+    CodeMirror.fromTextArea(myTextArea, {
+      lineNumbers: true
+    });
+  });
+</script>

@@ -1,0 +1,46 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:themes) %>
+<% end %>
+
+<div data-hook="admin_theme_upload_form_header">
+  <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @theme } %>
+</div>
+
+<!-- FORM FOR UPLOADING TEMPLATE ZIP FILE. -->
+<%= form_for @theme, url: upload_admin_themes_path, method: :post do |f| %>
+  <div class="panel panel-default" data-hook="theme-file-upload-form">
+    <div class="panel-heading">
+      <h1 class="panel-title">
+        Upload Theme
+      </h1>
+    </div>
+
+    <div class="panel-body">
+      <div class="col-md-6">
+        <div data-hook="theme-file-upload" class="form-group">
+          <%= f.file_field :template_file, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-actions" data-hook="buttons">
+    <%= f.submit Spree.t('actions.upload'), class: 'btn-success' %>
+  </div>
+<% end %>
+
+<!-- LISTING ALL THE THEMES -->
+<% @themes.all.each do |theme| %>
+  <div>
+    <span><%= theme.name %></span>
+
+    <% if theme.enabled? %>
+      <span><%= link_to Spree.t('actions.disabled'), admin_theme_deactivate_path(theme), method: :patch %></span>
+    <% else %>
+      <span><%= link_to Spree.t('actions.enabled'), admin_theme_activate_path(theme), method: :patch %></span>
+    <% end %>
+
+    <span><%= link_to Spree.t('actions.view_templates'), admin_theme_templates_path(theme) %></span>
+  </div>
+<% end %>

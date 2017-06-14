@@ -1,0 +1,20 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  spree:
+    themes: Themes
+    templates: Templates
+    path: Path
+    format: Format
+    handler: Handler
+    body: Body
+    actions:
+      upload_theme: Upload Themes
+      upload: Upload
+      disabled: Disable
+      enabled: Enable
+      view_templates: Templates
+    models:
+      theme:
+        minimum_active_error: Atleast one theme should be enabled. 

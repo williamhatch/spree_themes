@@ -1,0 +1,32 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:templates) %>
+<% end %>
+
+<table class="table" id="listing_templates" data-hook='admin_templates_listing_table'>
+  <thead>
+    <tr data-hook="admin_templates_index_headers">
+      <th><%= Spree.t(:path) %></th>
+      <th><%= Spree.t(:format) %></th>
+      <th><%= Spree.t(:handler) %></th>
+      <th data-hook="admin_templates_index_header_actions" class="actions"></th>    
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @templates.each do |template|%>
+      <tr id="<%= spree_dom_id template %>" data-hook="admin_templates_index_rows">
+        <td class='template_path'><%=link_to template.path, edit_admin_theme_template_path(@theme, template) %></td>
+        <td class='template_format'><%= template.format %></td>
+        <td class='template_handler'><%= template.handler %></td>
+
+        <td data-hook="admin_template_index_row_actions" class="actions actions-2 text-right">
+          <%= link_to edit_admin_theme_template_path(@theme, template), class: 'btn btn-primary btn-sm  with-tip action-edit no-text', title: '', 'data-original-title' => 'Edit' do %>
+            <span class="icon icon-edit"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @templates %>
