@@ -34,7 +34,13 @@ class TemplateGeneratorService
       dir.slice!("themes/#{ theme.name }/views/")
       filename = file_name.split('.')[0]
       # In spree few `.js.erb` files related to google are rendered in html format and searches for `filename.js` file.
-      script_embeded_partial? ? "#{ dir }/#{ filename }.js" : "#{ dir }/#{ filename }"
+      if script_embeded_partial?
+        "#{ dir }/#{ filename }.js"
+      elsif stylesheet_file?(filepath)
+        "#{ dir }/#{ filename }.css"
+      else
+        "#{ dir }/#{ filename }"
+      end
     end
 
     def is_partial?
@@ -42,10 +48,12 @@ class TemplateGeneratorService
     end
 
     def get_handler
+      return nil if stylesheet_file?(filepath)
       File.extname(filepath).gsub('.', '')
     end
 
     def get_format
+      return nil if stylesheet_file?(filepath)
       # In spree few `.js.erb` files related to google are rendered in html format.
       script_embeded_partial? ? 'html' : format
     end
@@ -64,6 +72,10 @@ class TemplateGeneratorService
 
     def file_name_without_ext
       File.basename(filepath, get_handler)
+    end
+
+    def stylesheet_file?(filename)
+      File.extname(filename) == '.css'
     end
 
 

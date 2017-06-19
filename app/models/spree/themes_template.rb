@@ -3,9 +3,11 @@ module Spree
 
     ## VALIDATIONS ##
     validates :path, presence: true
-    validates :format, inclusion: Mime::SET.symbols.map(&:to_s)
+    validates :format, inclusion: Mime::SET.symbols.map(&:to_s),
+                       allow_nil: true
     validates :locale, inclusion: I18n.available_locales.map(&:to_s)
-    validates :handler, inclusion: ActionView::Template::Handlers.extensions.map(&:to_s)
+    validates :handler, inclusion: ActionView::Template::Handlers.extensions.map(&:to_s),
+                        allow_nil: true
 
     ## ASSOCIATIONS ##
     belongs_to :theme
