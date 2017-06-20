@@ -35,10 +35,10 @@
   <div>
     <span><%= theme.name %></span>
 
-    <% if theme.enabled? %>
-      <span><%= link_to Spree.t('actions.disabled'), admin_theme_deactivate_path(theme), method: :patch %></span>
-    <% else %>
-      <span><%= link_to Spree.t('actions.enabled'), admin_theme_activate_path(theme), method: :patch %></span>
+    <% if theme.drafted? %>
+      <span><%= link_to Spree.t('actions.compiled'), admin_theme_state_change_path(theme, state: 'compiled'), method: :patch %></span>
+    <% elsif theme.compiled? %>
+      <span><%= link_to Spree.t('actions.published'), admin_theme_state_change_path(theme, state: 'published'), method: :patch %></span>
     <% end %>
 
     <span><%= link_to Spree.t('actions.view_templates'), admin_theme_templates_path(theme) %></span>

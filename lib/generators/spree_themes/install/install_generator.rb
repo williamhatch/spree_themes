@@ -33,12 +33,16 @@ module SpreeThemes
         filepath = "#{ ::SpreeThemes::Engine.root }/lib/generators/themes/default.zip"
 
         # creating theme object.
-        theme = Spree::Theme.new(enabled: true)
+        theme = Spree::Theme.new(state: 'published')
         theme.template_file = File.open(filepath)
         theme.save
 
         # extracting the zip file.
         ZipFileExtractor.new(filepath, theme)
+
+        # add themes/current/ directory in public directory.
+        puts 'Creating current theme directory...'
+        FileUtils.ln_s("#{ Rails.root }/public/themes/default", "#{ Rails.root }/public/themes/current")
       end
 
     end

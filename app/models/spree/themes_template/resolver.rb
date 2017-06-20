@@ -6,7 +6,7 @@ module Spree
     protected
 
       def theme
-        @theme = Spree::Theme.enabled.first || default_theme
+        @theme = Spree::Theme.published.first || default_theme
       end
 
       def default_theme

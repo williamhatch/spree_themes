@@ -13,10 +13,19 @@ en:
     actions:
       upload_theme: Upload Themes
       upload: Upload
-      disabled: Disable
-      enabled: Enable
+      compiled: Compile
+      published: Publish
       view_templates: Templates
       new_template: New Template
     models:
       theme:
-        minimum_active_error: Atleast one theme should be enabled. 
+        minimum_active_error: Atleast one theme should be published.
+    flash:
+      admin:
+        themes:
+          upload:
+            success: "Theme %{name} successfully uploaded."
+            failure: "Something went wrong, theme could not be uploaded."
+          state_change:
+            success: "Theme %{name} successfully %{state}."
+            failure: "Something went wrong, theme %{name} could not be %{state}."

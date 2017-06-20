@@ -2,7 +2,7 @@ module Spree
   module Admin
     class ThemesController < Spree::Admin::BaseController
 
-      before_action :load_theme, only: [:activate, :deactivate]
+      before_action :load_theme, only: :state_change
       before_action :load_themes
 
       def index
@@ -12,26 +12,26 @@ module Spree
       def upload
         @theme = Spree::Theme.new(theme_params)
         if @theme.save
+          flash[:notice] = Spree.t('flash.admin.themes.upload.success', name: @theme.name)
           redirect_to admin_themes_path
         else
+          flash[:error] = Spree.t('flash.admin.themes.upload.failure', name: @theme.name)
           render :index
         end
       end
 
-      def activate
-        if @theme.activate!
-          redirect_to admin_themes_path
+      def state_change
+        state = case params[:state]
+                when 'compiled' then @theme.compile
+                when 'published' then @theme.publish
+                else false
+                end
+        if state
+          flash[:notice] = Spree.t('flash.admin.themes.state_change.success', state: params[:state], name: @theme.name)
         else
-          render :index
+          flash[:error] = Spree.t('flash.admin.themes.state_change.failure', state: params[:state], name: @theme.name)
         end
-      end
-
-      def deactivate
-        if @theme.deactivate!
-          redirect_to admin_themes_path
-        else
-          render :index
-        end
+        redirect_to admin_themes_path
       end
 
       private
@@ -40,15 +40,15 @@ module Spree
           params.require(:theme).permit(:template_file)
         end
 
+        def load_themes
+          @themes = Spree::Theme.all
+        end
+
         def load_theme
           @theme = Spree::Theme.find_by(id: params[:theme_id])
           unless @theme
             redirect_to admin_themes_path
           end
-        end
-
-        def load_themes
-          @themes = Spree::Theme.all
         end
 
     end
