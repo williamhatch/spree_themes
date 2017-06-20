@@ -2,7 +2,7 @@ require 'zip'
 
 class ZipFileExtractor
 
-  OUTPUT_PATH = 'themes/'
+  OUTPUT_PATH = 'public/themes/'
 
   attr_reader :file_path, :theme
 

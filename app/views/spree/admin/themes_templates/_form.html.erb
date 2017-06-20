@@ -1,8 +1,4 @@
-<% content_for :page_title do %>
-  <%= link_to Spree.t(:templates), admin_theme_templates_path(@theme) %> /
-  <%= @template.path %>
-<% end %>
-
+<!--  
 <% content_for :head do %>
   <%= javascript_include_tag 'spree/backend/codemirror' %>
   <%= javascript_include_tag 'spree/backend/ruby' %>
@@ -34,7 +30,10 @@
   </fieldset>
 <% end %>
 
+-->
 <!-- script to initialize code mirror editor on textarea -->
+
+<!-- 
 <script type="text/javascript">
   $(document).ready(function() {
     var myTextArea = $('#themes_template_body')[0];
@@ -43,4 +42,4 @@
     });
   });
 </script>
-
+-->

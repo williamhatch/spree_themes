@@ -3,3 +3,5 @@ Rails.application.config.assets.precompile += %w( spree/backend/codemirror.js sp
 
 # precompiling .css files
 Rails.application.config.assets.precompile += %w( spree/backend/codemirror.css )
+
+Rails.application.config.assets.paths << Rails.root.join('public', 'themes', '**')

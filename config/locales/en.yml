@@ -9,12 +9,14 @@ en:
     format: Format
     handler: Handler
     body: Body
+    name: Name
     actions:
       upload_theme: Upload Themes
       upload: Upload
       disabled: Disable
       enabled: Enable
       view_templates: Templates
+      new_template: New Template
     models:
       theme:
         minimum_active_error: Atleast one theme should be enabled. 

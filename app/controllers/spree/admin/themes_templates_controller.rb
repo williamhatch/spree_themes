@@ -2,11 +2,25 @@ module Spree
   module Admin
     class ThemesTemplatesController < Spree::Admin::BaseController
 
-      before_action :load_theme, only: [:index, :edit, :update]
+      before_action :load_theme, only: [:index, :new, :create, :edit, :update]
       before_action :load_template, only: [:edit, :update]
 
       def index
         @templates = @theme.templates.page(params[:page]).per(params[:per_page])
+      end
+
+      def new
+        @template = @theme.themes_templates.build
+      end
+
+      def create
+        @template = @theme.themes_templates.build(new_template_params)
+
+        if @template.save
+          redirect_to admin_theme_templates_path(@theme)
+        else
+          render :new
+        end
       end
 
       def edit
@@ -38,6 +52,10 @@ module Spree
 
         def template_params
           params.require(:themes_template).permit(:body)
+        end
+
+        def new_template_params
+          params.require(:themes_template).permit(:body, :name, :path)
         end
 
     end

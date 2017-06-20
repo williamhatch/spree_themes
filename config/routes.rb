@@ -10,7 +10,7 @@ Spree::Core::Engine.routes.draw do
         post :upload
       end
 
-      resources :templates, controller: :themes_templates, only: [:index, :edit, :update]
+      resources :templates, controller: :themes_templates
 
     end
   end

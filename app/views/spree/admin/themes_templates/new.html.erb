@@ -1,6 +1,6 @@
 <% content_for :page_title do %>
   <%= link_to Spree.t(:templates), admin_theme_templates_path(@theme) %> /
-  <%= @template.path %>
+  <%= Spree.t(:new_template) %>
 <% end %>
 
 <% content_for :head do %>
@@ -13,11 +13,31 @@
   <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @theme } %>
 </div>
 
-<%= form_for @template, url: admin_theme_template_path(@theme, @template), method: :put, html: { multipart: true } do |f| %>
+<%= form_for @template, url: admin_theme_templates_path(@theme, @template), method: :post, html: { multipart: true } do |f| %>
   <fieldset>
+
+    <div class="row">
+      <div class="col-md-8">
+        <div data-hook="admin_template_form_name">
+          <%= f.label :name, Spree.t(:name) %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8">
+        <div data-hook="admin_template_form_path">
+          <%= f.label :path, Spree.t(:path) %>
+          <%= f.text_field :path, class: 'form-control' %>
+          <small><%= "(path will be appended to <b>public/themes/#{ @theme.name }/</b>)".html_safe %></small>
+        </div>
+      </div>
+    </div>
+
     <div data-hook="admin_template_form_fields">
       <div class="row">
-        <div class="col-md-8" data-hook="admin_template_form">
+        <div class="col-md-8">
           <div data-hook="admin_template_form_body">
             <%= f.label :body, Spree.t(:body) %>
             <%= f.text_area :body, class: 'form-control body', rows: '20' %>
@@ -43,4 +63,3 @@
     });
   });
 </script>
-

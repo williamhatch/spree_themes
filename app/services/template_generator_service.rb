@@ -25,22 +25,23 @@ class TemplateGeneratorService
         handler: get_handler,
         format: get_format,
         locale: DEFAULT_LOCALE,
-        theme_id: theme.id
+        theme_id: theme.id,
+        name: file_name
       }
     end
 
     def get_path
-      dir = File.dirname(filepath)
-      dir.slice!("themes/#{ theme.name }/views/")
-      filename = file_name.split('.')[0]
-      # In spree few `.js.erb` files related to google are rendered in html format and searches for `filename.js` file.
-      if script_embeded_partial?
-        "#{ dir }/#{ filename }.js"
-      elsif stylesheet_file?(filepath)
-        "#{ dir }/#{ filename }.css"
-      else
-        "#{ dir }/#{ filename }"
-      end
+      File.dirname(filepath)
+      # dir.slice!("themes/#{ theme.name }/views/")
+      # filename = file_name.split('.')[0]
+      # # In spree few `.js.erb` files related to google are rendered in html format and searches for `filename.js` file.
+      # if script_embeded_partial?
+      #   "#{ dir }/#{ filename }.js"
+      # elsif stylesheet_file?(filepath)
+      #   "#{ dir }/#{ filename }.css"
+      # else
+      #   "#{ dir }/#{ filename }"
+      # end
     end
 
     def is_partial?
