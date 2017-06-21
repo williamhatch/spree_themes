@@ -32,16 +32,6 @@ class TemplateGeneratorService
 
     def get_path
       File.dirname(filepath)
-      # dir.slice!("themes/#{ theme.name }/views/")
-      # filename = file_name.split('.')[0]
-      # # In spree few `.js.erb` files related to google are rendered in html format and searches for `filename.js` file.
-      # if script_embeded_partial?
-      #   "#{ dir }/#{ filename }.js"
-      # elsif stylesheet_file?(filepath)
-      #   "#{ dir }/#{ filename }.css"
-      # else
-      #   "#{ dir }/#{ filename }"
-      # end
     end
 
     def is_partial?

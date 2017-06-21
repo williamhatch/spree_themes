@@ -12,7 +12,7 @@ class ZipFileExtractor
   end
 
   def extract
-    FileUtils.mkdir_p(output_path)
+    FileUtils.mkdir_p(OUTPUT_PATH)
     parse_file
   end
 
@@ -21,16 +21,17 @@ class ZipFileExtractor
     def parse_file
       Zip::File.open(file_path) do |zip_file|
         zip_file.each do |file|
-          filepath = File.join(output_path, file.name)
+          # filepath = File.join(output_path, file.name)
+          filepath = file.name
           zip_file.extract(file, filepath) unless File.exist?(filepath)
           generate_template(filepath) if File.file?(filepath)
         end
       end
     end
 
-    def output_path
-      @output_path ||= OUTPUT_PATH + file_name
-    end
+    # def output_path
+    #   @output_path ||= OUTPUT_PATH + file_name
+    # end
 
     def file_name
       @file_name ||= File.basename(file_path, file_extension)

@@ -34,11 +34,16 @@ module Spree
 
     ## STATE MACHINES ##
     state_machine initial: :drafted do
-
       before_transition :drafted => :compiled, do: :assets_precompile
+
+      before_transition :published => :drafted do  |theme, transition|
+        theme.remove_current_theme
+      end
+
       before_transition :compiled => :published do |theme, transition|
         theme.remove_current_theme
         theme.apply_theme_to_store
+        theme.append_manifest_files
       end
 
       event :draft do
@@ -55,7 +60,12 @@ module Spree
     end
 
     def assets_precompile
-      puts 'hello'
+      AssetsPrecompilerService.minify(self)
+    end
+
+    def remove_current_theme
+      Spree::Theme.published.each(&:draft)
+      File.delete(CURRENT_THEME_PATH) if File.exist?(CURRENT_THEME_PATH)
     end
 
     def apply_theme_to_store
@@ -63,9 +73,11 @@ module Spree
       Rails.cache.clear
     end
 
-    def remove_current_theme
-      Spree::Theme.published.each(&:draft)
-      File.delete(CURRENT_THEME_PATH) if File.exist?(CURRENT_THEME_PATH)
+    def append_manifest_files
+      File.open('vendor/assets/javascripts/spree/frontend/all.js', 'a+') { |file| file << "//= require #{ name }\n" }
+      # File.open('vendor/assets/stylesheets/spree/frontend/all.css', 'a+') { |file| file << }
+      # append_file 'vendor/assets/javascripts/spree/frontend/all.js', "//= require public/themes/current/javascripts/#{ name }\n"
+      # inject_into_file 'vendor/assets/stylesheets/spree/frontend/all.css', " *= require public/themes/current/stylesheets/#{ name }", before: /\*\//, verbose: true
     end
 
     private
