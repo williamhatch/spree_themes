@@ -4,6 +4,9 @@ module Spree
     DEFAULT_LOCALE = 'en'
     DEFAULT_PATH = "public/themes"
 
+    # this attr attribute is used when tmeplates are created from admin end.
+    attr_accessor :created_by_admin
+
     ## VALIDATIONS ##
     validates :path, presence: true
     validates :format, inclusion: Mime::SET.symbols.map(&:to_s),
@@ -17,7 +20,7 @@ module Spree
 
     ## CALLBACKS ##
     before_validation :set_default_locale, unless: :locale?
-    before_create :set_public_path
+    before_create :set_public_path, if: :created_by_admin
     after_save :clear_cache
     after_save :update_public_file
 

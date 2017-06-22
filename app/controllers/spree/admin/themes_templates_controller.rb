@@ -15,6 +15,7 @@ module Spree
 
       def create
         @template = @theme.themes_templates.build(new_template_params)
+        @template.created_by_admin = true
 
         if @template.save
           redirect_to admin_theme_templates_path(@theme)

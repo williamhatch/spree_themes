@@ -16,7 +16,9 @@ module Spree
     validates :name, presence: true,
                      uniqueness: { case_sensitive: false }
     validates :state, inclusion: { in: STATES }
-    validate :ensure_atleast_one_published_theme, if: :state_changed?, unless: :published?
+
+    # FIX_ME_PG:- check for atleast one published theme.
+    # validate :ensure_atleast_one_published_theme, if: :state_changed?, unless: :published?
 
     ## ASSOCIATIONS ##
     has_many :themes_templates, dependent: :destroy
@@ -36,9 +38,9 @@ module Spree
     state_machine initial: :drafted do
       before_transition :drafted => :compiled, do: :assets_precompile
 
-      before_transition :published => :drafted do  |theme, transition|
-        theme.remove_current_theme
-      end
+      # before_transition :published => :drafted do  |theme, transition|
+      #   theme.remove_current_theme
+      # end
 
       before_transition :compiled => :published do |theme, transition|
         theme.remove_current_theme
@@ -74,17 +76,16 @@ module Spree
     end
 
     def append_manifest_files
-      File.open('vendor/assets/javascripts/spree/frontend/all.js', 'a+') { |file| file << "//= require #{ name }\n" }
-      # File.open('vendor/assets/stylesheets/spree/frontend/all.css', 'a+') { |file| file << }
-      # append_file 'vendor/assets/javascripts/spree/frontend/all.js', "//= require public/themes/current/javascripts/#{ name }\n"
-      # inject_into_file 'vendor/assets/stylesheets/spree/frontend/all.css', " *= require public/themes/current/stylesheets/#{ name }", before: /\*\//, verbose: true
+      generator = Spree::Theme::ManifestGenerator.new(self)
+      generator.add_javascript
+      generator.add_stylesheet
     end
 
     private
 
-      def ensure_atleast_one_published_theme
-        errors.add(:base, Spree.t('models.theme.minimum_active_error')) unless Spree::Theme.published.one?
-      end
+      # def ensure_atleast_one_published_theme
+      #   errors.add(:base, Spree.t('models.theme.minimum_active_error')) unless Spree::Theme.published.one?
+      # end
 
       def set_name
         self.name = File.basename(template_file_file_name, File.extname(template_file_file_name))

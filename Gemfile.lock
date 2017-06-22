@@ -72,6 +72,7 @@ PATH
       rubyzip (~> 1.2.1)
       spree_core (>= 3.1.0, < 4.0)
       state_machine (~> 1.2.0)
+      thor
 
 GEM
   remote: https://rubygems.org/
@@ -395,6 +396,7 @@ DEPENDENCIES
   spree_auth_devise!
   spree_themes!
   state_machine (~> 1.2.0)
+  thor
 
 BUNDLED WITH
    1.15.1

@@ -3,7 +3,7 @@ module Spree
     class ThemesController < Spree::Admin::BaseController
 
       before_action :load_theme, only: :state_change
-      before_action :load_themes
+      before_action :load_themes, only: :index
 
       def index
         @theme = Spree::Theme.new

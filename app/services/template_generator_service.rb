@@ -39,12 +39,12 @@ class TemplateGeneratorService
     end
 
     def get_handler
-      return nil if stylesheet_file?(filepath)
+      return nil if assets_file?(filepath)
       File.extname(filepath).gsub('.', '')
     end
 
     def get_format
-      return nil if stylesheet_file?(filepath)
+      return nil if assets_file?(filepath)
       # In spree few `.js.erb` files related to google are rendered in html format.
       script_embeded_partial? ? 'html' : format
     end
@@ -69,5 +69,12 @@ class TemplateGeneratorService
       File.extname(filename) == '.css'
     end
 
+    def javascript_file?(filename)
+      File.extname(filename) == '.js'
+    end
+
+    def assets_file?(filename)
+      stylesheet_file?(filename) || javascript_file?(filename)
+    end
 
 end

@@ -21,17 +21,21 @@ class ZipFileExtractor
     def parse_file
       Zip::File.open(file_path) do |zip_file|
         zip_file.each do |file|
-          # filepath = File.join(output_path, file.name)
-          filepath = file.name
-          zip_file.extract(file, filepath) unless File.exist?(filepath)
+          filepath = File.join(output_path, file.name)
+
+          next if filepath =~ /__MACOSX/ or filepath =~ /\.DS_Store/
+          unless File.exist?(filepath)
+            FileUtils::mkdir_p(File.dirname(filepath))
+            zip_file.extract(file, filepath)
+          end
           generate_template(filepath) if File.file?(filepath)
         end
       end
     end
 
-    # def output_path
-    #   @output_path ||= OUTPUT_PATH + file_name
-    # end
+    def output_path
+      @output_path ||= OUTPUT_PATH + file_name
+    end
 
     def file_name
       @file_name ||= File.basename(file_path, file_extension)
