@@ -44,8 +44,7 @@ module Spree
 
       before_transition :compiled => :published do |theme, transition|
         theme.remove_current_theme
-        theme.apply_theme_to_store
-        theme.append_manifest_files
+        theme.apply_new_theme
       end
 
       event :draft do
@@ -62,7 +61,7 @@ module Spree
     end
 
     def assets_precompile
-      AssetsPrecompilerService.minify(self)
+      AssetsPrecompilerService.new.minify
     end
 
     def remove_current_theme
@@ -70,15 +69,9 @@ module Spree
       File.delete(CURRENT_THEME_PATH) if File.exist?(CURRENT_THEME_PATH)
     end
 
-    def apply_theme_to_store
+    def apply_new_theme
       FileUtils.ln_s("#{ FILESYSTEM_PATH }/#{ name }", CURRENT_THEME_PATH)
       Rails.cache.clear
-    end
-
-    def append_manifest_files
-      generator = Spree::Theme::ManifestGenerator.new(self)
-      generator.add_javascript
-      generator.add_stylesheet
     end
 
     private

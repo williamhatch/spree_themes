@@ -1,35 +1,54 @@
 class AssetsPrecompilerService
 
-  attr_reader :theme, :env
+  attr_reader :theme, :env, :manifest
 
-  def initialize(theme)
-    @theme = theme
+  PRECOMPILED_ASSET_PATH = 'public/assets/theme'
+  THEME_DEFAULT_ASSET_PATH = 'public/themes/current'
+
+  def initialize
+    current_theme
   end
 
-  def self.minify(theme)
-    new(theme).send :minify
+  def minify(options= {})
+    options.merge!({ precompile: true }) unless options.key?(:precompile)
+    build_environment
+    build_manifest
+    options[:precompile] ? assets_precompile : manifest
   end
 
   private
 
-    def minify
-      @env = Sprockets::Environment.new()
+    def current_theme
+      @theme ||= Spree::Theme.published.first
+    end
+
+    def build_environment
+      @env ||= Sprockets::Environment.new()
       prepend_stylesheet_path
       prepend_javascript_path
-      manifest = Sprockets::Manifest.new(env, "#{ asset_path }/#{ theme.name }.json")
-      manifest.compile('*')
+      set_compressors
+    end
+
+    def build_manifest
+      @manifest ||= Sprockets::Manifest.new(env, PRECOMPILED_ASSET_PATH)
     end
 
     def prepend_stylesheet_path
-      env.prepend_path("#{ asset_path }/stylesheets")
+      env.prepend_path("#{ THEME_DEFAULT_ASSET_PATH }/stylesheets")
     end
 
     def prepend_javascript_path
-      env.prepend_path("#{ asset_path }/javascripts")
+      env.prepend_path("#{ THEME_DEFAULT_ASSET_PATH }/javascripts")
     end
 
-    def asset_path
-      "public/themes/#{ theme.name }"
+    def set_compressors
+      env.js_compressor  = Rails.application.config.assets.js_compressor
+      env.css_compressor = Rails.application.config.assets.css_compressor
+    end
+
+    def assets_precompile
+      manifest.clobber
+      manifest.compile('*')
     end
 
 end
