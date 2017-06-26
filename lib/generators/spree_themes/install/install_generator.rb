@@ -33,7 +33,7 @@ module SpreeThemes
         filepath = "#{ ::SpreeThemes::Engine.root }/lib/generators/themes/default.zip"
 
         # creating theme object.
-        theme = Spree::Theme.new(state: 'compiled', name: 'default')
+        theme = Spree::Theme.new(state: 'drafted', name: 'default')
         theme.template_file = File.open(filepath)
         theme.save(validate: false)
 
@@ -41,6 +41,7 @@ module SpreeThemes
         ZipFileExtractor.new(filepath, theme)
 
         # publishing theme.
+        theme.compile
         theme.publish
       end
 

@@ -33,7 +33,7 @@ module Sprockets
       class Theme < Manifest
 
         def initialize(view)
-          @manifest = AssetsPrecompilerService.new.minify({ precompile: false })
+          @manifest = AssetsPrecompilerService.new(current_theme).minify({ precompile: false })
           raise ArgumentError, 'config.assets.resolve_with includes :theme, but app.assets_manifest is nil' unless @manifest
         end
 
@@ -41,6 +41,10 @@ module Sprockets
           result = super
           result.prepend('theme/') if result.present?
           result
+        end
+
+        def current_theme
+          @theme ||= Spree::Theme.published.first
         end
 
       end

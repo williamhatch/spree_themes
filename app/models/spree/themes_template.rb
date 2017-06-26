@@ -4,7 +4,7 @@ module Spree
     DEFAULT_LOCALE = 'en'
     DEFAULT_PATH = "public/themes"
 
-    # this attr attribute is used when tmeplates are created from admin end.
+    # this attr attribute is used when templates are created from admin end.
     attr_accessor :created_by_admin
 
     ## VALIDATIONS ##
@@ -21,7 +21,7 @@ module Spree
     ## CALLBACKS ##
     before_validation :set_default_locale, unless: :locale?
     before_create :set_public_path, if: :created_by_admin
-    after_save :clear_cache
+    after_save :update_cache_timestamp
     after_save :update_public_file
 
     ## DELEGATES ##
@@ -29,8 +29,8 @@ module Spree
 
     private
 
-      def clear_cache
-        Spree::ThemesTemplate::Resolver.instance.clear_cache
+      def update_cache_timestamp
+        Rails.cache.write(Spree::ThemesTemplate::Resolver.cache_key, Time.now)
       end
 
       def set_default_locale

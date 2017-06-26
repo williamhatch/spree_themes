@@ -45,6 +45,7 @@ module Spree
       before_transition :compiled => :published do |theme, transition|
         theme.remove_current_theme
         theme.apply_new_theme
+        theme
       end
 
       event :draft do
@@ -61,7 +62,7 @@ module Spree
     end
 
     def assets_precompile
-      AssetsPrecompilerService.new.minify
+      AssetsPrecompilerService.new(self).minify
     end
 
     def remove_current_theme
@@ -71,7 +72,6 @@ module Spree
 
     def apply_new_theme
       FileUtils.ln_s("#{ FILESYSTEM_PATH }/#{ name }", CURRENT_THEME_PATH)
-      Rails.cache.clear
     end
 
     private

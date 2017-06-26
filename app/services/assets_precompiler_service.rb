@@ -5,8 +5,8 @@ class AssetsPrecompilerService
   PRECOMPILED_ASSET_PATH = 'public/assets/theme'
   THEME_DEFAULT_ASSET_PATH = 'public/themes/current'
 
-  def initialize
-    current_theme
+  def initialize(theme)
+    @theme = theme
   end
 
   def minify(options= {})
@@ -17,10 +17,6 @@ class AssetsPrecompilerService
   end
 
   private
-
-    def current_theme
-      @theme ||= Spree::Theme.published.first
-    end
 
     def build_environment
       @env ||= Sprockets::Environment.new()
