@@ -1,0 +1,7 @@
+/*
+// manifest js file for initializing codemirror editor.
+
+*= require 'spree/backend/codemirror'
+*= require 'spree/backend/show-hint'
+
+*/

@@ -4,9 +4,8 @@
 <% end %>
 
 <% content_for :head do %>
-  <%= javascript_include_tag 'spree/backend/codemirror' %>
-  <%= javascript_include_tag 'spree/backend/ruby' %>
-  <%= stylesheet_link_tag 'spree/backend/codemirror' %>
+  <%= javascript_include_tag 'spree/backend/editor' %>
+  <%= stylesheet_link_tag 'spree/backend/editor' %>
 <% end %>
 
 <div data-hook="admin_theme_form_header">
@@ -35,12 +34,4 @@
 <% end %>
 
 <!-- script to initialize code mirror editor on textarea -->
-<script type="text/javascript">
-  $(document).ready(function() {
-    var myTextArea = $('#themes_template_body')[0];
-    CodeMirror.fromTextArea(myTextArea, {
-      lineNumbers: true
-    });
-  });
-</script>
-
+<%= javascript_include_tag 'spree/backend/main.js' %>

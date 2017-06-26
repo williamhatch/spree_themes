@@ -4,12 +4,12 @@ Rails.application.config.assets.paths << Rails.root.join('public', 'themes', 'cu
 Rails.application.config.assets.paths << Rails.root.join('public', 'assets', 'theme')
 
 # precompiling .js files
-Rails.application.config.assets.precompile += %w( spree/backend/codemirror.js
-                                                  spree/backend/ruby.js
+Rails.application.config.assets.precompile += %w( spree/backend/editor.js
+                                                  spree/backend/main.js
                                                   *.manifest.js
                                                 )
 
 # precompiling .css files
-Rails.application.config.assets.precompile += %w( spree/backend/codemirror.css
+Rails.application.config.assets.precompile += %w( spree/backend/editor.css
                                                   *.manifest.css
                                                 )
