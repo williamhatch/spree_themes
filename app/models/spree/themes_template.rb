@@ -3,6 +3,7 @@ module Spree
 
     DEFAULT_LOCALE = 'en'
     DEFAULT_PATH = "public/themes"
+    ASSETS_FILE_EXTENSIONS = ['.js', '.css']
 
     # this attr attribute is used when templates are created from admin end.
     attr_accessor :created_by_admin
@@ -23,6 +24,7 @@ module Spree
     before_create :set_public_path, if: :created_by_admin
     after_save :update_cache_timestamp
     after_save :update_public_file
+    after_save :precompile_assets, if: :theme_published? && :assets_file?
 
     ## DELEGATES ##
     delegate :name, to: :theme, prefix: true
@@ -45,5 +47,18 @@ module Spree
         FileGeneratorService.create(self)
       end
 
+      def precompile_assets
+        assets_compiler = AssetsPrecompilerService.new(theme)
+        assets_compiler.minify
+        assets_compiler.copy_assets
+      end
+
+      def theme_published?
+        theme.published?
+      end
+
+      def assets_file?
+        ASSETS_FILE_EXTENSIONS.include? File.extname(name)
+      end
   end
 end

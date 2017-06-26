@@ -2,8 +2,8 @@ class AssetsPrecompilerService
 
   attr_reader :theme, :env, :manifest
 
-  PRECOMPILED_ASSET_PATH = 'public/assets/theme'
-  THEME_DEFAULT_ASSET_PATH = 'public/themes/current'
+  PUBLIC_PRECOMPILED_ASSET_PATH = 'public/assets/theme'
+  CURRENT_THEME_PATH = 'public/themes/current'
 
   def initialize(theme)
     @theme = theme
@@ -16,6 +16,11 @@ class AssetsPrecompilerService
     options[:precompile] ? assets_precompile : manifest
   end
 
+  def copy_assets
+    FileUtils.mkdir_p(PUBLIC_PRECOMPILED_ASSET_PATH)
+    FileUtils.cp_r("#{ CURRENT_THEME_PATH }/precompiled_assets/.", PUBLIC_PRECOMPILED_ASSET_PATH)
+  end
+
   private
 
     def build_environment
@@ -26,15 +31,15 @@ class AssetsPrecompilerService
     end
 
     def build_manifest
-      @manifest ||= Sprockets::Manifest.new(env, PRECOMPILED_ASSET_PATH)
+      @manifest ||= Sprockets::Manifest.new(env, "#{ theme_path }/precompiled_assets")
     end
 
     def prepend_stylesheet_path
-      env.prepend_path("#{ THEME_DEFAULT_ASSET_PATH }/stylesheets")
+      env.prepend_path("#{ source_asset_path }/stylesheets")
     end
 
     def prepend_javascript_path
-      env.prepend_path("#{ THEME_DEFAULT_ASSET_PATH }/javascripts")
+      env.prepend_path("#{ source_asset_path }/javascripts")
     end
 
     def set_compressors
@@ -45,6 +50,14 @@ class AssetsPrecompilerService
     def assets_precompile
       manifest.clobber
       manifest.compile('*')
+    end
+
+    def source_asset_path
+      theme.published? ? CURRENT_THEME_PATH : theme_path
+    end
+
+    def theme_path
+      "public/themes/#{ theme.name }"
     end
 
 end
