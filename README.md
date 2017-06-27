@@ -1,7 +1,8 @@
 SpreeThemes
 ==================
 
-Introduction goes here.
+This extension allows the admin to modify, upload new frontend themes from backend. It also provides admin to create new/edit templates to existing themes.
+
 
 ## Installation
 
@@ -23,6 +24,22 @@ Introduction goes here.
 4. Restart your server
 
   If your server was running, restart it so that it can find the assets properly.
+
+
+## Usage
+
+Once install, admin can see the option to upload themes under configuration tab at backend. Admin needs to upload the theme zip file in specific file structure. Once uploaded, admin can compile and publish the theme. Only after publishing, the theme will be applied to the frontend store.
+
+By default, spree default frontend theme is pbulished and viewed on frontend.
+
+File structure for the zip file to be uploaded:-
+* Theme.zip
+  * javascripts
+  * stylesheets
+  * views (these views will be the spree frontend view directory)
+
+*Note:- Add new javascript files to javascripts directory and new stylesheet files to stylesheets directory. For adding js and css manifest files, file name should be script.manifest.js or style.manifest.js*
+
 
 ## Testing
 
