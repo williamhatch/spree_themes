@@ -17,7 +17,7 @@ module Spree
     private
 
       def clear_cache_if_necessary
-        last_updated = Rails.cache.fetch(Spree::ThemesTemplate::Resolver.cache_key) { Time.now }
+        last_updated = Rails.cache.fetch(Spree::ThemesTemplate::Resolver.cache_key) { Time.current }
 
         if @cache_last_updated.nil? || @cache_last_updated < last_updated
           Rails.logger.info 'Reloading new template content.....'

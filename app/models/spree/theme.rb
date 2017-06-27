@@ -45,6 +45,7 @@ module Spree
       before_transition :compiled => :published do |theme, transition|
         theme.remove_current_theme
         theme.apply_new_theme
+        theme.update_cache_timestamp
       end
 
       event :draft do
@@ -72,6 +73,10 @@ module Spree
     def apply_new_theme
       FileUtils.ln_s("#{ FILESYSTEM_PATH }/#{ name }", CURRENT_THEME_PATH)
       AssetsPrecompilerService.new(self).copy_assets
+    end
+
+    def update_cache_timestamp
+      Rails.cache.write(Spree::ThemesTemplate::Resolver.cache_key, Time.current)
     end
 
     private

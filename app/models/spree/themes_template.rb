@@ -32,7 +32,7 @@ module Spree
     private
 
       def update_cache_timestamp
-        Rails.cache.write(Spree::ThemesTemplate::Resolver.cache_key, Time.now)
+        Rails.cache.write(Spree::ThemesTemplate::Resolver.cache_key, Time.current)
       end
 
       def set_default_locale
