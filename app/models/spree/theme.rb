@@ -5,9 +5,14 @@ module Spree
     DEFAULT_STATE = 'drafted'
     TEMPLATE_FILE_CONTENT_TYPE = 'application/zip'
     STATES = %w(drafted compiled published)
+    #FIXME_AB: We are planning to name this extension as vinsol_spree_themes so can we make this path as public/vinsol_spree_themes.
+    #FIXME_AB: Also use File.join to make path.
+    #FIXME_AB: Rename this variable to THEMES_PATH
     FILESYSTEM_PATH = "#{ Rails.root }/public/themes"
+    #FIXME_AB: Reuse THEMES_PATH
     CURRENT_THEME_PATH = "#{ Rails.root }/public/themes/current"
 
+    #FIXME_AB: Add storate to filesystem. Paperclip can have global setting to store uploaded files on s3. Here we want to ensure that files are on disk.
     has_attached_file :template_file, path: 'public/system/spree/themes/:filename'
 
     ## VALIDATIONS ##
@@ -36,6 +41,7 @@ module Spree
 
     ## STATE MACHINES ##
     state_machine initial: :drafted do
+      #FIXME_AB: use new hash syntax everywhere
       before_transition :drafted => :compiled, do: :assets_precompile
 
       # before_transition :published => :drafted do  |theme, transition|
@@ -71,6 +77,7 @@ module Spree
     end
 
     def apply_new_theme
+      #FIXME_AB: use File.join
       FileUtils.ln_s("#{ FILESYSTEM_PATH }/#{ name }", CURRENT_THEME_PATH)
       AssetsPrecompilerService.new(self).copy_assets
     end

@@ -2,6 +2,7 @@ class AssetsPrecompilerService
 
   attr_reader :theme, :env, :manifest
 
+  #FIXME_AB: FIle.join
   PUBLIC_PRECOMPILED_ASSET_PATH = 'public/assets/theme'
   CURRENT_THEME_PATH = 'public/themes/current'
 

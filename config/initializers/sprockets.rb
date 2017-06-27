@@ -1,6 +1,7 @@
 module Sprockets
   class Railtie < ::Rails::Railtie
 
+    #FIXME_AB: Can we name it as assets/vinsol_spree_theme 
     PUBLIC_THEME_PATH = '/assets/theme'
 
     def self.build_manifest(app)
@@ -39,6 +40,7 @@ module Sprockets
 
         def asset_path(path, digest, allow_non_precompiled = false)
           result = super
+          #FIXME_AB: have theme path as a constant
           result.prepend('theme/') if result.present?
           result
         end

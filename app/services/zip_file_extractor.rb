@@ -23,6 +23,7 @@ class ZipFileExtractor
         zip_file.each do |file|
           filepath = File.join(output_path, file.name)
 
+          #FIXME_AB: maintain an array of ignored files. any file with starting as . or __ should be ignored. Add this in Readme too
           next if filepath =~ /__MACOSX/ or filepath =~ /\.DS_Store/
           unless File.exist?(filepath)
             FileUtils::mkdir_p(File.dirname(filepath))
