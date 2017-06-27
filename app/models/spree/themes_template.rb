@@ -24,7 +24,7 @@ module Spree
     before_create :set_public_path, if: :created_by_admin
     after_save :update_cache_timestamp
     after_save :update_public_file
-    after_save :precompile_assets, if: :theme_published? && :assets_file?
+    after_save :precompile_assets, if: [:theme_published?, :assets_file?]
 
     ## DELEGATES ##
     delegate :name, to: :theme, prefix: true
@@ -60,5 +60,6 @@ module Spree
       def assets_file?
         ASSETS_FILE_EXTENSIONS.include? File.extname(name)
       end
+
   end
 end
