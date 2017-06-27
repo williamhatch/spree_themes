@@ -10,6 +10,12 @@ en:
     handler: Handler
     body: Body
     name: Name
+    state: Theme State
+    theme_states:
+      compiled: Compiled
+      drafted: Drafted
+      published: Published
+
     actions:
       upload_theme: Upload Themes
       upload: Upload
@@ -17,9 +23,11 @@ en:
       published: Publish
       view_templates: Templates
       new_template: New Template
+
     models:
       theme:
         minimum_active_error: Atleast one theme should be published.
+
     flash:
       admin:
         themes:

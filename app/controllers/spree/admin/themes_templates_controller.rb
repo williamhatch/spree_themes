@@ -6,7 +6,8 @@ module Spree
       before_action :load_template, only: [:edit, :update]
 
       def index
-        @templates = @theme.templates.page(params[:page]).per(params[:per_page])
+        @search = @theme.templates.search(params[:q])
+        @templates = @search.result.page(params[:page]).per(params[:per_page])
       end
 
       def new

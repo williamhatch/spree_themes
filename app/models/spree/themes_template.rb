@@ -29,6 +29,8 @@ module Spree
     ## DELEGATES ##
     delegate :name, to: :theme, prefix: true
 
+    self.whitelisted_ransackable_attributes = %w( name path format handler )
+
     private
 
       def update_cache_timestamp

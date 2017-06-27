@@ -6,6 +6,41 @@
   <%= button_link_to Spree.t(:new_template), new_admin_theme_template_url, class: "btn-success", icon: 'add', id: 'admin_new_theme_template_link' %>
 <% end %>
 
+<% content_for :table_filter_title do %>
+  <%= Spree.t(:search) %>
+<% end %>
+
+<% content_for :table_filter do %>
+  <div data-hook="admin_theme_templates_index_search">
+    <%= search_form_for [:admin, @search], url: admin_theme_templates_path(@theme) do |f| %>
+      <div class="form-group">
+        <%= f.label Spree.t(:name) %>
+        <%= f.text_field :name_cont, class: "form-control js-quick-search-target" %>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label Spree.t(:path) %>
+            <%= f.text_field :path_cont, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label Spree.t(:handler) %>
+            <%= f.text_field :handler_cont, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
+      <div data-hook="admin_users_index_search_buttons" class="form-actions">
+        <%= button Spree.t(:search), 'search' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
 <table class="table" id="listing_templates" data-hook='admin_templates_listing_table'>
   <thead>
     <tr data-hook="admin_templates_index_headers">

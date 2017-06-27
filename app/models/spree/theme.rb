@@ -39,6 +39,8 @@ module Spree
 
     alias_method :templates, :themes_templates
 
+    self.whitelisted_ransackable_attributes = %w( name state )
+
     ## STATE MACHINES ##
     state_machine initial: :drafted do
       #FIXME_AB: use new hash syntax everywhere
