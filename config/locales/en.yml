@@ -37,3 +37,6 @@ en:
           state_change:
             success: "Theme %{name} successfully %{state}."
             failure: "Something went wrong, theme %{name} could not be %{state}."
+          destroy:
+            success: "Theme %{name} successfully removed."
+            failure: "Something went wrong, theme %{name} could not be removed."

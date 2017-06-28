@@ -8,17 +8,23 @@
       </div>
 
       <div class="theme-content">
-        <b>Name: <%= theme.name %></b>
-        <b class="pull-right">State: <%= theme.state %></b>
+        <div>
+          <b>Name: <%= theme.name %></b>
+          <b class="pull-right">State: <%= theme.state %></b>          
+        </div>
 
         <div>
           <% if theme.drafted? %>
-            <span><%= link_to Spree.t('actions.compiled'), admin_theme_state_change_path(theme, state: 'compiled'), method: :patch %></span>
+            <span><%= link_to Spree.t('actions.compiled'), state_change_admin_theme_path(theme, state: 'compiled'), method: :patch %></span>
           <% elsif theme.compiled? %>
-            <span><%= link_to Spree.t('actions.published'), admin_theme_state_change_path(theme, state: 'published'), method: :patch %></span>
+            <span><%= link_to Spree.t('actions.published'), state_change_admin_theme_path(theme, state: 'published'), method: :patch %></span>
           <% end %>
 
-          <span><%= link_to Spree.t('actions.view_templates'), admin_theme_templates_path(theme) %></span> 
+          <span><%= link_to Spree.t('actions.view_templates'), admin_theme_templates_path(theme) %></span>
+
+          <%= link_to admin_theme_path(theme), method: :delete, class: 'btn btn-danger btn-sm  with-tip action-delete no-text pull-right', title: '', 'data-original-title' => 'Delete', data: { confirm: 'Are you sure?' } do %>
+            <span class="icon icon-delete"></span>
+          <% end %>
         </div>
       </div>
    </div>

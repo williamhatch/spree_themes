@@ -2,7 +2,7 @@ module Spree
   module Admin
     class ThemesController < Spree::Admin::BaseController
 
-      before_action :load_theme, only: :state_change
+      before_action :load_theme, only: [:state_change, :destroy]
       before_action :load_themes, only: :index
 
       def index
@@ -34,6 +34,15 @@ module Spree
         redirect_to admin_themes_path
       end
 
+      def destroy
+        if @theme.destroy
+          flash[:notice] = Spree.t('flash.admin.themes.destroy.success', name: @theme.name)
+        else
+          flash[:error] = Spree.t('flash.admin.themes.destroy.failure', name: @theme.name)
+        end
+        redirect_to admin_themes_path
+      end
+
       private
 
         def theme_params
@@ -46,7 +55,7 @@ module Spree
         end
 
         def load_theme
-          @theme = Spree::Theme.find_by(id: params[:theme_id])
+          @theme = Spree::Theme.find_by(id: params[:id])
           unless @theme
             redirect_to admin_themes_path
           end

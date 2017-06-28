@@ -1,0 +1,12 @@
+<tr id="<%= spree_dom_id template %>" data-hook="admin_templates_index_rows">
+  <td class='template_name'><%= link_to template.name, edit_admin_theme_template_path(@theme, template) %></td>
+  <td class='template_path'><%= template.path %></td>
+  <td class='template_format'><%= template.format %></td>
+  <td class='template_handler'><%= template.handler %></td>
+
+  <td data-hook="admin_template_index_row_actions" class="actions actions-2 text-right">
+    <%= link_to edit_admin_theme_template_path(@theme, template), class: 'btn btn-primary btn-sm  with-tip action-edit no-text', title: '', 'data-original-title' => 'Edit' do %>
+      <span class="icon icon-edit"></span>
+    <% end %>
+  </td>
+</tr>
