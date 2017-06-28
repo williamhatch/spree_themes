@@ -5,12 +5,8 @@ module Spree
     DEFAULT_STATE = 'drafted'
     TEMPLATE_FILE_CONTENT_TYPE = 'application/zip'
     STATES = %w(drafted compiled published)
-    #FIXME_AB: We are planning to name this extension as vinsol_spree_themes so can we make this path as public/vinsol_spree_themes.
-    #FIXME_AB: Also use File.join to make path.
-    #FIXME_AB: Rename this variable to THEMES_PATH
-    FILESYSTEM_PATH = "#{ Rails.root }/public/themes"
-    #FIXME_AB: Reuse THEMES_PATH
-    CURRENT_THEME_PATH = "#{ Rails.root }/public/themes/current"
+    THEMES_PATH = File.join(Rails.root, 'public', 'vinsol_spree_themes')
+    CURRENT_THEME_PATH = File.join(THEMES_PATH, 'current')
 
     #FIXME_AB: Add storate to filesystem. Paperclip can have global setting to store uploaded files on s3. Here we want to ensure that files are on disk.
     has_attached_file :template_file, path: 'public/system/spree/themes/:filename'
@@ -43,14 +39,13 @@ module Spree
 
     ## STATE MACHINES ##
     state_machine initial: :drafted do
-      #FIXME_AB: use new hash syntax everywhere
-      before_transition :drafted => :compiled, do: :assets_precompile
+      before_transition drafted: :compiled, do: :assets_precompile
 
-      # before_transition :published => :drafted do  |theme, transition|
+      # before_transition published: :drafted do  |theme, transition|
       #   theme.remove_current_theme
       # end
 
-      before_transition :compiled => :published do |theme, transition|
+      before_transition compiled: :published do |theme, transition|
         theme.remove_current_theme
         theme.apply_new_theme
         theme.update_cache_timestamp
@@ -61,7 +56,7 @@ module Spree
       end
 
       event :compile do
-        transition :drafted => :compiled
+        transition drafted: :compiled
       end
 
       event :publish do
@@ -79,8 +74,8 @@ module Spree
     end
 
     def apply_new_theme
-      #FIXME_AB: use File.join
-      FileUtils.ln_s("#{ FILESYSTEM_PATH }/#{ name }", CURRENT_THEME_PATH)
+      source_path = File.join(THEMES_PATH, name)
+      FileUtils.ln_s(source_path, CURRENT_THEME_PATH)
       AssetsPrecompilerService.new(self).copy_assets
     end
 

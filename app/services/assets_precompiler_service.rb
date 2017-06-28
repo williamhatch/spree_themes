@@ -2,9 +2,9 @@ class AssetsPrecompilerService
 
   attr_reader :theme, :env, :manifest
 
-  #FIXME_AB: FIle.join
-  PUBLIC_PRECOMPILED_ASSET_PATH = 'public/assets/theme'
-  CURRENT_THEME_PATH = 'public/themes/current'
+  PUBLIC_PRECOMPILED_ASSET_PATH = File.join('public', 'assets', 'vinsol_spree_theme')
+  THEME_PATH = File.join('public', 'vinsol_spree_themes')
+  CURRENT_THEME_PATH = File.join(THEME_PATH, 'current')
 
   def initialize(theme)
     @theme = theme
@@ -18,8 +18,10 @@ class AssetsPrecompilerService
   end
 
   def copy_assets
+    source_path = File.join(CURRENT_THEME_PATH, 'precompiled_assets', '.')
+
     FileUtils.mkdir_p(PUBLIC_PRECOMPILED_ASSET_PATH)
-    FileUtils.cp_r("#{ CURRENT_THEME_PATH }/precompiled_assets/.", PUBLIC_PRECOMPILED_ASSET_PATH)
+    FileUtils.cp_r(source_path, PUBLIC_PRECOMPILED_ASSET_PATH)
   end
 
   private
@@ -32,15 +34,15 @@ class AssetsPrecompilerService
     end
 
     def build_manifest
-      @manifest ||= Sprockets::Manifest.new(env, "#{ theme_path }/precompiled_assets")
+      @manifest ||= Sprockets::Manifest.new(env, File.join(theme_path, 'precompiled_assets'))
     end
 
     def prepend_stylesheet_path
-      env.prepend_path("#{ source_asset_path }/stylesheets")
+      env.prepend_path(File.join(source_asset_path, 'stylesheets'))
     end
 
     def prepend_javascript_path
-      env.prepend_path("#{ source_asset_path }/javascripts")
+      env.prepend_path(File.join(source_asset_path, 'javascripts'))
     end
 
     def set_compressors
@@ -58,7 +60,7 @@ class AssetsPrecompilerService
     end
 
     def theme_path
-      "public/themes/#{ theme.name }"
+      File.join(THEME_PATH, theme.name)
     end
 
 end

@@ -2,7 +2,8 @@ require 'zip'
 
 class ZipFileExtractor
 
-  OUTPUT_PATH = 'public/themes/'
+  OUTPUT_PATH = File.join('public', 'vinsol_spree_themes')
+  IGNORED_FILES_REGEX = /\A[__.]+/
 
   attr_reader :file_path, :theme
 
@@ -23,8 +24,7 @@ class ZipFileExtractor
         zip_file.each do |file|
           filepath = File.join(output_path, file.name)
 
-          #FIXME_AB: maintain an array of ignored files. any file with starting as . or __ should be ignored. Add this in Readme too
-          next if filepath =~ /__MACOSX/ or filepath =~ /\.DS_Store/
+          next if filepath =~ IGNORED_FILES_REGEX
           unless File.exist?(filepath)
             FileUtils::mkdir_p(File.dirname(filepath))
             zip_file.extract(file, filepath)
@@ -35,7 +35,7 @@ class ZipFileExtractor
     end
 
     def output_path
-      @output_path ||= OUTPUT_PATH + file_name
+      @output_path ||= File.join(OUTPUT_PATH, file_name)
     end
 
     def file_name

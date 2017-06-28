@@ -2,7 +2,7 @@ module Spree
   class ThemesTemplate < Spree::Base
 
     DEFAULT_LOCALE = 'en'
-    DEFAULT_PATH = "public/themes"
+    DEFAULT_PATH = File.join('public', 'vinsol_spree_themes')
     ASSETS_FILE_EXTENSIONS = ['.js', '.css']
 
     # this attr attribute is used when templates are created from admin end.
@@ -42,7 +42,7 @@ module Spree
       end
 
       def set_public_path
-        self.path = "#{ DEFAULT_PATH }/#{ theme_name }/#{ path }"
+        self.path = File.join(DEFAULT_PATH, theme_name, path)
       end
 
       def update_public_file

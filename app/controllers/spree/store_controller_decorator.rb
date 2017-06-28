@@ -1,4 +1,4 @@
-Spree::StoreController::THEME_VIEW_LOAD_PATH = 'public/themes/current/views'
+Spree::StoreController::THEME_VIEW_LOAD_PATH = File.join(Spree::Theme::CURRENT_THEME_PATH, 'views')
 
 module Spree
   StoreController.class_eval do

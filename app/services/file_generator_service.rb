@@ -19,7 +19,7 @@ class FileGeneratorService
     end
 
     def filepath
-      "#{ template.path }/#{ template.name }"
+      File.join(template.path, template.name)
     end
 
     def output_directory

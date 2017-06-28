@@ -1,8 +1,8 @@
 module Sprockets
   class Railtie < ::Rails::Railtie
 
-    #FIXME_AB: Can we name it as assets/vinsol_spree_theme 
-    PUBLIC_THEME_PATH = '/assets/theme'
+    THEME_PUBLIC_ASSET_DIRECTORY = 'vinsol_spree_theme'
+    PUBLIC_THEME_PATH = File.join('assets', THEME_PUBLIC_ASSET_DIRECTORY)
 
     def self.build_manifest(app)
       config = app.config
@@ -27,7 +27,7 @@ module Sprockets
         when :theme
           Theme
         else
-          raise ArgumentError, "Unrecognized asset resolver: #{name.inspect}. Expected :theme, :manifest or :environment"
+          raise ArgumentError, "Unrecognized asset resolver: #{ name.inspect }. Expected :theme, :manifest or :environment"
         end
       end
 
@@ -40,8 +40,7 @@ module Sprockets
 
         def asset_path(path, digest, allow_non_precompiled = false)
           result = super
-          #FIXME_AB: have theme path as a constant
-          result.prepend('theme/') if result.present?
+          result.prepend(THEME_PUBLIC_ASSET_DIRECTORY) if result.present?
           result
         end
 

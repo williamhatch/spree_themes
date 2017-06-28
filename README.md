@@ -40,6 +40,8 @@ File structure for the zip file to be uploaded:-
 
 *Note:- Add new javascript files to javascripts directory and new stylesheet files to stylesheets directory. For adding js and css manifest files, file name should be script.manifest.js or style.manifest.js*
 
+*Note:- When uploading, files starting with '__' or '.' will be ignored*
+
 
 ## Testing
 
