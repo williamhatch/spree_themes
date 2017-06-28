@@ -1,4 +1,4 @@
-module SpreeThemes
+module VinsolSpreeThemes
   module Generators
     class InstallGenerator < Rails::Generators::Base
 
@@ -15,7 +15,7 @@ module SpreeThemes
       end
 
       def add_migrations
-        run 'bundle exec rake railties:install:migrations FROM=spree_themes'
+        run 'bundle exec rake railties:install:migrations FROM=vinsol_spree_themes'
       end
 
       def run_migrations
@@ -30,7 +30,7 @@ module SpreeThemes
       def load_default_theme
         puts 'Loading and applying default spree theme...'
 
-        filepath = "#{ ::SpreeThemes::Engine.root }/lib/generators/themes/default.zip"
+        filepath = "#{ ::VinsolSpreeThemes::Engine.root }/lib/generators/themes/default.zip"
 
         # creating theme object.
         theme = Spree::Theme.new(state: 'drafted', name: 'default')

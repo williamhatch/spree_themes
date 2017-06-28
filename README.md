@@ -1,4 +1,4 @@
-SpreeThemes
+VinsolSpreeThemes
 ==================
 
 This extension allows the admin to modify, upload new frontend themes from backend. It also provides admin to create new/edit templates to existing themes.
@@ -8,7 +8,7 @@ This extension allows the admin to modify, upload new frontend themes from backe
 
 1. Add this extension to your Gemfile with this line:
   ```ruby
-  gem 'spree_themes', github: '[your-github-handle]/spree_themes'
+  gem 'vinsol_spree_themes', github: '[your-github-handle]/vinsol_spree_themes'
   ```
 
 2. Install the gem using Bundler:
@@ -18,7 +18,7 @@ This extension allows the admin to modify, upload new frontend themes from backe
 
 3. Copy & run migrations
   ```ruby
-  bundle exec rails g spree_themes:install
+  bundle exec rails g vinsol_spree_themes:install
   ```
 
 4. Restart your server
@@ -54,7 +54,7 @@ When testing your applications integration with this extension you may use it's 
 Simply add this require statement to your spec_helper:
 
 ```ruby
-require 'spree_themes/factories'
+require 'vinsol_spree_themes/factories'
 ```
 
 

@@ -2,19 +2,19 @@
 lib = File.expand_path('../lib/', __FILE__)
 $LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
 
-require 'spree_themes/version'
+require 'vinsol_spree_themes/version'
 
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'spree_themes'
-  s.version     = SpreeThemes.version
+  s.name        = 'vinsol_spree_themes'
+  s.version     = VinsolSpreeThemes.version
   s.summary     = 'Add extension summary here'
   s.description = 'Add (optional) extension description here'
   s.required_ruby_version = '>= 2.2.2'
 
   s.author    = 'You'
   s.email     = 'you@example.com'
-  s.homepage  = 'https://github.com/your-github-handle/spree_themes'
+  s.homepage  = 'https://github.com/your-github-handle/vinsol_spree_themes'
   s.license = 'BSD-3-Clause'
 
   # s.files       = `git ls-files`.split("\n")

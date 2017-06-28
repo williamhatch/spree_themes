@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    spree_themes (0.0.1.alpha)
+    vinsol_spree_themes (0.0.1.alpha)
       rubyzip (~> 1.2.1)
       spree_core (>= 3.2.0, < 4.0)
       state_machine (~> 1.2.0)
@@ -375,8 +375,8 @@ DEPENDENCIES
   simplecov
   spree (>= 3.2.0)
   spree_auth_devise (>= 3.2.0)
-  spree_themes!
   state_machine (~> 1.2.0)
+  vinsol_spree_themes!
 
 BUNDLED WITH
    1.15.1
