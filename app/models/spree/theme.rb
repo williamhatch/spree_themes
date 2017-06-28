@@ -25,9 +25,11 @@ module Spree
     has_many :themes_templates, dependent: :destroy
 
     ## CALLBACKS ##
-    before_validation :set_name
+    before_validation :set_name, if: :template_file?
     before_validation :set_state, unless: :state?
     after_commit :extract_template_zip_file, on: :create
+    before_destroy :ensure_not_published, prepend: true
+    after_destroy :delete_from_file_system
 
     ## SCOPES ##
     scope :published, -> { where(state: 'published') }
@@ -39,16 +41,26 @@ module Spree
 
     ## STATE MACHINES ##
     state_machine initial: :drafted do
-      before_transition drafted: :compiled, do: :assets_precompile
+      before_transition drafted: :compiled do |theme, transition|
+        begin
+          theme.assets_precompile
+        rescue Exception => e
+          theme.errors.add(:base, e)
+        end
+      end
 
       # before_transition published: :drafted do  |theme, transition|
       #   theme.remove_current_theme
       # end
 
       before_transition compiled: :published do |theme, transition|
-        theme.remove_current_theme
-        theme.apply_new_theme
-        theme.update_cache_timestamp
+        begin
+          theme.remove_current_theme
+          theme.apply_new_theme
+          theme.update_cache_timestamp
+        rescue Exception => e
+          theme.errors.add(:base, e)
+        end
       end
 
       event :draft do
@@ -99,6 +111,18 @@ module Spree
 
       def extract_template_zip_file
         ZipFileExtractor.new(template_file.path, self).extract
+      end
+
+      def delete_from_file_system
+        source_dir = File.join(THEMES_PATH, name)
+        FileUtils.remove_dir(source_dir)
+      end
+
+      def ensure_not_published
+        if published?
+          errors.add(:base, Spree.t('models.theme.no_destory_error'))
+          throw(:abort)
+        end
       end
 
   end

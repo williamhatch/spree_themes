@@ -3,7 +3,7 @@ module Spree
     class ThemesController < Spree::Admin::BaseController
 
       before_action :load_theme, only: [:state_change, :destroy]
-      before_action :load_themes, only: :index
+      before_action :load_themes
 
       def index
         @theme = Spree::Theme.new
@@ -28,19 +28,22 @@ module Spree
                 end
         if state
           flash[:notice] = Spree.t('flash.admin.themes.state_change.success', state: params[:state], name: @theme.name)
+          redirect_to admin_themes_path
         else
-          flash[:error] = Spree.t('flash.admin.themes.state_change.failure', state: params[:state], name: @theme.name)
+          flash[:error] = Spree.t('flash.admin.themes.state_change.failure', state: params[:state], name: @theme.name, errors: @theme.errors.full_messages.join(', '))
+          render :index
         end
-        redirect_to admin_themes_path
+
       end
 
       def destroy
         if @theme.destroy
           flash[:notice] = Spree.t('flash.admin.themes.destroy.success', name: @theme.name)
+          redirect_to admin_themes_path
         else
-          flash[:error] = Spree.t('flash.admin.themes.destroy.failure', name: @theme.name)
+          flash[:error] = Spree.t('flash.admin.themes.destroy.failure', name: @theme.name, errors: @theme.errors.full_messages.join(', '))
+          render :index
         end
-        redirect_to admin_themes_path
       end
 
       private

@@ -3,5 +3,5 @@
 
 *= require 'spree/backend/codemirror'
 *= require 'spree/backend/show-hint'
-
+*= require 'spree/backend/fullscreen'
 */

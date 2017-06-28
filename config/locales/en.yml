@@ -27,6 +27,7 @@ en:
     models:
       theme:
         minimum_active_error: Atleast one theme should be published.
+        no_destory_error: Published theme cannot be removed.
 
     flash:
       admin:
@@ -36,7 +37,7 @@ en:
             failure: "Something went wrong, theme could not be uploaded."
           state_change:
             success: "Theme %{name} successfully %{state}."
-            failure: "Something went wrong, theme %{name} could not be %{state}."
+            failure: "Something went wrong, theme %{name} could not be %{state} due to the following reason:- %{errors}"
           destroy:
             success: "Theme %{name} successfully removed."
-            failure: "Something went wrong, theme %{name} could not be removed."
+            failure: "Something went wrong, theme %{name} could not be removed due to following reasons:- %{errors}"

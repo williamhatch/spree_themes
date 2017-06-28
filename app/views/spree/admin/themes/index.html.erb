@@ -2,9 +2,12 @@
   <%= Spree.t(:themes) %>
 <% end %>
 
-<div data-hook="admin_theme_upload_form_header">
-  <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @theme } %>
-</div>
+<!-- this error partial should only be called when uploading the theme. -->
+<% unless @theme.persisted? %>
+  <div data-hook="admin_theme_upload_form_header">
+    <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @theme } %>
+  </div>
+<% end %>
 
 <% content_for :table_filter_title do %>
   <%= Spree.t(:search) %>

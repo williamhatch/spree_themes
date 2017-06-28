@@ -8,3 +8,4 @@
 //= require 'spree/backend/show-hint'
 //= require 'spree/backend/javascript'
 //= require 'spree/backend/markdown'
+//= require 'spree/backend/fullscreen'
