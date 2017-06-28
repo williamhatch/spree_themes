@@ -1,6 +1,6 @@
 <% content_for :page_title do %>
   <%= link_to Spree.t(:templates), admin_theme_templates_path(@theme) %> /
-  <%= @template.path %>
+  <%= File.join(@template.path, @template.name) %>
 <% end %>
 
 <% content_for :head do %>

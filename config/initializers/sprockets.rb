@@ -34,7 +34,11 @@ module Sprockets
       class Theme < Manifest
 
         def initialize(view)
-          @manifest = AssetsPrecompilerService.new(current_theme).minify({ precompile: false })
+          if current_theme
+            @manifest = AssetsPrecompilerService.new(current_theme).minify({ precompile: false })
+          else
+            super
+          end
           raise ArgumentError, 'config.assets.resolve_with includes :theme, but app.assets_manifest is nil' unless @manifest
         end
 

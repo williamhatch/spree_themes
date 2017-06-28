@@ -5,11 +5,13 @@ function Main() {
   }
 
   this.initializeEditor = function() {
-    CodeMirror.fromTextArea($('#themes_template_body')[0], {
+    var codeMirror = CodeMirror.fromTextArea($('#themes_template_body')[0], {
       lineNumbers: true,
       extraKeys: { "Ctrl-Space": "autocomplete" },
       mode: { name: "javascript", globalVars: true }
     });
+
+    codeMirror.setSize(800, 500);
   }
 }
 
