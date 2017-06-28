@@ -52,15 +52,15 @@ module Spree
       end
 
       event :draft do
-        transition [:published, :compiled] => :drafted
+        transition from: [:published, :compiled], to: :drafted
       end
 
       event :compile do
-        transition drafted: :compiled
+        transition from: :drafted, to: :compiled
       end
 
       event :publish do
-        transition [:compiled, :drafted] => :published
+        transition from: [:compiled, :drafted], to: :published
       end
     end
 

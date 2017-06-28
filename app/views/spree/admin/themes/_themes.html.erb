@@ -1,0 +1,28 @@
+<!-- LISTING ALL THE THEMES -->
+<div class="themes-container">
+  <% @themes.all.each do |theme| %>
+    <div class="theme">
+      <div class="theme-image">
+        <%#= image_tag "public/vinsol_spree_themes/default/snapshot.jpg" %>
+        <span>Theme Image</span>
+      </div>
+
+      <div class="theme-content">
+        <b>Name: <%= theme.name %></b>
+        <b class="pull-right">State: <%= theme.state %></b>
+
+        <div>
+          <% if theme.drafted? %>
+            <span><%= link_to Spree.t('actions.compiled'), admin_theme_state_change_path(theme, state: 'compiled'), method: :patch %></span>
+          <% elsif theme.compiled? %>
+            <span><%= link_to Spree.t('actions.published'), admin_theme_state_change_path(theme, state: 'published'), method: :patch %></span>
+          <% end %>
+
+          <span><%= link_to Spree.t('actions.view_templates'), admin_theme_templates_path(theme) %></span> 
+        </div>
+      </div>
+   </div>
+  <% end %>
+</div>
+
+<%= paginate @themes %>

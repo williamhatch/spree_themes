@@ -37,6 +37,7 @@ File structure for the zip file to be uploaded:-
   * javascripts
   * stylesheets
   * views (these views will be the spree frontend view directory)
+  * snapshot.png (this is the snapshot for the theme visible at backend)
 
 *Note:- Add new javascript files to javascripts directory and new stylesheet files to stylesheets directory. For adding js and css manifest files, file name should be script.manifest.js or style.manifest.js*
 

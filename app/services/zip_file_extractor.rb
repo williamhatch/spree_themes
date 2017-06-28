@@ -3,7 +3,7 @@ require 'zip'
 class ZipFileExtractor
 
   OUTPUT_PATH = File.join('public', 'vinsol_spree_themes')
-  IGNORED_FILES_REGEX = /\A[__.]+/
+  IGNORED_FILES_REGEX = /\/(\.|__)/
 
   attr_reader :file_path, :theme
 
@@ -23,7 +23,6 @@ class ZipFileExtractor
       Zip::File.open(file_path) do |zip_file|
         zip_file.each do |file|
           filepath = File.join(output_path, file.name)
-
           next if filepath =~ IGNORED_FILES_REGEX
           unless File.exist?(filepath)
             FileUtils::mkdir_p(File.dirname(filepath))
