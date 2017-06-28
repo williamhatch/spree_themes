@@ -17,7 +17,7 @@ en:
       published: Published
 
     actions:
-      upload_theme: Upload Themes
+      themes: Themes
       upload: Upload
       compiled: Compile
       published: Publish
