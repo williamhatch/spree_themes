@@ -2,7 +2,7 @@ module Spree
   module Admin
     class ThemesController < Spree::Admin::BaseController
 
-      before_action :load_theme, only: [:state_change, :destroy]
+      before_action :load_theme, only: [:state_change, :destroy, :download]
       before_action :load_themes
 
       def index
@@ -33,7 +33,17 @@ module Spree
           flash[:error] = Spree.t('flash.admin.themes.state_change.failure', state: params[:state], name: @theme.name, errors: @theme.errors.full_messages.join(', '))
           render :index
         end
+      end
 
+      def download
+        begin
+          zipfile = ZipFileBuilder.new(@theme)
+          zipfile.archive
+          send_file(zipfile.output_path, disposition: 'attachment', filename: zipfile.name)
+        rescue Exception => e
+          flash[:error] = Spree.t('flash.admin.themes.download.failure', name: @theme.name, errors: e.message)
+          render :index
+        end
       end
 
       def destroy
@@ -49,6 +59,7 @@ module Spree
       private
 
         def theme_params
+          return {} unless params[:theme]
           params.require(:theme).permit(:template_file)
         end
 

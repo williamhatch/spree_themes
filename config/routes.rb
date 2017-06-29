@@ -6,6 +6,7 @@ Spree::Core::Engine.routes.draw do
 
       member do
         patch :state_change
+        patch :download
       end
 
       collection do

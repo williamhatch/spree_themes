@@ -23,6 +23,7 @@ en:
       published: Publish
       view_templates: Templates
       new_template: New Template
+      download: Download
 
     models:
       theme:
@@ -41,3 +42,5 @@ en:
           destroy:
             success: "Theme %{name} successfully removed."
             failure: "Something went wrong, theme %{name} could not be removed due to following reasons:- %{errors}"
+          download:
+            failure: "Something went wrong, theme %{name} could not be downloaded due to following reason:- %{errors}"
