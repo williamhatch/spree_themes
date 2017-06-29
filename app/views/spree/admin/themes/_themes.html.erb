@@ -3,14 +3,13 @@
   <% @themes.all.each do |theme| %>
     <div class="theme">
       <div class="theme-image">
-        <%#= image_tag "public/vinsol_spree_themes/default/snapshot.jpg" %>
-        <span>Theme Image</span>
+        <%= image_tag snapshot_path(theme) %>
       </div>
 
       <div class="theme-content">
         <div>
           <b>Name: <%= theme.name %></b>
-          <b class="pull-right">State: <%= theme.state %></b>          
+          <b class="pull-right">State: <%= theme.state %></b>
         </div>
 
         <div>

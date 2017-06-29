@@ -6,6 +6,8 @@ This extension allows the admin to modify, upload new frontend themes from backe
 
 ## Installation
 
+This extension currently supports Rails 5 and Spree 3.2
+
 1. Add this extension to your Gemfile with this line:
   ```ruby
   gem 'vinsol_spree_themes', github: '[your-github-handle]/vinsol_spree_themes'
@@ -25,6 +27,14 @@ This extension allows the admin to modify, upload new frontend themes from backe
 
   If your server was running, restart it so that it can find the assets properly.
 
+
+## Production Setup
+
+Make sure while in production environment, in environment production.rb file set:
+
+```ruby
+config.assets.precompile = true
+```
 
 ## Usage
 
