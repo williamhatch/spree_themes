@@ -18,6 +18,7 @@ require File.expand_path('../dummy/config/environment.rb',  __FILE__)
 require 'rspec/rails'
 require 'database_cleaner'
 require 'ffaker'
+require 'shoulda-matchers'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -32,6 +33,7 @@ require 'spree/testing_support/url_helpers'
 
 # Requires factories defined in lib/vinsol_spree_themes/factories.rb
 require 'vinsol_spree_themes/factories'
+require "paperclip/matchers"
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
@@ -88,6 +90,19 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  Shoulda::Matchers.configure do |shoulda_config|
+    shoulda_config.integrate do |with|
+      # Choose a test framework:
+      with.test_framework :rspec
+
+      # Choose one or more libraries:er
+      with.library :rails
+    end
+  end
+
   config.fail_fast = ENV['FAIL_FAST'] || false
   config.order = "random"
+
+  config.include Paperclip::Shoulda::Matchers
+
 end
