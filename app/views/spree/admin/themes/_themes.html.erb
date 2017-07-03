@@ -21,8 +21,10 @@
 
           <span><%= link_to Spree.t('actions.view_templates'), admin_theme_templates_path(theme) %></span>
 
-          <%= link_to admin_theme_path(theme), method: :delete, class: 'btn btn-danger btn-sm  with-tip action-delete no-text pull-right', title: '', 'data-original-title' => 'Delete', data: { confirm: 'Are you sure?' } do %>
-            <span class="icon icon-delete"></span>
+          <% unless theme.published? %>
+            <%= link_to admin_theme_path(theme), method: :delete, class: 'btn btn-danger btn-sm  with-tip action-delete no-text pull-right', title: '', 'data-original-title' => 'Delete', data: { confirm: 'Are you sure?' } do %>
+              <span class="icon icon-delete"></span>
+            <% end %>
           <% end %>
 
           <%= link_to download_admin_theme_path(theme), method: :patch, class: 'btn btn-primary btn-sm with-tip action-download no-text pull-right', title: '', 'data-original-title' => Spree.t('actions.download') do %>

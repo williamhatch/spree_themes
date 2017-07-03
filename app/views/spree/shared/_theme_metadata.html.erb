@@ -1,0 +1,5 @@
+<% meta_info = YAML.load_file(File.join(Spree::Theme::CURRENT_THEME_PATH, 'meta_info.yml')) %>
+
+<meta name='name' content=<%= meta_info['name'] %> charset="utf-8">
+<meta name='authors' content=<%= meta_info['authors'] %> charset="utf-8">
+<meta name='version' content=<%= meta_info['version'] %> charset="utf-8">

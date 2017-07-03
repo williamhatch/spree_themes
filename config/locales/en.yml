@@ -44,3 +44,6 @@ en:
             failure: "Something went wrong, theme %{name} could not be removed due to following reasons:- %{errors}"
           download:
             failure: "Something went wrong, theme %{name} could not be downloaded due to following reason:- %{errors}"
+
+    warnings:
+      update_metainfo: 'Make sure you update the meta info details in file meta_info.yml once the theme is updated. You will need to download the theme and reupload it.'

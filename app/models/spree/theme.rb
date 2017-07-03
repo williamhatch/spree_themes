@@ -8,8 +8,8 @@ module Spree
     THEMES_PATH = File.join(Rails.root, 'public', 'vinsol_spree_themes')
     CURRENT_THEME_PATH = File.join(THEMES_PATH, 'current')
 
-    #FIXME_AB: Add storate to filesystem. Paperclip can have global setting to store uploaded files on s3. Here we want to ensure that files are on disk.
-    has_attached_file :template_file, path: 'public/system/spree/themes/:filename'
+    has_attached_file :template_file, storage: :filesystem,
+                                      path: 'public/system/spree/themes/:filename'
 
     ## VALIDATIONS ##
     validates_attachment :template_file, presence: true,
