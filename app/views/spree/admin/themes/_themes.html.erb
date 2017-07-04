@@ -9,10 +9,10 @@
       <div class="theme-content">
         <div>
           <b>Name: <%= theme.name %></b>
-          <b class="pull-right">State: <%= theme.state %></b>
+          <b class="pull-right">State:<span class="label label-complete"><%= theme.state %></span></b>
         </div>
 
-        <div>
+        <div class="theme-links">
           <% if theme.drafted? %>
             <span><%= link_to Spree.t('actions.compiled'), state_change_admin_theme_path(theme, state: 'compiled'), method: :patch %></span>
           <% elsif theme.compiled? %>

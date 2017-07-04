@@ -30,11 +30,15 @@ This extension currently supports Rails 5 and Spree 3.2
 
 ## Production Setup
 
-Make sure while in production environment, in environment production.rb file set:
+1. Make sure while in production environment, in environment production.rb file set:
+  ```ruby
+  config.assets.precompile = true
+  ```
 
-```ruby
-config.assets.precompile = true
-```
+2. Add the following path to the shared linked dir in deploy.rb file.
+  ```
+  set :linked_dirs, %w( public/vinsol_spree_themes )
+  ```
 
 ## Usage
 
