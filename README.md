@@ -30,11 +30,15 @@ This extension currently supports Rails 5 and Spree 3.2
 
 ## Production Setup
 
-Make sure while in production environment, in environment production.rb file set:
+1. Make sure while in production environment, in environment production.rb file set:
+  ```ruby
+  config.assets.precompile = true
+  ```
 
-```ruby
-config.assets.precompile = true
-```
+2. Add the following path to the shared linked dir in deploy.rb file.
+  ```
+  set :linked_dirs, %w( public/vinsol_spree_themes )
+  ```
 
 ## Usage
 
@@ -46,8 +50,15 @@ File structure for the zip file to be uploaded:-
 * Theme.zip
   * javascripts
   * stylesheets
-  * views (these views will be the spree frontend view directory)
-  * snapshot.png (this is the snapshot for the theme visible at backend)
+  * views: These views will be the spree frontend view directory.
+  * snapshot.png: This is the snapshot for the theme visible at backend.
+  * meta_info.yml: This .yml file contains meta info of the theme.
+
+Create a meta_info.yml file on the theme directory which contains the meta info of the theme. Format of the file should be following:-
+ * name: Name of the theme
+ * version: Version of the theme
+ * authors: Authors of the theme
+
 
 *Note:- Add new javascript files to javascripts directory and new stylesheet files to stylesheets directory. For adding js and css manifest files, file name should be script.manifest.js or style.manifest.js*
 
