@@ -1,5 +1,5 @@
 <tr id="<%= spree_dom_id template %>" data-hook="admin_templates_index_rows">
-  <td class='template_name'><%= link_to template.name, edit_admin_theme_template_path(@theme, template) %></td>
+  <td class='template_name'><%= link_to template.name, edit_admin_theme_template_path(@theme, template), class: 'template-name' %></td>
   <td class='template_path'><%= template.path %></td>
   <td class='template_format'><%= template.format %></td>
   <td class='template_handler'><%= template.handler %></td>

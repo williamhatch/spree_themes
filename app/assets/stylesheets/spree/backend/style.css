@@ -4,7 +4,6 @@
   flex-wrap: wrap;
   margin: 0 -15px;
 }
-
 .theme {
   min-height: 200px;
   margin-top: 30px;
@@ -15,11 +14,9 @@
 .theme-col {
   float:none;
 }
-
 .theme-image {
   min-height: 165px;
 }
-
 .theme-content {
   background: #f9f9f9;
   padding: 10px 5px;
@@ -48,4 +45,26 @@
 }
 .theme-content .btn-block {
   margin: 20px 0 15px;
+}
+
+/*template search bar*/
+.inner-addon { 
+    position: relative;
+}
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+.left-addon .glyphicon {
+  left:  0px;
+}
+.right-addon .glyphicon {
+  right: 0px;
+}
+.left-addon input {
+  padding-left:  30px;
+}
+.right-addon input {
+  padding-right: 30px;
 }
