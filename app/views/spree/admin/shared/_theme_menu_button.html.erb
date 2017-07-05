@@ -1,5 +1,5 @@
 <% if can? :admin, Spree::Theme %>
   <ul class="nav nav-sidebar">
-    <%= tab *Spree::BackendConfiguration::THEME_TABS, icon: 'picture' %>
+    <%= tab Spree.t(:vinsol_spree_themes), url: admin_themes_path, icon: 'picture' %>
   </ul>
 <% end %>

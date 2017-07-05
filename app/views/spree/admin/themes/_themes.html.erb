@@ -1,36 +1,39 @@
 <!-- LISTING ALL THE THEMES -->
 <div class="themes-container">
   <% @themes.all.each do |theme| %>
-    <div class="theme">
-      <div class="theme-image">
-        <%= image_tag snapshot_path(theme) %>
+    <div class="theme theme-col col-md-3 col-sm-3">
+      <div class="thumbnail">
+        <%= link_to image_tag(snapshot_path(theme)), admin_theme_templates_path(theme), class: 'img-responsive' %>
       </div>
 
-      <div class="theme-content">
-        <div>
-          <b>Name: <%= theme.name %></b>
-          <b class="pull-right">State:<span class="label label-complete"><%= theme.state %></span></b>
-        </div>
-
-        <div class="theme-links">
-          <% if theme.drafted? %>
-            <span><%= link_to Spree.t('actions.compiled'), state_change_admin_theme_path(theme, state: 'compiled'), method: :patch %></span>
-          <% elsif theme.compiled? %>
-            <span><%= link_to Spree.t('actions.published'), state_change_admin_theme_path(theme, state: 'published'), method: :patch %></span>
+      <div class="theme-content text-center">
+        <p class="big">
+          <%= link_to admin_theme_templates_path(theme) , class: 'theme-name' do %>
+            <%= theme.name %>
           <% end %>
+          <small class="label label-complete"><%= theme.state %></small>
+        </p>
 
-          <span><%= link_to Spree.t('actions.view_templates'), admin_theme_templates_path(theme) %></span>
-
+        <p class="btn-block">
+          <% if theme.drafted? %>
+            <%= link_to state_change_admin_theme_path(theme, state: 'compiled'), method: :patch, class: 'btn btn-default btn-sm with-tip', title: '', 'data-original-title' => Spree.t('actions.compiled') do %>
+              <span class="glyphicon glyphicon-film"></span>
+            <% end %>
+          <% elsif theme.compiled? %>
+            <%= link_to state_change_admin_theme_path(theme, state: 'published'), method: :patch, class: 'btn btn-default btn-sm with-tip', title: '', 'data-original-title' => Spree.t('actions.published') do %>
+              <span class="glyphicon glyphicon-eye-open"></span>
+            <% end %>
+            <!-- <span class="glyphicon glyphicon-bullhorn"></span> -->
+          <% end %>
+          <%= link_to download_admin_theme_path(theme), method: :patch, class: 'btn btn-default btn-sm with-tip action-download no-text', title: '', 'data-original-title' => Spree.t('actions.download') do %>
+            <span class="icon icon-download"></span>
+          <% end %>
           <% unless theme.published? %>
-            <%= link_to admin_theme_path(theme), method: :delete, class: 'btn btn-danger btn-sm  with-tip action-delete no-text pull-right', title: '', 'data-original-title' => 'Delete', data: { confirm: 'Are you sure?' } do %>
+            <%= link_to admin_theme_path(theme), method: :delete, class: 'btn btn-danger btn-sm  with-tip action-delete no-text', title: '', 'data-original-title' => 'Delete', data: { confirm: 'Are you sure?' } do %>
               <span class="icon icon-delete"></span>
             <% end %>
           <% end %>
-
-          <%= link_to download_admin_theme_path(theme), method: :patch, class: 'btn btn-primary btn-sm with-tip action-download no-text pull-right', title: '', 'data-original-title' => Spree.t('actions.download') do %>
-            <span class="icon icon-download"></span>
-          <% end %>
-        </div>
+        </p>
       </div>
    </div>
   <% end %>

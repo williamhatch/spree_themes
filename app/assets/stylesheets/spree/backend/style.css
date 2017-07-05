@@ -1,36 +1,51 @@
 .themes-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
   flex-wrap: wrap;
+  margin: 0 -15px;
 }
 
 .theme {
-  width: 300px;
-  border: 1px solid black;
   min-height: 200px;
-  margin: 10px 0;
-  padding: 4px;
+  margin-top: 30px;
+}
+.theme .thumbnail {
+  margin-bottom: 0;
+}
+.theme-col {
+  float:none;
 }
 
 .theme-image {
-  width: 100%;
   min-height: 165px;
-  text-align: center;
-}
-
-.theme-image img {
-  width: 100%;
 }
 
 .theme-content {
-  margin-top: 2px;
+  background: #f9f9f9;
+  padding: 10px 5px;
+  border: solid 1px #ddd;
+  margin: -2px 0 0 0;
+  border-radius: 0 0 2px 2px;
+  font-size:15px;
 }
-
-.action-download {
-  margin-right: 5px;
+.theme-content .big {
+  font-size: 25px;
 }
-
-.theme-links {
-  margin-top: 2px;
+.theme-name,
+.theme-name:hover {
+  color: rgba(0,0,0,0.5);
+  text-decoration: none;
+}
+.theme:hover .theme-name {
+  color: rgba(0,0,0,1);
+}
+.big small {
+  font-size: 30%;
+  vertical-align: middle;
+}
+.theme-content p {
+  margin-bottom: 0;
+}
+.theme-content .btn-block {
+  margin: 20px 0 15px;
 }
