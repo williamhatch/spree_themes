@@ -65,7 +65,7 @@ module Spree
 
         def load_themes
           @search = Spree::Theme.search(params[:q])
-          @themes = @search.result.all.page(params[:page]).per(params[:per_page])
+          @themes = @search.result.order(:name).page(params[:page]).per(params[:per_page])
         end
 
         def load_theme

@@ -6,7 +6,7 @@ module Spree
       before_action :load_template, only: [:edit, :update]
 
       def index
-        @templates = @theme.templates
+        @templates = @theme.templates.order(:name)
       end
 
       def new

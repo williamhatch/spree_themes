@@ -32,6 +32,7 @@ module Spree
     after_commit :extract_template_zip_file, on: :create
     before_destroy :ensure_not_published, prepend: true
     after_destroy :delete_from_file_system
+    after_create :set_state_to_compile
 
     ## SCOPES ##
     scope :published, -> { where(state: 'published') }
@@ -125,6 +126,10 @@ module Spree
           errors.add(:base, Spree.t('models.theme.no_destory_error'))
           throw(:abort)
         end
+      end
+
+      def set_state_to_compile
+        self.compile!
       end
 
   end
