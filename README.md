@@ -30,9 +30,10 @@ This extension currently supports Rails 5 and Spree 3.2
 
 ## Production Setup
 
-1. Make sure while in production environment, in environment production.rb file set:
+1. Set the following configuration for production environment in environment production.rb file:
   ```ruby
-  config.assets.precompile = true
+  config.assets.compile = true
+  config.public_file_server.enabled = true
   ```
 
 2. Add the following path to the shared linked dir in deploy.rb file.
