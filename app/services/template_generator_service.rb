@@ -1,6 +1,7 @@
 class TemplateGeneratorService
 
   DEFAULT_LOCALE = 'en'
+  FILE_EXTENSIONS = { css: '.css', js: '.js', yml: '.yml' }
 
   attr_reader :filepath, :theme_template, :theme
 
@@ -39,12 +40,12 @@ class TemplateGeneratorService
     end
 
     def get_handler
-      return nil if assets_file?(filepath)
+      return nil if assets_file?(filepath) || yml_files?(filepath)
       File.extname(filepath).gsub('.', '')
     end
 
     def get_format
-      return nil if assets_file?(filepath)
+      return nil if assets_file?(filepath) || yml_files?(filepath)
       # In spree few `.js.erb` files related to google are rendered in html format.
       script_embeded_partial? ? 'html' : format
     end
@@ -66,15 +67,19 @@ class TemplateGeneratorService
     end
 
     def stylesheet_file?(filename)
-      File.extname(filename) == '.css'
+      File.extname(filename) == FILE_EXTENSIONS[:css]
     end
 
     def javascript_file?(filename)
-      File.extname(filename) == '.js'
+      File.extname(filename) == FILE_EXTENSIONS[:js]
     end
 
     def assets_file?(filename)
       stylesheet_file?(filename) || javascript_file?(filename)
+    end
+
+    def yml_files?(filename)
+      File.extname(filename) == FILE_EXTENSIONS[:yml]
     end
 
 end
