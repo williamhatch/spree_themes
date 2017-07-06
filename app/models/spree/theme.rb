@@ -14,6 +14,8 @@ module Spree
     ## VALIDATIONS ##
     validates_attachment :template_file, presence: true,
                                          content_type: { content_type: TEMPLATE_FILE_CONTENT_TYPE }
+    do_not_validate_attachment_file_type :template_file
+
     validates :name, presence: true,
                      uniqueness: { case_sensitive: false }
     validates :state, inclusion: { in: STATES }
