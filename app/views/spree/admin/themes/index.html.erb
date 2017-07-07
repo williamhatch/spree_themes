@@ -1,6 +1,7 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:themes) %>
+  <%= Spree.t(:themes) %> <span class="badge"><%= @themes.count %></span>
 <% end %>
+
 
 <!-- this error partial should only be called when uploading the theme. -->
 <% unless @theme.persisted? %>
@@ -39,28 +40,25 @@
   </div>
 <% end %>
 
-<!-- FORM FOR UPLOADING TEMPLATE ZIP FILE. -->
-<%= form_for @theme, url: upload_admin_themes_path, method: :post do |f| %>
-  <div class="panel panel-default" data-hook="theme-file-upload-form">
-    <div class="panel-heading">
-      <h1 class="panel-title">
-        Upload Theme
-      </h1>
-    </div>
-
-    <div class="panel-body">
-      <div class="col-md-6">
-        <div data-hook="theme-file-upload" class="form-group">
+<div class="theme-row row">
+  <!-- FORM FOR UPLOADING TEMPLATE ZIP FILE. -->
+  <%= form_for @theme, url: upload_admin_themes_path, method: :post do |f| %>
+    <div class="updload-theme-panel col-md-4 col-sm-6" data-hook="theme-file-upload-form">
+      <div class="upload-theme-col">
+        <label class="cmn-height-block text-center">
           <%= f.file_field :template_file, class: 'form-control' %>
-        </div>
+          <div class="file-btn-helper">
+            <i class="glyphicon glyphicon-upload upload-icon"></i><br />
+            ADD NEW THEME
+          </div>
+        </label>
       </div>
     </div>
 
-  </div>
-
-  <div class="form-actions" data-hook="buttons">
-    <%= f.submit Spree.t('actions.upload'), class: 'btn-success' %>
-  </div>
-<% end %>
-
-<%= render partial: 'themes' %>
+    <div class="form-actions hidden" data-hook="buttons">
+      <%= f.submit Spree.t('actions.upload'), class: 'btn-success' %>
+    </div>
+  <% end %>
+  <div class="file-visible-xs visible-xs"></div>
+  <%= render partial: 'themes' %>
+</div>
