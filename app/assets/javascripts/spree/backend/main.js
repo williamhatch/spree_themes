@@ -2,6 +2,7 @@ function Main() {
 
   this.init = function() {
     this.initializeEditor();
+    this.uploadTheme();
   }
 
   this.initializeEditor = function() {
@@ -13,6 +14,7 @@ function Main() {
 
     codeMirror.setSize(800, 500);
   }
+
 }
 
 $(document).ready(function() {

@@ -1,0 +1,17 @@
+<%= form_for @theme, url: upload_admin_themes_path, method: :post do |f| %>
+  <div class="updload-theme-panel col-md-4 col-sm-6" data-hook="theme-file-upload-form">
+    <div class="upload-theme-col">
+      <label class="cmn-height-block text-center">
+        <%= f.file_field :template_file, class: 'form-control' %>
+        <div class="file-btn-helper">
+          <i class="glyphicon glyphicon-upload upload-icon"></i><br />
+          ADD NEW THEME
+        </div>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-actions hidden" data-hook="buttons">
+    <%= f.submit Spree.t('actions.upload'), class: 'btn-success' %>
+  </div>
+<% end %>
