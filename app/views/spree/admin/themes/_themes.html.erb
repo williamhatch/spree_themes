@@ -1,6 +1,7 @@
 <!-- LISTING ALL THE THEMES -->
 <div class="themes-container">
-  <% @themes.all.each do |theme| %>
+
+  <% sorted_themes(@themes).each do |theme| %>
     <div class="theme theme-col col-md-4 col-sm-6 <%= theme.state %>">
       <div class="theme-block">
         <div class="thumbnail cmn-height-block">
