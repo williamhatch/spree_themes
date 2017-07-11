@@ -1,3 +1,11 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'spree/backend/jquery.treemenu' %>
+  <%= stylesheet_link_tag 'spree/backend/jquery.treemenu' %>
+
+  <%= javascript_include_tag 'spree/backend/editor' %>
+  <%= stylesheet_link_tag 'spree/backend/editor' %>
+<% end %>
+
 <% content_for :page_title do %>
   <%= link_to Spree.t(:templates), admin_themes_path %>
 <% end %>
@@ -12,7 +20,7 @@
   <input type='text' id='search-input' class='form-control' placeholder='Search for templates...'>
 </div>
 
-<table class="table" id="listing_templates" data-hook='admin_templates_listing_table'>
+<!-- <table class="table" id="listing_templates" data-hook='admin_templates_listing_table'>
   <thead>
     <tr data-hook="admin_templates_index_headers">
       <th><%= Spree.t(:name) %></th>
@@ -26,6 +34,20 @@
   <tbody>
     <%= render partial: 'template', collection: @templates %>
   </tbody>
-</table>
+</table> -->
+
+<div id="tree-menu-sidebar">
+  <% filepath = File.join(Rails.root, 'public', 'vinsol_spree_themes', @theme.name) %>
+  <%= display_filetree_structure(@theme, filepath).html_safe %>
+</div>
+
+<%= render partial: 'editor' %>
 
 <%= javascript_include_tag 'spree/backend/search.js' %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#tree-menu-sidebar ul:first').addClass('tree');
+    $(".tree").treemenu({delay:500});
+  });
+</script>

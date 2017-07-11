@@ -2,7 +2,7 @@ function Main() {
 
   this.init = function() {
     this.initializeEditor();
-    this.uploadTheme();
+    // this.initializeFileTreeMenu();
   }
 
   this.initializeEditor = function() {
@@ -15,6 +15,10 @@ function Main() {
     codeMirror.setSize(800, 500);
   }
 
+  // this.initializeFileTreeMenu = function() {
+  //   $('#tree-menu-sidebar ul:first').addClass('tree');
+  //   $(".tree").treemenu({delay:500});
+  // }
 }
 
 $(document).ready(function() {

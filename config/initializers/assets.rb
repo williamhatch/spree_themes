@@ -9,10 +9,12 @@ Rails.application.config.assets.precompile += %w( spree/backend/editor.js
                                                   spree/backend/main.js
                                                   spree/backend/search.js
                                                   spree/backend/theme.js
+                                                  spree/backend/jquery.treemenu.js
                                                   *.manifest.js
                                                 )
 
 # precompiling .css files
 Rails.application.config.assets.precompile += %w( spree/backend/editor.css
+                                                  spree/backend/jquery.treemenu.css
                                                   *.manifest.css
                                                 )
