@@ -45,7 +45,7 @@ module Spree
         end
 
         def load_template
-          @template = @theme.templates.find_by(name: params[:id])
+          @template = @theme.templates.find_by(id: params[:id])
           unless @template
             redirect_to admin_theme_templates_path(@theme)
           end

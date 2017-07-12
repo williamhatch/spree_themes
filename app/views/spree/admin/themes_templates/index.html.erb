@@ -15,10 +15,10 @@
 <% end %>
 
 <!-- Search -->
-<div class="inner-addon left-addon">
+<!-- <div class="inner-addon left-addon">
   <i class="glyphicon glyphicon-search"></i>
   <input type='text' id='search-input' class='form-control' placeholder='Search for templates...'>
-</div>
+</div> -->
 
 <!-- <table class="table" id="listing_templates" data-hook='admin_templates_listing_table'>
   <thead>
@@ -41,7 +41,9 @@
   <%= display_filetree_structure(@theme, filepath).html_safe %>
 </div>
 
-<%= render partial: 'editor' %>
+<div data-hook='template-editor'>
+  <%= render partial: 'editor' %>
+</div>
 
 <%= javascript_include_tag 'spree/backend/search.js' %>
 
