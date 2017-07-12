@@ -8,7 +8,7 @@ This extension allows the admin to modify, upload new frontend themes from backe
 
 This extension currently supports Rails 5 and Spree 3.2
 
-1. Add this extension to your Gemfile with this line:
+1. Add this extension to your Gemfile:
   ```ruby
   gem 'vinsol_spree_themes', github: '[your-github-handle]/vinsol_spree_themes'
   ```
@@ -26,6 +26,33 @@ This extension currently supports Rails 5 and Spree 3.2
 4. Restart your server
 
   If your server was running, restart it so that it can find the assets properly.
+
+
+## Developers
+
+Steps to modify themes directly from files.
+
+1. Publish the theme which need to be updated/modified.
+
+2. Update the theme assets, stylesheets, scripts and templates from the path. 
+  ```
+  public/vinsol_spree_themes/<theme_name>/
+  ```
+
+  or
+
+  ```
+  public/vinsol_spree_themes/current/
+  ```
+
+3. If application is running, reload the store page and you will see the changes on the browser.
+
+4. Once all the changes are done and final theme is ready, run the following rake task to sync the updated files with the database.
+  ```
+  bundle exec rake db:sync_templates THEME_NAME=<theme_name>
+  ```
+
+*Note:- If the theme name is changed, then manually upload the theme from the admin panel as it will be considered a new theme.*
 
 
 ## Production Setup
