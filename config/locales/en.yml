@@ -25,6 +25,7 @@ en:
       view_templates: Templates
       new_template: New Template
       download: Download
+      preview: Preview
 
     models:
       theme:

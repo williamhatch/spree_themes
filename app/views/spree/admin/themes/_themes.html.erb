@@ -34,6 +34,7 @@
 
         <div class="theme-action-view">
           <%= link_to Spree.t(:templates), admin_theme_templates_path(theme) , class: 'btn btn-primary btn-sm' %>
+          <%= link_to Spree.t('actions.preview'), admin_theme_preview_path(theme_id: theme), class: 'btn btn-info btn-sm', target: '_blank' %>
         </div>
       </div>
    </div>

@@ -1,0 +1,6 @@
+<% if preview_mode? %>
+  <div>
+    <p>You are currently viewing the preview mode.</p>
+    <%= link_to 'Close', admin_theme_preview_path(params[:theme]), method: :delete %>
+  </div>
+<% end %>

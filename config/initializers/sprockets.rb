@@ -44,7 +44,7 @@ module Sprockets
 
         def asset_path(path, digest, allow_non_precompiled = false)
           result = super
-          result.prepend("#{Sprockets::Railtie::THEME_PUBLIC_ASSET_DIRECTORY}/") if result.present?
+          result.prepend("#{ Sprockets::Railtie::THEME_PUBLIC_ASSET_DIRECTORY }/") if result.present?
           result
         end
 

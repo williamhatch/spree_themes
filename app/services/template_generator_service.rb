@@ -8,7 +8,7 @@ class TemplateGeneratorService
   def initialize(filepath, theme)
     @filepath = filepath
     @theme = theme
-    @theme_template = Spree::ThemesTemplate.new
+    @theme_template = build_template
   end
 
   def generate
@@ -17,6 +17,10 @@ class TemplateGeneratorService
   end
 
   private
+
+    def build_template
+      @theme.templates.find_or_initialize_by(path: get_path, name: file_name)
+    end
 
     def template_attributes
       { 
