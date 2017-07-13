@@ -11,7 +11,8 @@ function Main() {
       extraKeys: { "Ctrl-Space": "autocomplete" },
       mode: { name: "javascript", globalVars: true }
     });
-    codeMirror.setSize($('.admin-editor-section').width(), 500);
+    codeMirror.setSize($('.admin-editor-section').width(), 800);
+    codeMirror.setSize($('.admin-editor-section').height(), 600);
   }
 
   // this.initializeFileTreeMenu = function() {
