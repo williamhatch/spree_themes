@@ -8,14 +8,12 @@
 
 <%= form_for @template || Spree::ThemesTemplate.new, url: form_path, method: :put, html: { multipart: true }, remote: true do |f| %>
   <fieldset>
-    <div data-hook="admin_template_form_fields">
-      <div class="row">
-        <div class="col-md-8" data-hook="admin_template_form">
+    <div data-hook="admin_template_form_fields" class="admin-editor-section">
+      <div data-hook="admin_template_form">
           <div data-hook="admin_template_form_body">
             <%= f.label :body, Spree.t(:body) %>
             <%= f.text_area :body, class: 'form-control body', rows: '20' %>
           </div>
-        </div>
       </div>
     </div>
 

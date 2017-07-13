@@ -1,3 +1,16 @@
+a {
+  color: #235ccc;
+}
+.btn-success, 
+.btn.action-capture {
+  color: #fff;
+  background-color: #1e8a1d;
+  border-color: #1e8a1d;
+}
+#main-part {
+  padding: 15px 15px 0;
+}
+
 .theme-row {
   position: relative;
 }
@@ -219,38 +232,4 @@
 }
 .published .btn-group .dropdown-toggle:hover {
   color: #fff; 
-}
-
-/* template filetree structure*/
-.tree { background-color:#2C3E50; color:#46CFB0;}
-.tree li,
-.tree li > a,
-.tree li > span {
-    padding: 4pt;
-    border-radius: 4px;
-}
-
-.tree li a {
-   color:#46CFB0;
-    text-decoration: none;
-    line-height: 20pt;
-    border-radius: 4px;
-}
-
-.tree li a:hover {
-    background-color: #34BC9D;
-    color: #fff;
-}
-
-.active {
-    background-color: #34495E;
-    color: white;
-}
-
-.active a {
-    color: #fff;
-}
-
-.tree li a.active:hover {
-    background-color: #34BC9D;
 }

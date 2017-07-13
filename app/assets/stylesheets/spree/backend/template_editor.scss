@@ -1,0 +1,53 @@
+.admin-editor-section {
+  padding-bottom: 30px;
+
+  .CodeMirror {
+    max-width: 100%;
+  }
+}
+
+/* template filetree structure*/
+.tree { 
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+  
+  li,
+  li > a,
+  li > span {
+      padding: 4pt;
+      border-radius: 4px;
+  }
+  li{
+      a {
+        color:inherit;
+        text-decoration: none;
+        line-height: 20pt;
+        border-radius: 4px;
+        
+        &:hover {
+          background-color: #0079b3;
+          color: #fff;
+        }
+      }
+    } 
+  
+  .active {
+    background-color: #f2f2f2;
+    a {
+      &:hover {
+        background-color: #0079b3;
+      }
+    }
+  }
+
+  .treemenu {
+    padding: 0 0 0 10px;
+  }
+}
+
+
+
+
+
+

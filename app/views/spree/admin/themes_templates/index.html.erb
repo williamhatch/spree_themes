@@ -35,13 +35,15 @@
   </tbody>
 </table> -->
 
-<div id="tree-menu-sidebar">
-  <% filepath = File.join(Rails.root, 'public', 'vinsol_spree_themes', @theme.name) %>
-  <%= display_filetree_structure(@theme, filepath).html_safe %>
-</div>
+<div class="row">
+  <div class="col-md-push-9 col-md-3" id="tree-menu-sidebar">
+    <% filepath = File.join(Rails.root, 'public', 'vinsol_spree_themes', @theme.name) %>
+    <%= display_filetree_structure(@theme, filepath).html_safe %>
+  </div>
 
-<div data-hook='template-editor'>
-  <%= render partial: 'editor' %>
+  <div data-hook='template-editor' class="col-md-pull-3 col-md-9">
+    <%= render partial: 'editor' %>
+  </div>
 </div>
 
 <%#= javascript_include_tag 'spree/backend/search.js' %>

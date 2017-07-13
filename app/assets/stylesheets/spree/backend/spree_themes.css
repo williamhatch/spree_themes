@@ -4,3 +4,4 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
 
 *= require 'spree/backend/style'
 */
+@import 'template_editor'
