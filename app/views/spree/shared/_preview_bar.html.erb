@@ -1,6 +1,7 @@
 <% if preview_mode? %>
-  <div>
-    <p>You are currently viewing the preview mode.</p>
-    <%= link_to 'Close', admin_theme_preview_path(params[:theme]), method: :delete %>
+  <div class="alert alert-preview" role="alert">
+    <h4 class="text-center"><%= Spree.t('warnings.preview_mode_message') %>
+      <%= link_to 'X', admin_theme_preview_path(params[:theme]), method: :delete, class: 'pull-right' %>
+    </h4>
   </div>
 <% end %>

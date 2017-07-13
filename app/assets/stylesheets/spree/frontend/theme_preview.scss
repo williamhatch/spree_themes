@@ -1,0 +1,10 @@
+.alert-preview {
+  background: #5cb85c;
+  border-color: #5cb85c;
+  color: #fff;
+  margin-bottom: 0;
+  
+  [data-method="delete"] {
+    color: #fff;
+  }
+}

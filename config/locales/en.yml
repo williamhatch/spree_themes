@@ -49,3 +49,4 @@ en:
 
     warnings:
       update_metainfo: 'Make sure you update the meta info details in file meta_info.yml once the theme is updated. You will need to download the theme and reupload it.'
+      preview_mode_message: You are currently viewing the preview mode.
