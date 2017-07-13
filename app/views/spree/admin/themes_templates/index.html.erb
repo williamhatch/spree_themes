@@ -1,7 +1,6 @@
 <% content_for :head do %>
   <%= javascript_include_tag 'spree/backend/jquery.treemenu' %>
   <%= stylesheet_link_tag 'spree/backend/jquery.treemenu' %>
-
   <%= javascript_include_tag 'spree/backend/editor' %>
   <%= stylesheet_link_tag 'spree/backend/editor' %>
 <% end %>
@@ -45,7 +44,7 @@
   <%= render partial: 'editor' %>
 </div>
 
-<%= javascript_include_tag 'spree/backend/search.js' %>
+<%#= javascript_include_tag 'spree/backend/search.js' %>
 
 <script type="text/javascript">
   $(document).ready(function() {

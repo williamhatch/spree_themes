@@ -1,4 +1,12 @@
-<%= form_for @template || Spree::ThemesTemplate.new, url: "#", method: :put, html: { multipart: true }, remote: true do |f| %>
+<% form_path = @template.nil? ? '#' : admin_theme_template_path(@theme, @template) %>
+
+<% if @template %>
+  <div data-hook="admin_theme_form_header">
+    <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @template } %>
+  </div>
+<% end %>
+
+<%= form_for @template || Spree::ThemesTemplate.new, url: form_path, method: :put, html: { multipart: true }, remote: true do |f| %>
   <fieldset>
     <div data-hook="admin_template_form_fields">
       <div class="row">
