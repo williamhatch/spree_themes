@@ -34,6 +34,7 @@ module Sprockets
       class Theme < Manifest
 
         def initialize(view)
+          @view = view
           if current_theme
             @manifest = AssetsPrecompilerService.new(current_theme).minify({ precompile: false })
           else
@@ -49,7 +50,11 @@ module Sprockets
         end
 
         def current_theme
-          @theme ||= Spree::Theme.published.first
+          if @view.session[:preview].present? && @view.current_spree_user.admin?
+            @theme ||= Spree::Theme.find_by(name: @view.session[:preview])
+          else
+            @theme ||= Spree::Theme.published.first
+          end
         end
 
       end

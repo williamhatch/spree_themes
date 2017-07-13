@@ -7,12 +7,12 @@ module Spree
 
     before_action :set_view_path
 
-    after_action :set_preview_theme, if: :preview_mode?
+    before_action :set_preview_theme, if: [:preview_mode?, :preview_theme]
 
     private
 
       def set_preview_theme
-        params.merge!({ mode: 'preview' })
+        params.merge!({ mode: 'preview', theme:  preview_theme.id })
       end
 
       def preview_mode?
@@ -27,6 +27,10 @@ module Spree
 
       def theme_preview_path
         File.join(Spree::Theme::THEMES_PATH, session[:preview], 'views')
+      end
+
+      def preview_theme
+        @preview_theme ||= Spree::Theme.find_by(name: session[:preview])
       end
 
   end
