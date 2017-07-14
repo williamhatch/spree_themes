@@ -7,7 +7,7 @@ Rails.application.config.assets.paths << Rails.root.join('public', 'assets', 'vi
 # precompiling .js files
 Rails.application.config.assets.precompile += %w( spree/backend/editor.js
                                                   spree/backend/main.js
-                                                  spree/backend/search.js
+                                                  spree/backend/template.js
                                                   spree/backend/theme.js
                                                   spree/backend/jquery.treemenu.js
                                                   *.manifest.js

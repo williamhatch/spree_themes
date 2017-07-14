@@ -13,28 +13,6 @@
   <%= button_link_to Spree.t(:new_template), new_admin_theme_template_url, class: "btn-success", icon: 'add', id: 'admin_new_theme_template_link' %>
 <% end %>
 
-<!-- Search -->
-<!-- <div class="inner-addon left-addon">
-  <i class="glyphicon glyphicon-search"></i>
-  <input type='text' id='search-input' class='form-control' placeholder='Search for templates...'>
-</div> -->
-
-<!-- <table class="table" id="listing_templates" data-hook='admin_templates_listing_table'>
-  <thead>
-    <tr data-hook="admin_templates_index_headers">
-      <th><%= Spree.t(:name) %></th>
-      <th><%= Spree.t(:path) %></th>
-      <th><%= Spree.t(:format) %></th>
-      <th><%= Spree.t(:handler) %></th>
-      <th data-hook="admin_templates_index_header_actions" class="actions"></th>    
-    </tr>
-  </thead>
-
-  <tbody>
-    <%= render partial: 'template', collection: @templates %>
-  </tbody>
-</table> -->
-
 <div class="row">
   <div class="col-md-push-9 col-md-3" id="tree-menu-sidebar">
     <% filepath = File.join(Rails.root, 'public', 'vinsol_spree_themes', @theme.name) %>
@@ -46,11 +24,4 @@
   </div>
 </div>
 
-<%#= javascript_include_tag 'spree/backend/search.js' %>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('#tree-menu-sidebar ul:first').addClass('tree');
-    $(".tree").treemenu({delay:500});
-  });
-</script>
+<%= javascript_include_tag 'spree/backend/template' %>

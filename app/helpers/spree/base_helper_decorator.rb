@@ -28,7 +28,7 @@ Spree::BaseHelper.class_eval do
         template_path = File.dirname(full_path.sub(Rails.root.to_s + '/', ''))
         template = theme.templates.find_by(path: template_path, name: entry)
         next unless template
-        html_string << "<li>#{ link_to entry, edit_admin_theme_template_path(theme, template), remote: true }</li>"
+        html_string << "<li>#{ link_to entry, edit_admin_theme_template_path(theme, template), remote: true, class: 'file-link' }</li>"
       end
     end
     html_string << '</ul>'
