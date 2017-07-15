@@ -16,5 +16,7 @@ module VinsolSpreeThemes
     end
 
     config.to_prepare &method(:activate).to_proc
+
+    Devise.parent_controller = 'Spree::StoreController'
   end
 end

@@ -78,6 +78,7 @@ File structure for the zip file to be uploaded:-
 * Theme.zip
   * javascripts
   * stylesheets
+  * images
   * views: These views will be the spree frontend view directory.
   * snapshot.png: This is the snapshot for the theme visible at backend.
   * meta_info.yml: This .yml file contains meta info of the theme.

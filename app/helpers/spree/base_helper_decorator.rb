@@ -1,7 +1,7 @@
 Spree::BaseHelper.class_eval do
 
   DEFAULT_THEME_THUMBNAIL_NAME = 'snapshot.png'
-  INVALID_DIRECTORIES = ['.', '..', 'precompiled_assets']
+  INVALID_DIRECTORIES = ['.', '..', 'precompiled_assets', 'images']
 
   def snapshot_path(theme)
     File.join('/vinsol_spree_themes', theme.name, DEFAULT_THEME_THUMBNAIL_NAME)
