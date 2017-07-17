@@ -85,7 +85,7 @@ module Spree
 
     def remove_current_theme
       Spree::Theme.published.each(&:draft)
-      File.try(:delete, CURRENT_THEME_PATH)
+      File.delete(CURRENT_THEME_PATH) if File.exist?(CURRENT_THEME_PATH)
     end
 
     def apply_new_theme
