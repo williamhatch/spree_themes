@@ -3,7 +3,7 @@ class TemplateGeneratorService
   DEFAULT_LOCALE = 'en'
   FILE_EXTENSIONS = { css: '.css', scss: '.scss', js: '.js', yml: '.yml' }
   IMAGE_EXTENSIONS = ['.png', '.gif', '.jpeg', '.jpg']
-  FONT_EXTENSIONS = ['.woff', '.ttf', '.svg', '.eot', '.woff2']
+  FONT_EXTENSIONS = ['.woff', '.ttf', '.svg', '.eot', '.woff2', '.otf']
 
   attr_reader :filepath, :theme_template, :theme
 
