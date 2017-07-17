@@ -3,6 +3,7 @@ class TemplateGeneratorService
   DEFAULT_LOCALE = 'en'
   FILE_EXTENSIONS = { css: '.css', scss: '.scss', js: '.js', yml: '.yml' }
   IMAGE_EXTENSIONS = ['.png', '.gif', '.jpeg', '.jpg']
+  FONT_EXTENSIONS = ['.woff', '.ttf', '.svg', '.eot', '.woff2']
 
   attr_reader :filepath, :theme_template, :theme
 
@@ -13,7 +14,7 @@ class TemplateGeneratorService
   end
 
   def generate
-    return nil if image_file?(filepath)
+    return nil if(image_file?(filepath) || font_directory?(filepath))
     theme_template.assign_attributes(template_attributes)
     theme_template.save
   end
@@ -87,6 +88,10 @@ class TemplateGeneratorService
     # FIX_ME_PG:- considering all images used in themes to be kept in images directory. Later invalidate using file content-type.
     def image_file?(filename)
       file_name == 'snapshot.png' || get_path.split('/').include?('images') && IMAGE_EXTENSIONS.include?(File.extname(filename))
+    end
+
+    def font_directory?(filename)
+      get_path.split('/').include?('fonts') && FONT_EXTENSIONS.include?(File.extname(filename))
     end
 
     def yml_files?(filename)

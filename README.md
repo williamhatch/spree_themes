@@ -89,7 +89,7 @@ Create a meta_info.yml file on the theme directory which contains the meta info 
  * authors: Authors of the theme
 
 
-*Note:- Add new javascript files to javascripts directory and new stylesheet files to stylesheets directory. For adding js and css manifest files, file name should be script.manifest.js or style.manifest.js*
+*Note:- Add new javascript files to javascripts directory and new stylesheet files to stylesheets directory. For adding js and css manifest files, file name should be script.manifest.js or style.manifest.css. If using sass, use style.manifest.scss files instead of .css.*
 
 *Note:- When uploading, files starting with '__' or '.' will be ignored*
 
