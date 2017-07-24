@@ -7,6 +7,7 @@ module Spree
       def show
         session[:preview] = @theme.name
         @theme.assets_precompile
+        @theme.update_cache_timestamp
         redirect_to root_path(theme: @theme.id, mode: 'preview')
       end
 

@@ -32,7 +32,9 @@ module Spree
     after_commit :extract_template_zip_file, on: :create
     # before_destroy :ensure_not_published, prepend: true
     after_destroy :delete_from_file_system
-    after_create :set_state_to_compile
+
+    # FIX_ME_PG:- Need to have default state to compiled when uploading theme. Set state after zip file extraction.
+    # after_create :set_state_to_compile
 
     ## SCOPES ##
     scope :published, -> { where(state: 'published') }
@@ -47,14 +49,11 @@ module Spree
       before_transition drafted: :compiled do |theme, transition|
         begin
           theme.assets_precompile
+          theme.update_cache_timestamp
         rescue Exception => e
           theme.errors.add(:base, e)
         end
       end
-
-      # before_transition published: :drafted do  |theme, transition|
-      #   theme.remove_current_theme
-      # end
 
       before_transition compiled: :published do |theme, transition|
         begin
@@ -90,7 +89,7 @@ module Spree
 
     def apply_new_theme
       source_path = File.join(THEMES_PATH, name)
-      FileUtils.ln_s(source_path, CURRENT_THEME_PATH)
+      FileUtils.ln_sf(source_path, CURRENT_THEME_PATH)
       AssetsPrecompilerService.new(self).copy_assets
     end
 
@@ -128,9 +127,9 @@ module Spree
         end
       end
 
-      def set_state_to_compile
-        self.compile!
-      end
+      # def set_state_to_compile
+      #   self.compile!
+      # end
 
   end
 end

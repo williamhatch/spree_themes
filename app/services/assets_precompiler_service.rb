@@ -20,6 +20,7 @@ class AssetsPrecompilerService
   def copy_assets
     source_path = File.join(CURRENT_THEME_PATH, 'precompiled_assets', '.')
 
+    FileUtils.rm_r(PUBLIC_PRECOMPILED_ASSET_PATH)
     FileUtils.mkdir_p(PUBLIC_PRECOMPILED_ASSET_PATH)
     FileUtils.cp_r(source_path, PUBLIC_PRECOMPILED_ASSET_PATH)
   end
@@ -30,6 +31,7 @@ class AssetsPrecompilerService
       @env ||= Sprockets::Environment.new()
       prepend_stylesheet_path
       prepend_javascript_path
+      prepend_images_path
       set_compressors
     end
 
@@ -43,6 +45,10 @@ class AssetsPrecompilerService
 
     def prepend_javascript_path
       env.prepend_path(File.join(source_asset_path, 'javascripts'))
+    end
+
+    def prepend_images_path
+      env.prepend_path(File.join(source_asset_path, 'images'))
     end
 
     def set_compressors
