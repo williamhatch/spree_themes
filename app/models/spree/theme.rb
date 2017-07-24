@@ -93,6 +93,12 @@ module Spree
       AssetsPrecompilerService.new(self).copy_assets
     end
 
+    def preview
+      assets_precompile
+      AssetsPrecompilerService.new(self).copy_preview_assets
+      update_cache_timestamp
+    end
+
     def update_cache_timestamp
       Rails.cache.write(Spree::ThemesTemplate::CacheResolver.cache_key, Time.current)
     end

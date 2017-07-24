@@ -3,6 +3,7 @@ class AssetsPrecompilerService
   attr_reader :theme, :env, :manifest
 
   PUBLIC_PRECOMPILED_ASSET_PATH = File.join('public', 'assets', 'vinsol_spree_theme')
+  PUBLIC_PRECOMPILED_ASSET_PATH_FOR_PREVIEW = File.join('public', 'assets', 'preview_vinsol_spree_theme')
   THEME_PATH = File.join('public', 'vinsol_spree_themes')
   CURRENT_THEME_PATH = File.join(THEME_PATH, 'current')
 
@@ -20,9 +21,17 @@ class AssetsPrecompilerService
   def copy_assets
     source_path = File.join(CURRENT_THEME_PATH, 'precompiled_assets', '.')
 
-    FileUtils.rm_r(PUBLIC_PRECOMPILED_ASSET_PATH)
+    FileUtils.rm_r(PUBLIC_PRECOMPILED_ASSET_PATH) if File.exists?(PUBLIC_PRECOMPILED_ASSET_PATH)
     FileUtils.mkdir_p(PUBLIC_PRECOMPILED_ASSET_PATH)
     FileUtils.cp_r(source_path, PUBLIC_PRECOMPILED_ASSET_PATH)
+  end
+
+  def copy_preview_assets
+    source_path = File.join(theme_path, 'precompiled_assets', '.')
+
+    FileUtils.rm_r(PUBLIC_PRECOMPILED_ASSET_PATH_FOR_PREVIEW) if File.exists?(PUBLIC_PRECOMPILED_ASSET_PATH_FOR_PREVIEW)
+    FileUtils.mkdir_p(PUBLIC_PRECOMPILED_ASSET_PATH_FOR_PREVIEW)
+    FileUtils.cp_r(source_path, PUBLIC_PRECOMPILED_ASSET_PATH_FOR_PREVIEW)
   end
 
   private
@@ -32,6 +41,7 @@ class AssetsPrecompilerService
       prepend_stylesheet_path
       prepend_javascript_path
       prepend_images_path
+      prepend_fonts_path
       set_compressors
     end
 
@@ -49,6 +59,10 @@ class AssetsPrecompilerService
 
     def prepend_images_path
       env.prepend_path(File.join(source_asset_path, 'images'))
+    end
+
+    def prepend_fonts_path
+      env.prepend_path(File.join(source_asset_path, 'fonts'))
     end
 
     def set_compressors
