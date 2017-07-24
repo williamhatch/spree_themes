@@ -2,16 +2,17 @@ module Spree
   module Admin
     class ThemesPreviewController < Spree::Admin::BaseController
 
-      before_action :load_theme, only: :show
+      before_action :load_theme, only: [:show, :destroy]
 
       def show
         session[:preview] = @theme.name
-        @theme.preview
+        @theme.open_preview
         redirect_to root_path(theme: @theme.id, mode: 'preview')
       end
 
       def destroy
         session.delete(:preview)
+        @theme.close_preview
         redirect_to admin_themes_path
       end
 

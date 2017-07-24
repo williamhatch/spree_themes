@@ -7,6 +7,7 @@ module Spree
     STATES = %w(drafted compiled published)
     THEMES_PATH = File.join(Rails.root, 'public', 'vinsol_spree_themes')
     CURRENT_THEME_PATH = File.join(THEMES_PATH, 'current')
+    ASSET_CACHE_PATH = File.join(Rails.root, 'tmp', 'cache')
 
     has_attached_file :template_file, storage: :filesystem,
                                       path: 'public/system/spree/themes/:filename'
@@ -93,9 +94,15 @@ module Spree
       AssetsPrecompilerService.new(self).copy_assets
     end
 
-    def preview
+    def open_preview
       assets_precompile
       AssetsPrecompilerService.new(self).copy_preview_assets
+      remove_cache
+      update_cache_timestamp
+    end
+
+    def close_preview
+      remove_cache
       update_cache_timestamp
     end
 
@@ -108,6 +115,10 @@ module Spree
       # def ensure_atleast_one_published_theme
       #   errors.add(:base, Spree.t('models.theme.minimum_active_error')) unless Spree::Theme.published.one?
       # end
+
+      def remove_cache
+        FileUtils.rm_r(ASSET_CACHE_PATH) if File.exists?(ASSET_CACHE_PATH)
+      end
 
       def set_name
         self.name = File.basename(template_file_file_name, File.extname(template_file_file_name))
