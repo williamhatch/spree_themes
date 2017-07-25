@@ -95,15 +95,16 @@ module Spree
     end
 
     def open_preview
-      assets_precompile
-      AssetsPrecompilerService.new(self).copy_preview_assets
+      precompile_assets = AssetsPrecompilerService.new(self)
+      precompile_assets.minify
+      precompile_assets.copy_preview_assets
       remove_cache
-      update_cache_timestamp
+      # update_cache_timestamp
     end
 
     def close_preview
       remove_cache
-      update_cache_timestamp
+      # update_cache_timestamp
     end
 
     def update_cache_timestamp
@@ -117,7 +118,7 @@ module Spree
       # end
 
       def remove_cache
-        FileUtils.rm_r(ASSET_CACHE_PATH) if File.exists?(ASSET_CACHE_PATH)
+        FileUtils.remove_dir(ASSET_CACHE_PATH) if File.exists?(ASSET_CACHE_PATH)
       end
 
       def set_name
