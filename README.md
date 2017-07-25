@@ -1,12 +1,29 @@
 VinsolSpreeThemes
 ==================
 
-This extension allows the admin to modify, upload new frontend themes from backend. It also provides admin to create new/edit templates to existing themes.
+This extension allows the admin to upload new spree store themes from backend. This extension provides an interface where admin can manage all the themes by editing them, deleting old themes and publishing theme to store for the users.
+
+Admin can even preview the theme after modifying it from the backend before publishing it to the users.
+
+
+## Requirements
+
+This extension currently supports Ruby 2.4, Rails 5 and Spree 3.2.
+
+
+## Features
+
+Some of the current functionalities are:-
+
+1. Upload the theme
+1. Preview the theme.
+2. Publish the theme on spree store.
+3. Download the theme.
+4. Remove the uploaded theme.
+5. Modify the uploaded / published theme.
 
 
 ## Installation
-
-This extension currently supports Rails 5 and Spree 3.2
 
 1. Add this extension to your Gemfile:
   ```ruby
@@ -24,13 +41,55 @@ This extension currently supports Rails 5 and Spree 3.2
   ```
 
 4. Restart your server
+  ```ruby
+  rails server
+  ```
 
-  If your server was running, restart it so that it can find the assets properly.
+
+## Usage
+
+After installing the extension, admin will see a tab `vinsol spree themes` on left sidebar of admin panel. Or you can visit the link
+
+```
+ http://localhost:3000/admin/themes
+```
+
+Then, admin uploads the new theme in zip file. Once uploaded, admin can preview the theme and also modify it accordingly through the editor.
+
+Theme templates can be modified through the editor. Later theme can be published for the spree store users.
+
+*Note:- Before publishing the theme, admin needs to compile it using the link provided with other options for all assets to load properly.*
+
+Once the extension is installed, admin gets a spree store default theme uploaded on the system and is published for the store users.
+
+Besides preview and publishing, admin can delete the uploaded theme or download it in zip format.
+
+
+## Theme Structure
+
+Theme file structure for the zip file to be uploaded:-
+
+* Theme.zip
+  * javascripts
+  * stylesheets
+  * images
+  * views: These views will be the spree frontend view directory.
+  * snapshot.png: This is the snapshot for the theme visible at backend.
+  * meta_info.yml: This .yml file contains meta info of the theme.
+
+*Note:- When uploading, files starting with '__' or '.' will be ignored*
+
+Create a meta_info.yml file on the theme directory which contains the meta info of the theme. Format of the file should be following:-
+ * name: Name of the theme
+ * version: Version of the theme
+ * authors: Authors of the theme
+
+*Note:- Add new javascript files to javascripts directory and new stylesheet files to stylesheets directory. For adding js and css manifest files, file name should be script.manifest.js or style.manifest.css. If using sass, use style.manifest.scss files instead of .css.*
 
 
 ## Developers
 
-Steps to modify themes directly from files.
+If modifying the theme directly from the filesystem, follow these steps:-
 
 1. Publish the theme which need to be updated/modified.
 
@@ -52,12 +111,12 @@ Steps to modify themes directly from files.
   bundle exec rake db:sync_templates THEME_NAME=<theme_name>
   ```
 
-*Note:- If the theme name is changed, then manually upload the theme from the admin panel as it will be considered a new theme.*
+*Note:- For manually uploading the theme, make sure you download the updatd theme and change the theme name (Theme name is the name of the zip file). Also make sure to update the meta info of the theme in the file `meta_info.yml` when the theme is updated.*
 
 
 ## Production Setup
 
-1. Set the following configuration for production environment in environment production.rb file:
+1. Set the following configuration for production environment in environment file `production.rb`:
   ```ruby
   config.assets.compile = true
   config.public_file_server.enabled = true
@@ -67,31 +126,6 @@ Steps to modify themes directly from files.
   ```
   set :linked_dirs, %w( public/vinsol_spree_themes )
   ```
-
-## Usage
-
-Once install, admin can see the option to upload themes under configuration tab at backend. Admin needs to upload the theme zip file in specific file structure. Once uploaded, admin can compile and publish the theme. Only after publishing, the theme will be applied to the frontend store.
-
-By default, spree default frontend theme is pbulished and viewed on frontend.
-
-File structure for the zip file to be uploaded:-
-* Theme.zip
-  * javascripts
-  * stylesheets
-  * images
-  * views: These views will be the spree frontend view directory.
-  * snapshot.png: This is the snapshot for the theme visible at backend.
-  * meta_info.yml: This .yml file contains meta info of the theme.
-
-Create a meta_info.yml file on the theme directory which contains the meta info of the theme. Format of the file should be following:-
- * name: Name of the theme
- * version: Version of the theme
- * authors: Authors of the theme
-
-
-*Note:- Add new javascript files to javascripts directory and new stylesheet files to stylesheets directory. For adding js and css manifest files, file name should be script.manifest.js or style.manifest.css. If using sass, use style.manifest.scss files instead of .css.*
-
-*Note:- When uploading, files starting with '__' or '.' will be ignored*
 
 
 ## Testing
