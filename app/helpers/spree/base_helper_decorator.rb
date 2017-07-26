@@ -14,7 +14,7 @@ Spree::BaseHelper.class_eval do
   # FIX_ME_PG:- This helper method needs to be defined here as it is used by spree_auth_devise extension templates.
   # spree_auth_devise not able to load the helper method from the store_controller.
   def preview_mode?
-    current_spree_user.present? && current_spree_user.admin? && session[:preview].present?
+    cookies[:preview].present?
   end
 
   # FIX_ME_PG:- Optimize the logic for building the directory files tree strucutre.

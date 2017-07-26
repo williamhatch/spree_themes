@@ -56,14 +56,14 @@ module Sprockets
 
         def current_theme
           if preview_by_admin?
-            @theme ||= Spree::Theme.find_by(name: @view.session[:preview])
+            @theme ||= Spree::Theme.find_by(name: @view.cookies[:preview])
           else
             @theme ||= Spree::Theme.published.first
           end
         end
 
         def preview_by_admin?
-         @view.present? && @view.session[:preview].present? && @view.current_spree_user.admin?
+          @view.present? && @view.cookies[:preview].present?
         end
 
       end

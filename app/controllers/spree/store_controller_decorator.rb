@@ -16,7 +16,7 @@ module Spree
       end
 
       def preview_mode?
-        current_spree_user.present? && current_spree_user.admin? && session[:preview].present?
+        cookies[:preview].present?
       end
       helper_method :preview_mode?
 
@@ -26,11 +26,11 @@ module Spree
       end
 
       def theme_preview_path
-        File.join(Spree::Theme::THEMES_PATH, session[:preview], 'views')
+        File.join(Spree::Theme::THEMES_PATH, cookies[:preview], 'views')
       end
 
       def preview_theme
-        @preview_theme ||= Spree::Theme.find_by(name: session[:preview])
+        @preview_theme ||= Spree::Theme.find_by(name: cookies[:preview])
       end
 
   end

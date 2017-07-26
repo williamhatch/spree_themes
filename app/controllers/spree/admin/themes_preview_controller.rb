@@ -5,13 +5,13 @@ module Spree
       before_action :load_theme, only: [:show, :destroy]
 
       def show
-        session[:preview] = @theme.name
+        cookies[:preview] = @theme.name
         @theme.open_preview
         redirect_to root_path(theme: @theme.id, mode: 'preview')
       end
 
       def destroy
-        session.delete(:preview)
+        cookies.delete(:preview)
         @theme.close_preview
         redirect_to admin_themes_path
       end
