@@ -5,10 +5,16 @@ This extension allows the admin to upload new spree store themes from backend. T
 
 Admin can even preview the theme after modifying it from the backend before publishing it to the users.
 
+View the demo application at url:-
+
+http://35.163.245.199/admin/themes
+
+credentials: spree@example.com / spree123
+
 
 ## Requirements
 
-This extension currently supports Ruby 2.4, Rails 5 and Spree 3.2.
+This extension currently supports Ruby >= 2.2.2, Rails 5 and Spree 3.2.
 
 
 ## Features
@@ -27,8 +33,10 @@ Some of the current functionalities are:-
 
 1. Add this extension to your Gemfile:
   ```ruby
-  gem 'vinsol_spree_themes', github: '[your-github-handle]/vinsol_spree_themes'
+  gem 'vinsol_spree_themes', github: 'vinsol-spree-contrib/vinsol_spree_themes', branch: 'master'
   ```
+
+  *Note:- Add this gem at the end of your gemfile as it has some sprocket-rails dependency and needs to be loaded after all gems are loaded.*
 
 2. Install the gem using Bundler:
   ```ruby
@@ -111,7 +119,17 @@ If modifying the theme directly from the filesystem, follow these steps:-
   bundle exec rake db:sync_templates THEME_NAME=<theme_name>
   ```
 
-*Note:- For manually uploading the theme, make sure you download the updatd theme and change the theme name (Theme name is the name of the zip file). Also make sure to update the meta info of the theme in the file `meta_info.yml` when the theme is updated.*
+
+## Downloading Theme
+
+Admin can download the theme in the zip format after modifying it. While uploading the downloaded theme, admin needs to follow the below steps:-
+
+1. Make sure to change the theme name (Theme name is the name of the zip file).
+
+2. Make sure to update the meta info of the theme in the file `meta_info.yml` when the theme is updated.
+
+3. Extract the downloaded zip file and then need to compress the files within the extracted folder. Otherwise, the theme structure will change and there will be issue while uploading.
+
 
 
 ## Production Setup
@@ -126,6 +144,19 @@ If modifying the theme directly from the filesystem, follow these steps:-
   ```
   set :linked_dirs, %w( public/vinsol_spree_themes )
   ```
+
+
+## Assumptions
+
+While developing this extensions, we face few issues related to assets precompilation, spree fragment caching and rails template caching. To resolve these issues we applied few assumptions and solutions
+
+1. For clearing cache, we used rails resolvers. We are assuming that whenever the template is modified, we are clearing the cache.
+
+2. When previewing the theme, we remove the cache directory under `tmp/cache` for proper theme rendering.
+
+3. We are assuming the theme zip filename to be the theme name and admin cannot upload the other theme with the same name.
+
+4. We need to compile and minify the assets before publishing the theme using the compile link for proper rendering of theme.
 
 
 ## Testing
@@ -145,10 +176,34 @@ require 'vinsol_spree_themes/factories'
 ```
 
 
+## RoadMaps
+
+Some other features which need to work on and are under development:-
+
+1. Theme revisions and rollback to previous theme versions.
+2. Maintaining the themes in multiple instances / cluster mode.
+3. Extension Dependencies for Spree < 3.2 and Rails 4.
+4. Update theme images like scripts and styles from admin interface.
+5. Flexibility to modify other spree extension views according to the theme.
+6. Displaying Theme information using theme meta info.
+
+
 ## Contributing
 
-If you'd like to contribute, please take a look at the
-[instructions](CONTRIBUTING.md) for installing dependencies and crafting a good
-pull request.
+If you'd like to contribute, please follow the below steps:-
 
-Copyright (c) 2017 [name of extension creator], released under the New BSD License
+1. Fork the repo.
+2. Clone your repo.
+3. Run bundle install.
+4. Run bundle exec rake test_app to create the test application in spec/test_app.
+5. Make your changes.
+6. Ensure specs pass by running bundle exec rspec spec.
+7. Submit your pull request.
+
+
+Credits
+-------
+
+[![vinsol.com: Ruby on Rails, iOS and Android developers](http://vinsol.com/vin_logo.png "Ruby on Rails, iOS and Android developers")](http://vinsol.com)
+
+Copyright (c) 2017 [vinsol.com](http://vinsol.com "Ruby on Rails, iOS and Android developers"), released under the New MIT License
