@@ -12,6 +12,13 @@ http://35.163.245.199/admin/themes
 credentials: spree@example.com / spree123
 
 
+Themes Url:-
+
+https://github.com/vinsol-spree-contrib/theme-BigShop.git
+
+https://github.com/vinsol-spree-contrib/theme-ClassicWhite.git
+
+
 ## Requirements
 
 This extension currently supports Ruby >= 2.2.2, Rails 5 and Spree 3.2.
@@ -38,23 +45,37 @@ Some of the current functionalities are:-
 
   *Note:- Add this gem at the end of your gemfile as it has some sprocket-rails dependency and needs to be loaded after all gems are loaded.*
 
-2. Install the gem using Bundler:
+2. Also add the following gem above the extension:
+   ```ruby
+   gem 'sprockets-helpers', '~> 1.2.1'
+   ```
+
+   *Note:- This gem is dependent for the preview feature.*
+
+3. Install the gem using Bundler:
   ```ruby
   bundle install
   ```
 
-3. Copy & run migrations
+4. Copy & run migrations
   ```ruby
   bundle exec rails g vinsol_spree_themes:install
   ```
 
-4. Restart your server
+5. Restart your server
   ```ruby
   rails server
   ```
 
 
 ## Usage
+
+# Development
+
+Make sure to set the following config in environment file `development.rb`.
+
+`config.assets.debug = false`
+
 
 After installing the extension, admin will see a tab `vinsol spree themes` on left sidebar of admin panel. Or you can visit the link
 
@@ -71,6 +92,18 @@ Theme templates can be modified through the editor. Later theme can be published
 Once the extension is installed, admin gets a spree store default theme uploaded on the system and is published for the store users.
 
 Besides preview and publishing, admin can delete the uploaded theme or download it in zip format.
+
+
+## Themes
+
+Some spree store themes can be cloned from the following link:-
+
+1. https://github.com/vinsol-spree-contrib/theme-ClassicWhite.git
+2. https://github.com/vinsol-spree-contrib/theme-BigShop.git
+
+After clonning, zip the files of the theme and upload the zip file from the admin interface.
+
+Yay!! new theme is ready to be published.
 
 
 ## Theme Structure
@@ -140,7 +173,13 @@ Admin can download the theme in the zip format after modifying it. While uploadi
   config.public_file_server.enabled = true
   ```
 
-2. Add the following path to the shared linked dir in deploy.rb file.
+2. Also, set the assets compressors in `production.rb` file.
+  ```ruby
+  config.assets.js_compressor = :uglifier 
+  config.assets.css_compressor = :sass
+  ```
+
+3. Add the following path to the shared linked dir in deploy.rb file.
   ```
   set :linked_dirs, %w( public/vinsol_spree_themes )
   ```
