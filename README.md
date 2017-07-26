@@ -7,15 +7,14 @@ Admin can even preview the theme after modifying it from the backend before publ
 
 View the demo application at url:-
 
-http://35.163.245.199/admin/themes
+http://vinsol-spree-themes-demo.domain4now.com/admin/themes
 
 credentials: spree@example.com / spree123
 
 
-Themes Url:-
+Sample Theme Repositories:
 
 https://github.com/vinsol-spree-contrib/theme-BigShop.git
-
 https://github.com/vinsol-spree-contrib/theme-ClassicWhite.git
 
 
@@ -40,7 +39,7 @@ Some of the current functionalities are:-
 
 1. Add this extension to your Gemfile:
   ```ruby
-  gem 'vinsol_spree_themes', github: 'vinsol-spree-contrib/vinsol_spree_themes', branch: 'master'
+  gem 'vinsol_spree_themes'
   ```
 
   *Note:- Add this gem at the end of your gemfile as it has some sprocket-rails dependency and needs to be loaded after all gems are loaded.*
@@ -83,7 +82,7 @@ After installing the extension, admin will see a tab `vinsol spree themes` on le
  http://localhost:3000/admin/themes
 ```
 
-Then, admin uploads the new theme in zip file. Once uploaded, admin can preview the theme and also modify it accordingly through the editor.
+Then, admin uploads the new theme in zip file(Download sample themes from the links added below). Once uploaded, admin can preview the theme and also modify it accordingly through the editor.
 
 Theme templates can be modified through the editor. Later theme can be published for the spree store users.
 
@@ -130,7 +129,7 @@ Create a meta_info.yml file on the theme directory which contains the meta info 
 
 ## Developers
 
-If modifying the theme directly from the filesystem, follow these steps:-
+If you wish to modify the theme directly from the filesystem, follow these steps:-
 
 1. Publish the theme which need to be updated/modified.
 
@@ -179,7 +178,7 @@ Admin can download the theme in the zip format after modifying it. While uploadi
   config.assets.css_compressor = :sass
   ```
 
-3. Add the following path to the shared linked dir in deploy.rb file.
+3. For Capistrano: Add the following path to the shared linked dir in deploy.rb file.
   ```
   set :linked_dirs, %w( public/vinsol_spree_themes )
   ```
@@ -187,7 +186,7 @@ Admin can download the theme in the zip format after modifying it. While uploadi
 
 ## Assumptions
 
-While developing this extensions, we face few issues related to assets precompilation, spree fragment caching and rails template caching. To resolve these issues we applied few assumptions and solutions
+While developing this extensions, we faced few issues related to assets precompilation, spree fragment caching and rails template caching. To resolve these issues we made few assumptions:
 
 1. For clearing cache, we used rails resolvers. We are assuming that whenever the template is modified, we are clearing the cache.
 
@@ -196,6 +195,8 @@ While developing this extensions, we face few issues related to assets precompil
 3. We are assuming the theme zip filename to be the theme name and admin cannot upload the other theme with the same name.
 
 4. We need to compile and minify the assets before publishing the theme using the compile link for proper rendering of theme.
+
+5. Rails app is using centeral cache store. So that Rails.cache.clear can flush cache for all application servers.
 
 
 ## Testing
