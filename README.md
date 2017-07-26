@@ -15,6 +15,7 @@ credentials: spree@example.com / spree123
 Sample Theme Repositories:
 
 https://github.com/vinsol-spree-contrib/theme-BigShop.git
+
 https://github.com/vinsol-spree-contrib/theme-ClassicWhite.git
 
 
