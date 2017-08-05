@@ -60,6 +60,7 @@ module Spree
         begin
           theme.remove_current_theme
           theme.apply_new_theme
+          theme.remove_cache
           theme.update_cache_timestamp
         rescue Exception => e
           theme.errors.add(:base, e)
@@ -111,15 +112,15 @@ module Spree
       Rails.cache.write(Spree::ThemesTemplate::CacheResolver.cache_key, Time.current)
     end
 
+    def remove_cache
+      FileUtils.remove_dir(ASSET_CACHE_PATH) if File.exists?(ASSET_CACHE_PATH)
+    end
+
     private
 
       # def ensure_atleast_one_published_theme
       #   errors.add(:base, Spree.t('models.theme.minimum_active_error')) unless Spree::Theme.published.one?
       # end
-
-      def remove_cache
-        FileUtils.remove_dir(ASSET_CACHE_PATH) if File.exists?(ASSET_CACHE_PATH)
-      end
 
       def set_name
         self.name = File.basename(template_file_file_name, File.extname(template_file_file_name))
