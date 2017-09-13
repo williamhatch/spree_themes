@@ -22,8 +22,17 @@ class ZipFileExtractor
     def parse_file
       Zip::File.open(file_path) do |zip_file|
         zip_file.each do |file|
-          filepath = File.join(output_path, file.name)
+          ## [::NASTY HACK::]
+          ## For some zipfiles(including downloaded zip from github),
+          ## whole folder is extracted instead of files withing folder
+          ## so files extracted to output path is invalid.
+          temp_path = "#{ theme.name }/"
+          next if file.name == temp_path
+          filename = (file.name.include? temp_path) ? file.name.sub(temp_path, '') : file.name
+
+          filepath = File.join(output_path, filename)
           next if filepath =~ IGNORED_FILES_REGEX
+
           unless File.exist?(filepath)
             FileUtils::mkdir_p(File.dirname(filepath))
             zip_file.extract(file, filepath)
