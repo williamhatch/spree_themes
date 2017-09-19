@@ -35,6 +35,8 @@ require 'spree/testing_support/url_helpers'
 require 'vinsol_spree_themes/factories'
 require "paperclip/matchers"
 
+require 'custom/matchers/have_attr_accessor.rb'
+
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
@@ -104,5 +106,6 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include Paperclip::Shoulda::Matchers
+  # config.include Shoulda::Callback::Matchers::ActiveModel
 
 end

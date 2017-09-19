@@ -1,68 +1,203 @@
 VinsolSpreeThemes
 ==================
 
-This extension allows the admin to modify, upload new frontend themes from backend. It also provides admin to create new/edit templates to existing themes.
+This extension allows the admin to upload new spree store themes from backend. This extension provides an interface where admin can manage all the themes by editing them, deleting old themes and publishing theme to store for the users.
+
+Admin can even preview the theme after modifying it from the backend before publishing it to the users.
+
+View the demo application at url:-
+
+http://vinsol-spree-themes-demo.domain4now.com/admin/themes
+
+credentials: spree@example.com / spree123
+
+
+Sample Theme Repositories:
+
+https://github.com/vinsol-spree-contrib/theme-BigShop.git
+
+https://github.com/vinsol-spree-contrib/theme-ClassicWhite.git
+
+
+## Requirements
+
+This extension currently supports Ruby >= 2.2.2, Rails 5 and Spree 3.2.
+
+
+## Features
+
+Some of the current functionalities are:-
+
+1. Upload the theme
+1. Preview the theme.
+2. Publish the theme on spree store.
+3. Download the theme.
+4. Remove the uploaded theme.
+5. Modify the uploaded / published theme.
 
 
 ## Installation
 
-This extension currently supports Rails 5 and Spree 3.2
-
-1. Add this extension to your Gemfile with this line:
+1. Add this extension to your Gemfile:
   ```ruby
-  gem 'vinsol_spree_themes', github: '[your-github-handle]/vinsol_spree_themes'
+  gem 'vinsol_spree_themes'
   ```
 
-2. Install the gem using Bundler:
+  *Note:- Add this gem at the end of your gemfile as it has some sprocket-rails dependency and needs to be loaded after all gems are loaded.*
+
+2. Also add the following gem above the extension:
+   ```ruby
+   gem 'sprockets-helpers', '~> 1.2.1'
+   ```
+
+   *Note:- This gem is dependent for the preview feature.*
+
+3. Install the gem using Bundler:
   ```ruby
   bundle install
   ```
 
-3. Copy & run migrations
+4. Copy & run migrations
   ```ruby
   bundle exec rails g vinsol_spree_themes:install
   ```
 
-4. Restart your server
-
-  If your server was running, restart it so that it can find the assets properly.
-
-
-## Production Setup
-
-1. Make sure while in production environment, in environment production.rb file set:
+5. Restart your server
   ```ruby
-  config.assets.precompile = true
+  rails server
   ```
 
-2. Add the following path to the shared linked dir in deploy.rb file.
-  ```
-  set :linked_dirs, %w( public/vinsol_spree_themes )
-  ```
 
 ## Usage
 
-Once install, admin can see the option to upload themes under configuration tab at backend. Admin needs to upload the theme zip file in specific file structure. Once uploaded, admin can compile and publish the theme. Only after publishing, the theme will be applied to the frontend store.
+# Development
 
-By default, spree default frontend theme is pbulished and viewed on frontend.
+Make sure to set the following config in environment file `development.rb`.
 
-File structure for the zip file to be uploaded:-
+`config.assets.debug = false`
+
+
+After installing the extension, admin will see a tab `vinsol spree themes` on left sidebar of admin panel. Or you can visit the link
+
+```
+ http://localhost:3000/admin/themes
+```
+
+Then, admin uploads the new theme in zip file(Download sample themes from the links added below). Once uploaded, admin can preview the theme and also modify it accordingly through the editor.
+
+Theme templates can be modified through the editor. Later theme can be published for the spree store users.
+
+*Note:- Before publishing the theme, admin needs to compile it using the link provided with other options for all assets to load properly.*
+
+Once the extension is installed, admin gets a spree store default theme uploaded on the system and is published for the store users.
+
+Besides preview and publishing, admin can delete the uploaded theme or download it in zip format.
+
+
+## Themes
+
+Some spree store themes can be cloned from the following link:-
+
+1. https://github.com/vinsol-spree-contrib/theme-ClassicWhite.git
+2. https://github.com/vinsol-spree-contrib/theme-BigShop.git
+
+After clonning, zip the files of the theme and upload the zip file from the admin interface.
+
+Yay!! new theme is ready to be published.
+
+
+## Theme Structure
+
+Theme file structure for the zip file to be uploaded:-
+
 * Theme.zip
   * javascripts
   * stylesheets
+  * images
   * views: These views will be the spree frontend view directory.
   * snapshot.png: This is the snapshot for the theme visible at backend.
   * meta_info.yml: This .yml file contains meta info of the theme.
+
+*Note:- When uploading, files starting with '__' or '.' will be ignored*
 
 Create a meta_info.yml file on the theme directory which contains the meta info of the theme. Format of the file should be following:-
  * name: Name of the theme
  * version: Version of the theme
  * authors: Authors of the theme
 
+*Note:- Add new javascript files to javascripts directory and new stylesheet files to stylesheets directory. For adding js and css manifest files, file name should be script.manifest.js or style.manifest.css. If using sass, use style.manifest.scss files instead of .css.*
 
-*Note:- Add new javascript files to javascripts directory and new stylesheet files to stylesheets directory. For adding js and css manifest files, file name should be script.manifest.js or style.manifest.js*
 
-*Note:- When uploading, files starting with '__' or '.' will be ignored*
+## Developers
+
+If you wish to modify the theme directly from the filesystem, follow these steps:-
+
+1. Publish the theme which need to be updated/modified.
+
+2. Update the theme assets, stylesheets, scripts and templates from the path. 
+  ```
+  public/vinsol_spree_themes/<theme_name>/
+  ```
+
+  or
+
+  ```
+  public/vinsol_spree_themes/current/
+  ```
+
+3. If application is running, reload the store page and you will see the changes on the browser.
+
+4. Once all the changes are done and final theme is ready, run the following rake task to sync the updated files with the database.
+  ```
+  bundle exec rake db:sync_templates THEME_NAME=<theme_name>
+  ```
+
+
+## Downloading Theme
+
+Admin can download the theme in the zip format after modifying it. While uploading the downloaded theme, admin needs to follow the below steps:-
+
+1. Make sure to change the theme name (Theme name is the name of the zip file).
+
+2. Make sure to update the meta info of the theme in the file `meta_info.yml` when the theme is updated.
+
+3. Extract the downloaded zip file and then need to compress the files within the extracted folder. Otherwise, the theme structure will change and there will be issue while uploading.
+
+
+
+## Production Setup
+
+1. Set the following configuration for production environment in environment file `production.rb`:
+  ```ruby
+  config.assets.compile = true
+  config.public_file_server.enabled = true
+  ```
+
+2. Also, set the assets compressors in `production.rb` file.
+  ```ruby
+  config.assets.js_compressor = :uglifier 
+  config.assets.css_compressor = :sass
+  ```
+
+3. For Capistrano: Add the following path to the shared linked dir in deploy.rb file.
+  ```
+  set :linked_dirs, %w( public/vinsol_spree_themes )
+  ```
+
+
+## Assumptions
+
+While developing this extensions, we faced few issues related to assets precompilation, spree fragment caching and rails template caching. To resolve these issues we made few assumptions:
+
+1. For clearing cache, we used rails resolvers. We are assuming that whenever the template is modified, we are clearing the cache.
+
+2. When previewing the theme, we remove the cache directory under `tmp/cache` for proper theme rendering.
+
+3. We are assuming the theme zip filename to be the theme name and admin cannot upload the other theme with the same name.
+
+4. We need to compile and minify the assets before publishing the theme using the compile link for proper rendering of theme.
+
+5. Rails app is using centeral cache store. So that Rails.cache.clear can flush cache for all application servers.
 
 
 ## Testing
@@ -82,10 +217,34 @@ require 'vinsol_spree_themes/factories'
 ```
 
 
+## RoadMaps
+
+Some other features which need to work on and are under development:-
+
+1. Theme revisions and rollback to previous theme versions.
+2. Maintaining the themes in multiple instances / cluster mode.
+3. Extension Dependencies for Spree < 3.2 and Rails 4.
+4. Update theme images like scripts and styles from admin interface.
+5. Flexibility to modify other spree extension views according to the theme.
+6. Displaying Theme information using theme meta info.
+
+
 ## Contributing
 
-If you'd like to contribute, please take a look at the
-[instructions](CONTRIBUTING.md) for installing dependencies and crafting a good
-pull request.
+If you'd like to contribute, please follow the below steps:-
 
-Copyright (c) 2017 [name of extension creator], released under the New BSD License
+1. Fork the repo.
+2. Clone your repo.
+3. Run bundle install.
+4. Run bundle exec rake test_app to create the test application in spec/test_app.
+5. Make your changes.
+6. Ensure specs pass by running bundle exec rspec spec.
+7. Submit your pull request.
+
+
+Credits
+-------
+
+[![vinsol.com: Ruby on Rails, iOS and Android developers](http://vinsol.com/vin_logo.png "Ruby on Rails, iOS and Android developers")](http://vinsol.com)
+
+Copyright (c) 2017 [vinsol.com](http://vinsol.com "Ruby on Rails, iOS and Android developers"), released under the New MIT License

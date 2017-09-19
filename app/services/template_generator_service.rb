@@ -1,21 +1,29 @@
 class TemplateGeneratorService
 
   DEFAULT_LOCALE = 'en'
+  FILE_EXTENSIONS = { css: '.css', scss: '.scss', js: '.js', yml: '.yml' }
+  IMAGE_EXTENSIONS = ['.png', '.gif', '.jpeg', '.jpg']
+  FONT_EXTENSIONS = ['.woff', '.ttf', '.svg', '.eot', '.woff2', '.otf']
 
   attr_reader :filepath, :theme_template, :theme
 
   def initialize(filepath, theme)
     @filepath = filepath
     @theme = theme
-    @theme_template = Spree::ThemesTemplate.new
+    @theme_template = build_template
   end
 
   def generate
+    return nil if(image_file?(filepath) || font_directory?(filepath))
     theme_template.assign_attributes(template_attributes)
     theme_template.save
   end
 
   private
+
+    def build_template
+      @theme.templates.find_or_initialize_by(path: get_path, name: file_name)
+    end
 
     def template_attributes
       { 
@@ -39,12 +47,12 @@ class TemplateGeneratorService
     end
 
     def get_handler
-      return nil if assets_file?(filepath)
+      return nil if assets_file?(filepath) || yml_files?(filepath)
       File.extname(filepath).gsub('.', '')
     end
 
     def get_format
-      return nil if assets_file?(filepath)
+      return nil if assets_file?(filepath) || yml_files?(filepath)
       # In spree few `.js.erb` files related to google are rendered in html format.
       script_embeded_partial? ? 'html' : format
     end
@@ -66,15 +74,28 @@ class TemplateGeneratorService
     end
 
     def stylesheet_file?(filename)
-      File.extname(filename) == '.css'
+      File.extname(filename) == FILE_EXTENSIONS[:css] || FILE_EXTENSIONS[:scss]
     end
 
     def javascript_file?(filename)
-      File.extname(filename) == '.js'
+      File.extname(filename) == FILE_EXTENSIONS[:js]
     end
 
     def assets_file?(filename)
       stylesheet_file?(filename) || javascript_file?(filename)
+    end
+
+    # FIX_ME_PG:- considering all images used in themes to be kept in images directory. Later invalidate using file content-type.
+    def image_file?(filename)
+      file_name == 'snapshot.png' || get_path.split('/').include?('images') && IMAGE_EXTENSIONS.include?(File.extname(filename))
+    end
+
+    def font_directory?(filename)
+      get_path.split('/').include?('fonts') && FONT_EXTENSIONS.include?(File.extname(filename))
+    end
+
+    def yml_files?(filename)
+      File.extname(filename) == FILE_EXTENSIONS[:yml]
     end
 
 end

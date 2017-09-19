@@ -6,8 +6,6 @@ module Spree
       before_action :load_template, only: [:edit, :update]
 
       def index
-        @search = @theme.templates.search(params[:q])
-        @templates = @search.result.page(params[:page]).per(params[:per_page])
       end
 
       def new
@@ -29,11 +27,8 @@ module Spree
       end
 
       def update
-        if @template.update(template_params)
-          redirect_to admin_theme_templates_path(@theme)
-        else
-          render :edit
-        end
+        @template.update(template_params)
+        render :edit
       end
 
       private

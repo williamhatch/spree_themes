@@ -1,36 +1,239 @@
-.themes-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-wrap: wrap;
+a {
+  color: #235ccc;
+}
+.btn-success, 
+.btn.action-capture {
+  color: #fff;
+  background-color: #1e8a1d;
+  border-color: #1e8a1d;
+}
+#main-part {
+  padding: 15px 15px 0;
 }
 
+.theme-row {
+  position: relative;
+}
 .theme {
-  width: 300px;
-  border: 1px solid black;
-  min-height: 200px;
-  margin: 10px 0;
-  padding: 4px;
+  margin-bottom: 30px;
+}
+
+.theme-block {
+  background: #f9f9f9;
+  border: solid 1px #ddd;
+  position: relative;
+  cursor: pointer;
+}
+.theme-block:hover .thumbnail {
+  opacity: 0.3;
+}
+.theme .thumbnail {
+  margin-bottom: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  transition: all 0.15s
 }
 
 .theme-image {
+  height: auto;
+  position: absolute;
+  left: 0;
+  top: 0;
   width: 100%;
-  min-height: 165px;
+}
+.theme-name-area {
+  position: relative;
+}
+.theme-name {
+  border-radius: 0;
+  border-top: solid 1px #ddd;
+  font-size:15px;
+  margin: 0;
+  overflow: hidden;
+  padding: 15px 60px 15px 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: #f9f9f9;
+}
+.theme .btn-group {
+  bottom: 0;
+  font-size: 13px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-left:solid 1px #ddd;
+}
+.theme .btn-group .dropdown-toggle {
+  border-radius: 0;
+  border: none;
+  background: none;
+  float: none;
+  color: rgba(0,0,0,0.5);
+  font-size: 22px;
+  line-height: 48px;
+  width: 60px;
+  padding: 0;
+  height: 47px;
+  transition: all 1s;
+}
+.theme .btn-group .dropdown-toggle:hover {
+  color: rgba(0,0,0,1);
+}
+.theme .btn-group.open .dropdown-toggle {
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+}
+.more-action-glyphicon {
+  transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin-top: 2px;
+}
+
+.btn-group.open .more-action-glyphicon {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.theme .btn-group .dropdown-menu {
+  margin-bottom: 0;
+  left: auto;
+  right: 0;
+  padding: 0
+}
+.theme-state .label {
+  border-radius: 2px;
+  font-size: inherit;
+  font-weight: normal;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.published .theme-block {
+  border-color: #6cb575;
+}
+.published .theme-name {
+  background: #6cb575;
+  border-color: #6cb575;
+  color: #fff;
+  padding-right: 110px;
+}
+.theme-name-link {
+  color: inherit;
+}
+.theme-name-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+.cmn-height-block:after {
+  content: ' ';
+  padding-top: 62%;
+  display: block;
+}
+.cmn-height-block.thumbnail .theme-image {
+  max-height: 228px;
+  overflow: hidden;
+}
+.theme-action-view {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-40%);
   text-align: center;
+  opacity: 0;
 }
-
-.theme-image img {
+.theme-block:hover .theme-action-view {
+  transform: translateY(-50%) scale(1);
+  opacity: 1;
+}
+.updload-theme-panel label {
+  border: 5px dashed rgba(0,0,0,.1);
+  margin: 0;
   width: 100%;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s;
+}
+.file-visible-xs {
+  margin-bottom: 30px;
+}
+.updload-theme-panel label:after {
+  margin-bottom: 45px;
+}
+.updload-theme-panel label:hover {
+  background: #162e40;
+  color: #fff;
+}
+.updload-theme-panel input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  height: 0;
+  width: 0;
+  font-size: 0.01em;
+}
+.updload-theme-panel .file-btn-helper {
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  transition: all 0.3s;
+}
+.updload-theme-panel label:hover .file-btn-helper {
+  line-height: 2;
+}
+.updload-theme-panel .file-btn-helper .upload-icon {
+  font-size: 2em;
 }
 
-.theme-content {
-  margin-top: 2px;
+/*template search bar*/
+.inner-addon { 
+    position: relative;
+}
+.inner-addon .glyphicon {
+  padding: 10px;
+  pointer-events: none;
+  position: absolute;
+}
+.left-addon .glyphicon {
+  left:  0px;
+}
+.right-addon .glyphicon {
+  right: 0px;
+}
+.left-addon input {
+  padding-left:  30px;
+}
+.right-addon input {
+  padding-right: 30px;
 }
 
-.action-download {
-  margin-right: 5px;
+.theme .dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  clear: both;
+  font-weight: 400;
+  color: #292b2c;
+  text-align: inherit;
+  white-space: nowrap;
+  background: 0 0;
+}
+.theme .dropdown-item + .dropdown-item {
+  border-top: solid 1px #ddd;
+}
+.theme .dropdown-item:hover {
+  background: #f2f2f2;
+  text-decoration: none;
+  transition: all 0.3s;
 }
 
-.theme-links {
-  margin-top: 2px;
+.published .btn-group {
+  border-color: #5da066;
+}
+.published .btn-group .dropdown-toggle {
+  color: rgba(144, 251, 157, 0.7);
+}
+.published .btn-group .dropdown-toggle:hover {
+  color: #fff; 
 }

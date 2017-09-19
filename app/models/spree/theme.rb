@@ -7,6 +7,7 @@ module Spree
     STATES = %w(drafted compiled published)
     THEMES_PATH = File.join(Rails.root, 'public', 'vinsol_spree_themes')
     CURRENT_THEME_PATH = File.join(THEMES_PATH, 'current')
+    ASSET_CACHE_PATH = File.join(Rails.root, 'tmp', 'cache')
 
     has_attached_file :template_file, storage: :filesystem,
                                       path: 'public/system/spree/themes/:filename'
@@ -14,6 +15,8 @@ module Spree
     ## VALIDATIONS ##
     validates_attachment :template_file, presence: true,
                                          content_type: { content_type: TEMPLATE_FILE_CONTENT_TYPE }
+    do_not_validate_attachment_file_type :template_file
+
     validates :name, presence: true,
                      uniqueness: { case_sensitive: false }
     validates :state, inclusion: { in: STATES }
@@ -28,8 +31,11 @@ module Spree
     before_validation :set_name, if: :template_file?
     before_validation :set_state, unless: :state?
     after_commit :extract_template_zip_file, on: :create
-    before_destroy :ensure_not_published, prepend: true
+    # before_destroy :ensure_not_published, prepend: true
     after_destroy :delete_from_file_system
+
+    # FIX_ME_PG:- Need to have default state to compiled when uploading theme. Set state after zip file extraction.
+    # after_create :set_state_to_compile
 
     ## SCOPES ##
     scope :published, -> { where(state: 'published') }
@@ -44,19 +50,17 @@ module Spree
       before_transition drafted: :compiled do |theme, transition|
         begin
           theme.assets_precompile
+          theme.update_cache_timestamp
         rescue Exception => e
           theme.errors.add(:base, e)
         end
       end
 
-      # before_transition published: :drafted do  |theme, transition|
-      #   theme.remove_current_theme
-      # end
-
       before_transition compiled: :published do |theme, transition|
         begin
           theme.remove_current_theme
           theme.apply_new_theme
+          theme.remove_cache
           theme.update_cache_timestamp
         rescue Exception => e
           theme.errors.add(:base, e)
@@ -87,12 +91,29 @@ module Spree
 
     def apply_new_theme
       source_path = File.join(THEMES_PATH, name)
-      FileUtils.ln_s(source_path, CURRENT_THEME_PATH)
+      FileUtils.ln_sf(source_path, CURRENT_THEME_PATH)
       AssetsPrecompilerService.new(self).copy_assets
     end
 
+    def open_preview
+      precompile_assets = AssetsPrecompilerService.new(self)
+      precompile_assets.minify
+      precompile_assets.copy_preview_assets
+      remove_cache
+      # update_cache_timestamp
+    end
+
+    def close_preview
+      remove_cache
+      # update_cache_timestamp
+    end
+
     def update_cache_timestamp
-      Rails.cache.write(Spree::ThemesTemplate::Resolver.cache_key, Time.current)
+      Rails.cache.write(Spree::ThemesTemplate::CacheResolver.cache_key, Time.current)
+    end
+
+    def remove_cache
+      FileUtils.remove_dir(ASSET_CACHE_PATH) if File.exists?(ASSET_CACHE_PATH)
     end
 
     private
@@ -124,6 +145,10 @@ module Spree
           throw(:abort)
         end
       end
+
+      # def set_state_to_compile
+      #   self.compile!
+      # end
 
   end
 end

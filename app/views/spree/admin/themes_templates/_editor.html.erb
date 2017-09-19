@@ -1,0 +1,29 @@
+<% form_path = @template.nil? ? '#' : admin_theme_template_path(@theme, @template) %>
+
+<% if @template %>
+  <div data-hook="admin_theme_form_header">
+    <%= render partial: 'spree/admin/shared/error_messages', locals: { target: @template } %>
+  </div>
+<% end %>
+
+<%= form_for @template || Spree::ThemesTemplate.new, url: form_path, method: :put, html: { multipart: true }, remote: true do |f| %>
+  <fieldset>
+    <div data-hook="admin_template_form_fields" class="admin-editor-section">
+      <div data-hook="admin_template_form">
+          <div data-hook="admin_template_form_body">
+            <%= f.label :body, Spree.t(:body) %>
+            <%= f.text_area :body, class: 'form-control body', rows: '20' %>
+          </div>
+      </div>
+    </div>
+
+    <div class="form-actions" data-hook="buttons">
+      <%= button Spree.t('actions.update'), 'refresh', 'submit', { class: 'btn-success', data: { disable_with: "#{ Spree.t(:saving) }..." }} %>
+      <span class="or"><%= Spree.t(:or) %></span>
+      <%= button_link_to Spree.t('actions.cancel'), admin_themes_path, icon: 'delete' %>
+    </div>
+  </fieldset>
+<% end %>
+
+<!-- script to initialize code mirror editor on textarea -->
+<%= javascript_include_tag 'spree/backend/main.js' %>

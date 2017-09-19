@@ -1,35 +1,40 @@
 <!-- LISTING ALL THE THEMES -->
 <div class="themes-container">
-  <% @themes.all.each do |theme| %>
-    <div class="theme">
-      <div class="theme-image">
-        <%= image_tag snapshot_path(theme) %>
-      </div>
 
-      <div class="theme-content">
-        <div>
-          <b>Name: <%= theme.name %></b>
-          <b class="pull-right">State:<span class="label label-complete"><%= theme.state %></span></b>
+  <% sorted_themes(@themes).each do |theme| %>
+    <div class="theme theme-col col-md-4 col-sm-6 <%= theme.state %>">
+      <div class="theme-block">
+        <div class="thumbnail cmn-height-block">
+          <%= link_to image_tag(snapshot_path(theme)), admin_theme_templates_path(theme), class: 'img-responsive theme-image' %>
         </div>
 
-        <div class="theme-links">
-          <% if theme.drafted? %>
-            <span><%= link_to Spree.t('actions.compiled'), state_change_admin_theme_path(theme, state: 'compiled'), method: :patch %></span>
-          <% elsif theme.compiled? %>
-            <span><%= link_to Spree.t('actions.published'), state_change_admin_theme_path(theme, state: 'published'), method: :patch %></span>
-          <% end %>
+        <div class="theme-content">
+          <div class="theme-name-area">
+            <h2 class="theme-name"><%= theme.name %></h2>
+            
+              <div class="btn-group dropup">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-option-horizontal more-action-glyphicon"></i></button>
 
-          <span><%= link_to Spree.t('actions.view_templates'), admin_theme_templates_path(theme) %></span>
+              <div class="dropdown-menu">
+                <% if theme.drafted? %>
+                  <%= link_to Spree.t('actions.compiled'), state_change_admin_theme_path(theme, state: 'compiled'), method: :patch, class: 'dropdown-item' %>
+                <% elsif theme.compiled? %>
+                  <%= link_to Spree.t('actions.published'), state_change_admin_theme_path(theme, state: 'published'), method: :patch, class: 'dropdown-item' %>
+                <% end %>
+                
+                <% unless theme.published? %>
+                  <%= link_to 'Delete', admin_theme_path(theme), method: :delete, class: 'dropdown-item', data: { confirm: 'Are you sure?' } %>
+                <% end %>
 
-          <% unless theme.published? %>
-            <%= link_to admin_theme_path(theme), method: :delete, class: 'btn btn-danger btn-sm  with-tip action-delete no-text pull-right', title: '', 'data-original-title' => 'Delete', data: { confirm: 'Are you sure?' } do %>
-              <span class="icon icon-delete"></span>
-            <% end %>
-          <% end %>
+                <%= link_to Spree.t('actions.download'), download_admin_theme_path(theme), method: :patch, class: 'dropdown-item action-download' %>
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <%= link_to download_admin_theme_path(theme), method: :patch, class: 'btn btn-primary btn-sm with-tip action-download no-text pull-right', title: '', 'data-original-title' => Spree.t('actions.download') do %>
-            <span class="icon icon-download"></span>
-          <% end %>
+        <div class="theme-action-view">
+          <%= link_to Spree.t(:templates), admin_theme_templates_path(theme) , class: 'btn btn-primary btn-sm' %>
+          <%= link_to Spree.t('actions.preview'), admin_theme_preview_path(theme_id: theme), class: 'btn btn-info btn-sm', target: '_blank' %>
         </div>
       </div>
    </div>

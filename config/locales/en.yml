@@ -4,6 +4,7 @@
 en:
   spree:
     themes: Themes
+    vinsol_spree_themes: Vinsol Spree Theme
     templates: Templates
     path: Path
     format: Format
@@ -24,6 +25,7 @@ en:
       view_templates: Templates
       new_template: New Template
       download: Download
+      preview: Preview
 
     models:
       theme:
@@ -47,3 +49,4 @@ en:
 
     warnings:
       update_metainfo: 'Make sure you update the meta info details in file meta_info.yml once the theme is updated. You will need to download the theme and reupload it.'
+      preview_mode_message: Preview Mode

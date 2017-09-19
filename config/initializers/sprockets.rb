@@ -3,6 +3,7 @@ module Sprockets
 
     THEME_PUBLIC_ASSET_DIRECTORY = 'vinsol_spree_theme'
     PUBLIC_THEME_PATH = File.join('assets', THEME_PUBLIC_ASSET_DIRECTORY)
+    PREVIEW_THEME_PUBLIC_ASSET_DIRECTORY = 'preview_vinsol_spree_theme'
 
     def self.build_manifest(app)
       config = app.config
@@ -34,6 +35,7 @@ module Sprockets
       class Theme < Manifest
 
         def initialize(view)
+          @view = view
           if current_theme
             @manifest = AssetsPrecompilerService.new(current_theme).minify({ precompile: false })
           else
@@ -44,12 +46,24 @@ module Sprockets
 
         def asset_path(path, digest, allow_non_precompiled = false)
           result = super
-          result.prepend(THEME_PUBLIC_ASSET_DIRECTORY) if result.present?
+          if preview_by_admin?
+            result.prepend("#{ Sprockets::Railtie::PREVIEW_THEME_PUBLIC_ASSET_DIRECTORY }/") if result.present?
+          else
+            result.prepend("#{ Sprockets::Railtie::THEME_PUBLIC_ASSET_DIRECTORY }/") if result.present?
+          end
           result
         end
 
         def current_theme
-          @theme ||= Spree::Theme.published.first
+          if preview_by_admin?
+            @theme ||= Spree::Theme.find_by(name: @view.cookies[:preview])
+          else
+            @theme ||= Spree::Theme.published.first
+          end
+        end
+
+        def preview_by_admin?
+          @view.present? && @view.cookies[:preview].present?
         end
 
       end

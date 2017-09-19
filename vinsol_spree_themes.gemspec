@@ -8,23 +8,24 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'vinsol_spree_themes'
   s.version     = VinsolSpreeThemes.version
-  s.summary     = 'Add extension summary here'
-  s.description = 'Add (optional) extension description here'
+  s.summary     = 'This extension creates a flexible system where admin can upload, modify the themes and publish it to spree store.'
+  s.description = 'This extension provides an interface for the admin to upload new themes, publish it to the spree store, modify the theme layout accordingly and later download it.'
   s.required_ruby_version = '>= 2.2.2'
 
-  s.author    = 'You'
-  s.email     = 'you@example.com'
-  s.homepage  = 'https://github.com/your-github-handle/vinsol_spree_themes'
+  s.author    = ['Paresh Gupta', 'Nimish Mehta']
+  s.email     = 'info@vinsol.com'
+  s.homepage  = 'http://vinsol.com'
   s.license = 'BSD-3-Clause'
 
-  # s.files       = `git ls-files`.split("\n")
-  # s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.files       = `git ls-files`.split("\n")
+  s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_path = 'lib'
   s.requirements << 'none'
 
   s.add_dependency 'spree_core', '>= 3.2.0', '< 4.0'
   s.add_dependency 'rubyzip', '~> 1.2.1'
   s.add_dependency 'state_machine', '~> 1.2.0'
+  s.add_dependency 'sprockets-helpers', '~> 1.2.1'
 
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'capybara-screenshot'
@@ -40,4 +41,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'shoulda-matchers'
+  s.add_development_dependency 'shoulda-callback-matchers'
 end
