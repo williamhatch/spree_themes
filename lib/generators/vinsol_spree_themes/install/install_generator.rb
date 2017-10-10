@@ -29,7 +29,6 @@ module VinsolSpreeThemes
 
       def load_default_theme
         puts 'Loading and applying default spree theme...'
-
         filepath = "#{ ::VinsolSpreeThemes::Engine.root }/lib/generators/themes/default.zip"
 
         # creating theme object.
@@ -40,9 +39,10 @@ module VinsolSpreeThemes
         # extracting the zip file.
         ZipFileExtractor.new(filepath, theme)
 
+        # TODO Snapshot image fails to load in case of default theme
         # publishing theme.
-        theme.compile
-        theme.publish
+        # theme.compile
+        # theme.publish
       end
 
     end

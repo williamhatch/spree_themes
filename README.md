@@ -21,7 +21,7 @@ https://github.com/vinsol-spree-contrib/theme-ClassicWhite.git
 
 ## Requirements
 
-This extension currently supports Ruby >= 2.2.2, Rails 5 and Spree 3.2.
+This extension currently supports Ruby >= 2.2.2, Rails 5 and Spree >= 3.2.
 
 
 ## Features
