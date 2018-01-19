@@ -5,6 +5,7 @@ This extension allows the admin to upload new spree store themes from backend. T
 
 Admin can even preview the theme after modifying it from the backend before publishing it to the users.
 
+### Demo
 View the demo application at url:-
 
 http://vinsol-spree-themes-demo.domain4now.com/admin/themes
@@ -12,11 +13,19 @@ http://vinsol-spree-themes-demo.domain4now.com/admin/themes
 credentials: spree@example.com / spree123
 
 
-Sample Theme Repositories:
+### Download Sample Themes:
 
-https://github.com/vinsol-spree-contrib/theme-BigShop.git
+For SPREE 3.2
 
-https://github.com/vinsol-spree-contrib/theme-ClassicWhite.git
+https://github.com/vinsol-spree-contrib/theme-BigShop/archive/3-2-stable.zip
+
+https://github.com/vinsol-spree-contrib/theme-ClassicWhite/archive/3-2-stable.zip
+
+For SPREE 3.3
+
+https://github.com/vinsol-spree-contrib/theme-BigShop/archive/3-3-bump.zip
+
+https://github.com/vinsol-spree-contrib/theme-ClassicWhite/archive/3-3-bump.zip
 
 
 ## Requirements
@@ -39,8 +48,17 @@ Some of the current functionalities are:-
 ## Installation
 
 1. Add this extension to your Gemfile:
+
+For SPREE 3.2
+
   ```ruby
-  gem 'vinsol_spree_themes'
+  gem 'vinsol_spree_themes', github: 'vinsol-spree-contrib/spree_themes', branch: '3-2-stable'
+  ```
+
+For SPREE 3.3
+
+  ```ruby
+  gem 'vinsol_spree_themes', github: 'vinsol-spree-contrib/spree_themes', branch: '3-3-stable'
   ```
 
   *Note:- Add this gem at the end of your gemfile as it has some sprocket-rails dependency and needs to be loaded after all gems are loaded.*
