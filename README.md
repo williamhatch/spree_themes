@@ -52,13 +52,13 @@ Some of the current functionalities are:-
 For SPREE 3.2
 
   ```ruby
-  gem 'vinsol_spree_themes', branch: '3-2-stable'
+  gem 'vinsol_spree_themes', github: 'vinsol-spree-contrib/spree_themes', branch: '3-2-stable'
   ```
 
 For SPREE 3.3
 
   ```ruby
-  gem 'vinsol_spree_themes', branch: '3-3-stable'
+  gem 'vinsol_spree_themes', github: 'vinsol-spree-contrib/spree_themes', branch: '3-3-stable'
   ```
 
   *Note:- Add this gem at the end of your gemfile as it has some sprocket-rails dependency and needs to be loaded after all gems are loaded.*
