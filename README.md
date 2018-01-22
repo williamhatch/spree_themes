@@ -21,7 +21,7 @@ https://github.com/vinsol-spree-contrib/theme-BigShop/archive/3-2-stable.zip
 
 https://github.com/vinsol-spree-contrib/theme-ClassicWhite/archive/3-2-stable.zip
 
-For SPREE 3.3
+For SPREE 3.3 and SPREE 3.4
 
 https://github.com/vinsol-spree-contrib/theme-BigShop/archive/3-3-bump.zip
 
@@ -30,7 +30,7 @@ https://github.com/vinsol-spree-contrib/theme-ClassicWhite/archive/3-3-bump.zip
 
 ## Requirements
 
-This extension currently supports Ruby >= 2.2.2, Rails 5 and Spree 3.2.
+This extension currently supports Ruby 2.4.2, Rails 5.1 and Spree 3.4.
 
 
 ## Features
@@ -49,16 +49,22 @@ Some of the current functionalities are:-
 
 1. Add this extension to your Gemfile:
 
-For SPREE 3.2
+For SPREE 3.4
 
   ```ruby
-  gem 'vinsol_spree_themes', github: 'vinsol-spree-contrib/spree_themes', branch: '3-2-stable'
+  gem 'vinsol_spree_themes', github: 'vinsol-spree-contrib/spree_themes', branch: 'master'
   ```
 
 For SPREE 3.3
 
   ```ruby
   gem 'vinsol_spree_themes', github: 'vinsol-spree-contrib/spree_themes', branch: '3-3-stable'
+  ```
+
+For SPREE 3.2
+
+  ```ruby
+  gem 'vinsol_spree_themes', github: 'vinsol-spree-contrib/spree_themes', branch: '3-2-stable'
   ```
 
   *Note:- Add this gem at the end of your gemfile as it has some sprocket-rails dependency and needs to be loaded after all gems are loaded.*
