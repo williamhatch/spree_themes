@@ -136,6 +136,9 @@ module Spree
 
       def delete_from_file_system
         source_dir = File.join(THEMES_PATH, name)
+
+        # This makes sure that the directory exists when deleting the theme.
+        Dir.mkdir(source_dir) unless Dir.exists?(source_dir)
         FileUtils.remove_dir(source_dir)
       end
 
