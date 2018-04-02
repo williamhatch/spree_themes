@@ -21,6 +21,13 @@ https://github.com/vinsol-spree-contrib/theme-BigShop/archive/3-2-stable.zip
 
 https://github.com/vinsol-spree-contrib/theme-ClassicWhite/archive/3-2-stable.zip
 
+https://github.com/vinsol-spree-contrib/theme-OnlineStore/archive/3-2-stable.zip
+
+https://github.com/vinsol-spree-contrib/theme-CrownTheme/archive/3-2-stable.zip
+
+https://github.com/vinsol-spree-contrib/theme-LatticeTheme/archive/master.zip
+
+
 For SPREE 3.3 and SPREE 3.4
 
 https://github.com/vinsol-spree-contrib/theme-BigShop/archive/3-3-bump.zip
