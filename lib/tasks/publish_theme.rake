@@ -11,19 +11,10 @@ namespace :db do
     THEMES.each do |theme_name|
       theme = create_theme(theme_name)
       ZipFileExtractor.new("public/system/spree/themes/#{theme.template_file_file_name}", theme).extract
-      theme.compile
     end
-    filepath = "#{ ::VinsolSpreeThemes::Engine.root }/lib/generators/themes/default.zip"
-
-    theme = Spree::Theme.find_or_initialize_by(state: 'drafted', name: 'default')
-    theme.template_file = File.open(filepath)
-    theme.save(validate: false)
-    ZipFileExtractor.new(filepath, theme)
+    theme = Spree::Theme.second
     theme.compile
-    theme_new = Spree::Theme.first
-    Rails.cache.clear
-    theme_new.publish
-    theme_new.remove_cache
-    theme_new.update_cache_timestamp
+    theme.publish
+    theme.apply_new_theme
   end
 end
