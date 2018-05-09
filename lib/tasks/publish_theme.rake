@@ -1,24 +1,34 @@
 namespace :db do
+  desc "Updates themes and publish first theme"
 
   THEMES = ['BigShop', 'ClassicWhite']
-  def create_theme(name)
-    full_theme_name = "theme-#{name}-3-3-bump"
-    Spree::Theme.find_or_create_by(name: full_theme_name, state: 'drafted', template_file_file_name: "#{full_theme_name}.zip")
-  end
+  ZIP_FILEPATH = File.join('public', 'system', 'spree', 'themes')
 
-  desc "Updates themes"
-  task upload_themes: :environment do
-    THEMES.each do |theme_name|
-      theme = create_theme(theme_name)
-      ZipFileExtractor.new("public/system/spree/themes/#{theme.template_file_file_name}", theme).extract
-    end
-    theme = Spree::Theme.second
-    theme.compile
-  end
 
-  desc "publish theme"
   task publish_theme: :environment do
-    theme = Spree::Theme.second
-    theme.publish
+    THEMES.each do |name|
+      ActiveRecord::Base.transaction do
+        theme_name = "theme-#{name}-3-3-bump"
+        filepath = File.open(ZIP_FILEPATH + '/' + theme_name + '.zip')
+
+        theme = Spree::Theme.find_or_initialize_by(name: theme_name, state: 'drafted')
+        theme.template_file = File.open(filepath)
+        theme.save(validate: false)
+
+        ZipFileExtractor.new(filepath, theme).extract
+        theme.compile!
+      end
+    end
+
+    ActiveRecord::Base.transaction do
+      theme = Spree::Theme.last
+      begin
+        theme.assets_precompile
+        theme.remove_current_theme
+        theme.apply_new_theme
+        theme.remove_cache
+        theme.update_cache_timestamp
+      end
+    end
   end
 end
