@@ -13,12 +13,17 @@ namespace :db do
       ZipFileExtractor.new("public/system/spree/themes/#{theme.template_file_file_name}", theme).extract
       theme.compile
     end
-    # Spree::Theme.first.compile
-    theme = Spree::Theme.first
-    Rails.cache.clear
+    filepath = "#{ ::VinsolSpreeThemes::Engine.root }/lib/generators/themes/default.zip"
 
-    theme.publish
-    theme.remove_cache
-    theme.update_cache_timestamp
+    theme = Spree::Theme.find_or_initialize_by(state: 'drafted', name: 'default')
+    theme.template_file = File.open(filepath)
+    theme.save(validate: false)
+    ZipFileExtractor.new(filepath, theme)
+    theme.compile
+    theme_new = Spree::Theme.first
+    Rails.cache.clear
+    theme_new.publish
+    theme_new.remove_cache
+    theme_new.update_cache_timestamp
   end
 end
