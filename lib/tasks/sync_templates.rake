@@ -4,9 +4,7 @@ namespace :db do
   task sync_templates: :environment do
 
     begin
-      
     raise puts 'Environment variable THEME_NAME not found, pass theme name as environment variable.' unless ENV['THEME_NAME']
-      
       INVALID_DIRECTORIES = ['.', '..', 'precompiled_assets']
 
       theme = Spree::Theme.where(name: ENV['THEME_NAME']).first
