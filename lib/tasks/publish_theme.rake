@@ -11,8 +11,8 @@ namespace :db do
     THEMES.each do |theme_name|
       theme = create_theme(theme_name)
       ZipFileExtractor.new("public/system/spree/themes/#{theme.template_file_file_name}", theme).extract
-      theme.compile
     end
+    Spree::Theme.first.compile
     Spree::Theme.first.publish
     Rails.cache.clear
   end
