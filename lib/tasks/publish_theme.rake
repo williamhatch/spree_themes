@@ -1,6 +1,6 @@
 namespace :db do
 
-  THEMES = ['BigShop', '']
+  THEMES = ['BigShop', 'default', 'ClassicWhite']
   def create_theme(name)
     full_theme_name = "theme-#{name}-3-3-bump"
     Spree::Theme.find_or_create_by(name: full_theme_name, state: 'drafted', template_file_file_name: "#{full_theme_name}.zip")
