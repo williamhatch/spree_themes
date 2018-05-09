@@ -14,5 +14,6 @@ namespace :db do
       theme.compile
     end
     Spree::Theme.first.publish
+    Rails.cache.clear
   end
 end
