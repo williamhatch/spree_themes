@@ -5,6 +5,10 @@ This extension allows the admin to upload new spree store themes from backend. T
 
 Admin can even preview the theme after modifying it from the backend before publishing it to the users.
 
+Try Spree Themes for Spree 3-4 with direct deployment on Heroku:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-themes)
+
 ### Demo
 View the demo application at url:-
 
@@ -165,7 +169,7 @@ If you wish to modify the theme directly from the filesystem, follow these steps
 
 1. Publish the theme which need to be updated/modified.
 
-2. Update the theme assets, stylesheets, scripts and templates from the path. 
+2. Update the theme assets, stylesheets, scripts and templates from the path.
   ```
   public/vinsol_spree_themes/<theme_name>/
   ```
