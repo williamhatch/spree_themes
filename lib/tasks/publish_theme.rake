@@ -16,7 +16,7 @@ namespace :db do
         theme.save(validate: false)
 
         ZipFileExtractor.new(filepath, theme).extract
-        theme.compile!
+        theme.compile
       end
     end
 
@@ -24,7 +24,7 @@ namespace :db do
 
       theme = Spree::Theme.last
 
-      path = '/public/vinsol_spree_themes/'
+      path = "/public/vinsol_spree_themes/"
       current_path = path + 'current'
       theme_path =  path + theme.name
 
