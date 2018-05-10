@@ -22,13 +22,12 @@ namespace :db do
 
     ActiveRecord::Base.transaction do
       theme = Spree::Theme.last
-      begin
-        theme.assets_precompile
-        theme.remove_current_theme
-        theme.apply_new_theme
-        theme.remove_cache
-        theme.update_cache_timestamp
-      end
+      theme.assets_precompile
+      theme.remove_current_theme
+
+      theme.remove_cache
+      theme.update_cache_timestamp
+      theme.publish!
     end
   end
 end
