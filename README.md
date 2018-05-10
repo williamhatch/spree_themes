@@ -13,7 +13,7 @@ Try Spree Themes for Spree 3-4 with direct deployment on Heroku:
 
 Try Spree Classic White Theme with direct deployment on Heroku:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-classicwhite)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/new-spree-themes)
 
 ### Demo
 View the demo application at url:-
