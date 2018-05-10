@@ -16,34 +16,21 @@ namespace :db do
         theme.save(validate: false)
 
         ZipFileExtractor.new(filepath, theme).extract
-        theme.compile
       end
     end
 
     ActiveRecord::Base.transaction do
-
       theme = Spree::Theme.last
-
-      path = "/public/vinsol_spree_themes/"
-      current_path = path + 'current'
-      theme_path =  path + theme.name
-
-      Spree::Theme.published.each(&:draft)
-
-      theme.assets_precompile
-      theme.publish
-
-      File.delete(current_path) if File.exist?(current_path)
-
-      # theme.remove_current_theme
-      # theme.publish!
-
-      # theme.update(state: 'publish')
-      FileUtils.ln_sf(theme_path, current_path)
-      AssetsPrecompilerService.new(theme).copy_assets
-
-      theme.remove_cache
-      theme.update_cache_timestamp
+      begin
+        theme.compile if theme.drafted?
+        theme.publish
+        Rails.cache.clear
+        # theme.assets_precompile
+        # theme.remove_current_theme
+        # theme.apply_new_theme
+        # theme.remove_cache
+        # theme.update_cache_timestamp
+      end
     end
   end
 end
