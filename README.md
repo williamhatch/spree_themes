@@ -7,13 +7,8 @@ Admin can even preview the theme after modifying it from the backend before publ
 
 Try Spree Themes for Spree 3-4 with direct deployment on Heroku:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-themes)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-themes-new)
 
-
-
-Try Spree Classic White Theme with direct deployment on Heroku:
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/new-spree-themes)
 
 ### Demo
 View the demo application at url:-
