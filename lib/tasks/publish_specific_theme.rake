@@ -10,17 +10,13 @@ namespace :db do
       theme.template_file = File.open(filepath)
       theme.save(validate: false)
       ZipFileExtractor.new(filepath, theme).extract
-      theme.compile!
+      theme.compile
     end
 
     ActiveRecord::Base.transaction do
       theme = Spree::Theme.find_by(name: theme_name)
       begin
-        theme.assets_precompile
-        theme.remove_current_theme
-        theme.apply_new_theme
-        theme.remove_cache
-        theme.update_cache_timestamp
+        theme.publish
       end
     end
 
