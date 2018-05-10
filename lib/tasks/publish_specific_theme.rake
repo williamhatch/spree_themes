@@ -3,10 +3,9 @@ namespace :db do
 
   desc "Update selected theme"
   task :publish_specific_theme, [:theme] => [:environment] do |t, args|
-    theme_name = "theme-#{args[:theme]}-3-3-bump"
     ActiveRecord::Base.transaction do
-      filepath = File.open(ZIP_FILEPATH + '/' + theme_name + '.zip')
-      theme = Spree::Theme.find_or_initialize_by(name: theme_name, state: 'drafted')
+      filepath = File.open(ZIP_FILEPATH + '/' + args[:theme] + '.zip')
+      theme = Spree::Theme.find_or_initialize_by(name: args[:theme])
       theme.template_file = File.open(filepath)
       theme.save(validate: false)
       ZipFileExtractor.new(filepath, theme).extract
@@ -14,7 +13,7 @@ namespace :db do
     end
 
     ActiveRecord::Base.transaction do
-      theme = Spree::Theme.find_by(name: theme_name)
+      theme = Spree::Theme.find_by(name: args[:theme])
       begin
         theme.publish
       end
