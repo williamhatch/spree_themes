@@ -21,13 +21,27 @@ namespace :db do
     end
 
     ActiveRecord::Base.transaction do
+
       theme = Spree::Theme.last
+
+      path = '/public/vinsol_spree_themes/'
+      current_path = path + 'current'
+      theme_path =  path + theme.name
+
+      Spree::Theme.published.each(&:draft)
+      File.delete(current_path) if File.exist?(current_path)
+
       theme.assets_precompile
-      theme.remove_current_theme
+
+      # theme.remove_current_theme
+      # theme.publish!
+
+      theme.update(state: 'publish')
+      FileUtils.ln_sf(theme_path, current_path)
+      AssetsPrecompilerService.new(theme).copy_assets
 
       theme.remove_cache
       theme.update_cache_timestamp
-      theme.publish!
     end
   end
 end
