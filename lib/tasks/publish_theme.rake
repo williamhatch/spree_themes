@@ -29,14 +29,16 @@ namespace :db do
       theme_path =  path + theme.name
 
       Spree::Theme.published.each(&:draft)
-      File.delete(current_path) if File.exist?(current_path)
 
       theme.assets_precompile
+      theme.publish
+
+      File.delete(current_path) if File.exist?(current_path)
 
       # theme.remove_current_theme
       # theme.publish!
 
-      theme.update(state: 'publish')
+      # theme.update(state: 'publish')
       FileUtils.ln_sf(theme_path, current_path)
       AssetsPrecompilerService.new(theme).copy_assets
 
