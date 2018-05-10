@@ -16,6 +16,7 @@ namespace :db do
       theme = Spree::Theme.find_by(name: args[:theme])
       begin
         theme.publish
+        Rails.cache.clear
       end
     end
 
