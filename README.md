@@ -10,12 +10,8 @@ Try Spree Themes for Spree 3-4 with direct deployment on Heroku:
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-themes-new)
 
 
-### Demo
-View the demo application at url:-
-
-http://vinsol-spree-themes-demo.domain4now.com/admin/themes
-
-credentials: spree@example.com / spree123
+### Steps to Publish a Theme.
+Go to - https://github.com/vinsol-spree-contrib/spree_themes/wiki/Steps-to-Publish-a-Theme
 
 
 ### Download Sample Themes:
