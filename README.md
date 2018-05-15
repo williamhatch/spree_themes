@@ -26,11 +26,14 @@ https://github.com/vinsol-spree-contrib/theme-OnlineStore/archive/3-2-stable.zip
 
 https://github.com/vinsol-spree-contrib/theme-CrownTheme/archive/3-2-stable.zip
 
-https://github.com/vinsol-spree-contrib/theme-LatticeTheme/archive/master.zip
+https://github.com/vinsol-spree-contrib/theme-LatticeTheme/archive/3-2-stable.zip
 
 https://github.com/vinsol-spree-contrib/theme-Matrix/archive/3-2-stable.zip
 
 https://github.com/vinsol-spree-contrib/theme-Unite/archive/3-2-stable.zip
+
+https://github.com/vinsol-spree-contrib/theme-CrownTheme-2/archive/3-2-stable.zip
+
 
 
 
@@ -49,6 +52,9 @@ https://github.com/vinsol-spree-contrib/theme-LatticeTheme/archive/3-3-bump.zip
 https://github.com/vinsol-spree-contrib/theme-Matrix/archive/3-3-bump.zip
 
 https://github.com/vinsol-spree-contrib/theme-Unite/archive/3-3-bump.zip
+
+https://github.com/vinsol-spree-contrib/theme-CrownTheme-2/archive/3-3-bump.zip
+
 
 
 ## Requirements
