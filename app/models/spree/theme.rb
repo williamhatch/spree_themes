@@ -81,27 +81,18 @@ module Spree
     end
 
     def assets_precompile
-      puts "1"
       AssetsPrecompilerService.new(self).minify
-      puts "2"
     end
 
     def remove_current_theme
-      puts "5"
       Spree::Theme.published.each(&:draft)
-      puts "6"
       File.delete(CURRENT_THEME_PATH) if File.exist?(CURRENT_THEME_PATH)
-      puts "7"
     end
 
     def apply_new_theme
-      puts "8"
       source_path = File.join(THEMES_PATH, name)
-      puts "9"
       FileUtils.ln_sf(source_path, CURRENT_THEME_PATH)
-      puts "10"
       AssetsPrecompilerService.new(self).copy_assets
-      puts "11"
     end
 
     def open_preview
@@ -118,17 +109,11 @@ module Spree
     end
 
     def update_cache_timestamp
-      puts "3"
       Rails.cache.write(Spree::ThemesTemplate::CacheResolver.cache_key, Time.current)
-      puts "4"
     end
 
     def remove_cache
-      puts "18"
-
       FileUtils.remove_dir(ASSET_CACHE_PATH) if File.exists?(ASSET_CACHE_PATH)
-      puts "19"
-
     end
 
     private

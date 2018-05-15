@@ -19,18 +19,13 @@ class AssetsPrecompilerService
   end
 
   def copy_assets
-    puts "12"
     source_path = File.join(CURRENT_THEME_PATH, 'precompiled_assets', '.')
-    puts "13"
 
     FileUtils.rm_r(PUBLIC_PRECOMPILED_ASSET_PATH) if File.exists?(PUBLIC_PRECOMPILED_ASSET_PATH)
-    puts "14"
 
     FileUtils.mkdir_p(PUBLIC_PRECOMPILED_ASSET_PATH)
-    puts "15"
 
     FileUtils.cp_r(source_path, PUBLIC_PRECOMPILED_ASSET_PATH)
-    puts "16"
 
   end
 
