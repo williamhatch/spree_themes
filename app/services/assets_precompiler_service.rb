@@ -22,11 +22,8 @@ class AssetsPrecompilerService
     source_path = File.join(CURRENT_THEME_PATH, 'precompiled_assets', '.')
 
     FileUtils.rm_r(PUBLIC_PRECOMPILED_ASSET_PATH) if File.exists?(PUBLIC_PRECOMPILED_ASSET_PATH)
-
     FileUtils.mkdir_p(PUBLIC_PRECOMPILED_ASSET_PATH)
-
     FileUtils.cp_r(source_path, PUBLIC_PRECOMPILED_ASSET_PATH)
-
   end
 
   def copy_preview_assets
