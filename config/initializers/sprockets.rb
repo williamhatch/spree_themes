@@ -4,6 +4,7 @@ module Sprockets
     THEME_PUBLIC_ASSET_DIRECTORY = 'vinsol_spree_theme'
     PUBLIC_THEME_PATH = File.join('assets', THEME_PUBLIC_ASSET_DIRECTORY)
     PREVIEW_THEME_PUBLIC_ASSET_DIRECTORY = 'preview_vinsol_spree_theme'
+    THEME_PUBLIC_ASSET_DIRECTORY_REGEX = /vinsol_spree_theme/
 
     def self.build_manifest(app)
       config = app.config
@@ -46,10 +47,12 @@ module Sprockets
 
         def asset_path(path, digest, allow_non_precompiled = false)
           result = super
-          if preview_by_admin?
-            result.prepend("#{ Sprockets::Railtie::PREVIEW_THEME_PUBLIC_ASSET_DIRECTORY }/") if result.present?
-          else
-            result.prepend("#{ Sprockets::Railtie::THEME_PUBLIC_ASSET_DIRECTORY }/") if result.present?
+          if !(result =~ Sprockets::Railtie::THEME_PUBLIC_ASSET_DIRECTORY_REGEX )
+            if preview_by_admin?
+              result.prepend("#{ Sprockets::Railtie::PREVIEW_THEME_PUBLIC_ASSET_DIRECTORY }/") if result.present?
+            else
+              result.prepend("#{ Sprockets::Railtie::THEME_PUBLIC_ASSET_DIRECTORY }/") if result.present?
+            end
           end
           result
         end

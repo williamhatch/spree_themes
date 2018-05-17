@@ -4,6 +4,7 @@ class ZipFileExtractor
 
   OUTPUT_PATH = File.join('public', 'vinsol_spree_themes')
   IGNORED_FILES_REGEX = /\/(\.|__)/
+  VIDEO_FILE_REGEX = /mp4/
 
   attr_reader :file_path, :theme
 
@@ -37,7 +38,7 @@ class ZipFileExtractor
             FileUtils::mkdir_p(File.dirname(filepath))
             zip_file.extract(file, filepath)
           end
-          generate_template(filepath) if File.file?(filepath)
+          generate_template(filepath) if File.file?(filepath) && !(file.name =~ VIDEO_FILE_REGEX)
         end
       end
     end
