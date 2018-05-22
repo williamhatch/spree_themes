@@ -15,16 +15,17 @@ Go to - https://github.com/vinsol-spree-contrib/spree_themes/wiki/Steps-to-Publi
 
 Try Spree Themes with direct deployment on Heroku:
 
-| Theme Name    | Deploy Button |   Theme Download Link |
-| ------------- | ------------- | --------------------- |
-| Big Shop      | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-bigshop)  | https://github.com/vinsol-spree-contrib/theme-BigShop/archive/3-3-bump.zip      |
-| Classic White | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-classic-white)  | https://github.com/vinsol-spree-contrib/theme-ClassicWhite/archive/3-3-bump.zip |
-| Lattice       | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-lattice)  | https://github.com/vinsol-spree-contrib/theme-LatticeTheme/archive/3-3-bump.zip |
-| Crown         | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-crown)    | https://github.com/vinsol-spree-contrib/theme-CrownTheme/archive/3-3-bump.zip   |
-| Online Store  | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-online)   | https://github.com/vinsol-spree-contrib/theme-OnlineStore/archive/3-3-bump.zip  |
-| Unite         | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-unite)    | https://github.com/vinsol-spree-contrib/theme-Unite/archive/3-3-bump.zip        |
-| Matrix        | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-matrix)   | https://github.com/vinsol-spree-contrib/theme-Matrix/archive/3-3-bump.zip       |
-| Crown Theme 2 | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-crown-2)  | https://github.com/vinsol-spree-contrib/theme-CrownTheme-2/archive/3-3-bump.zip |
+| Theme Name      | Deploy Button |   Theme Download Link |
+| --------------- | ------------- | --------------------- |
+| Big Shop        | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-bigshop)   | https://github.com/vinsol-spree-contrib/theme-BigShop/archive/3-3-bump.zip      |
+| Classic White   | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-classic-white)   | https://github.com/vinsol-spree-contrib/theme-ClassicWhite/archive/3-3-bump.zip |
+| Lattice         | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-lattice)   | https://github.com/vinsol-spree-contrib/theme-LatticeTheme/archive/3-3-bump.zip |
+| Crown           | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-crown)     | https://github.com/vinsol-spree-contrib/theme-CrownTheme/archive/3-3-bump.zip   |
+| Online Store    | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-online)    | https://github.com/vinsol-spree-contrib/theme-OnlineStore/archive/3-3-bump.zip  |
+| Unite           | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-unite)     | https://github.com/vinsol-spree-contrib/theme-Unite/archive/3-3-bump.zip        |
+| Matrix          | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-matrix)    | https://github.com/vinsol-spree-contrib/theme-Matrix/archive/3-3-bump.zip       |
+| Crown Theme 2    | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-crown-2)   | https://github.com/vinsol-spree-contrib/theme-CrownTheme-2/archive/3-3-bump.zip |
+| Shopkeeper Theme | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-shopkeeper) | https://github.com/vinsol-spree-contrib/theme-Shopkeeper/archive/3-3-bump.zip |
 
 
 ### Download Sample Themes:
