@@ -27,6 +27,7 @@ Try Spree Themes with direct deployment on Heroku:
 | Crown Theme 2    | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-crown-2)   | https://github.com/vinsol-spree-contrib/theme-CrownTheme-2/archive/3-3-bump.zip |
 | Shopkeeper Theme | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-shopkeeper) | https://github.com/vinsol-spree-contrib/theme-Shopkeeper/archive/3-3-bump.zip |
 | Scrollex Theme   | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-scrollex)   | https://github.com/vinsol-spree-contrib/theme-ScrollexTheme/archive/3-3-bump.zip |
+| EStore Theme     | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-theme-estore)     | https://github.com/vinsol-spree-contrib/theme-EStore/archive/3-3-stable.zip |
 
 
 ### Download Sample Themes:
